@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="bg_signup">#0c5a7eff</color>
+    <color name="txtamarillo">#b2e01c</color>
+    <color name="txtblanco">#dde9ec</color>
+    <color name="txtbtnamarillo">#4a572d</color>
+    <color name="bgbtnamarillo">#d7ff02</color>
+    <color name="bgbtnblanco">#ffffff</color>
+
+</resources>

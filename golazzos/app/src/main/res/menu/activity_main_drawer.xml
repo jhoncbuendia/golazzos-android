@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_camara" android:icon="@android:drawable/ic_menu_camera"
+            android:title="Como Jugar" />
+        <item android:id="@+id/eq_favorito" android:icon="@android:drawable/ic_menu_slideshow"
+            android:title="Mis Equipos Favoritos" />
+
+        <item android:id="@+id/nav_slideshow" android:icon="@android:drawable/ic_menu_slideshow"
+            android:title="Mi Estadio" />
+
+    </group>
+
+    <item android:title="Partidos">
+        <menu>
+            <item android:id="@+id/nav_share" android:icon="@android:drawable/ic_menu_share"
+                android:title="Por Jugar" />
+            <item android:id="@+id/nav_send" android:icon="@android:drawable/ic_menu_send"
+                android:title="En Vivo" />
+            <item android:id="@+id/pt_finalizado" android:icon="@android:drawable/ic_menu_send"
+                android:title="Finalizado" />
+        </menu>
+    </item>
+
+</menu>

@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">golazzos</string>
+    <string name="facebook_app_id">717244748375587</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Mi Cuenta</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="action_salir">Salir</string>
+
+    <string-array name="ligas">
+        <item>Champions League</item>
+        <item>UEFA</item>
+        <item>Liga Postobon</item>
+        <item>Liga Española</item>
+        <item>Liga Inglesa</item>
+        <item>Liga Italiana</item>
+
+    </string-array>
+    <string name="title_activity_sign_in">Iniciar sesión</string>
+    <string name="title_activity_sign_up">Crear una cuenta</string>
+    <string name="title_activity_wizard_onectivity">Copy Wizard</string>
+    <string name="title_activity_wizard_two">Copy Wizard</string>
+    <string name="title_activity_wizard_three">Copy Wizard</string>
+    <string name="title_activity_wizard_four">Copy Wizard</string>
+    <string name="title_activity_initial">InitialActivity</string>
+</resources>

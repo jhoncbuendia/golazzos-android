@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:fitsSystemWindows="true"
+    tools:context="games.buendia.jhon.golazzos.activities.SignUpActivity"
+    android:background="@color/bg_signup">
+
+
+<ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#0e5b7f">
+    <LinearLayout android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+       >
+
+        <!-- TODO: Update blank fragment layout -->
+
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="CREA TU CUENTA"
+            android:layout_gravity="center"
+            android:layout_marginTop="70dp"
+            android:textColor="@color/txtamarillo" />
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/login_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="40dp"
+            android:width="300dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="ó llena los capos"
+            android:layout_gravity="center"
+            android:layout_marginTop="35dp"
+            android:textColor="@color/txtblanco" />
+
+
+
+
+
+
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/userup"
+
+            android:layout_marginTop="10dp"
+            android:hint="EMAIL"
+            android:textAlignment="textStart"
+            android:textColor="@color/txtblanco" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:id="@+id/pwdup"
+
+            android:hint="CONTRASEÑA"
+            android:textAlignment="textStart"
+            android:inputType="textCapWords|textPassword"
+            android:autoText="false"
+            android:textColor="@color/txtblanco" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Crear"
+            android:id="@+id/crear_cuenta"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:background="@color/bgbtnamarillo"
+            android:width="300dp"
+            android:textColor="@color/txtbtnamarillo" />
+
+    </LinearLayout>
+</ScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

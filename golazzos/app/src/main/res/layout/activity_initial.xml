@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:fitsSystemWindows="true"
+    tools:context="games.buendia.jhon.golazzos.activities.InitialActivity"
+    android:background="@mipmap/mob_login">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+z
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CREA TU CUENTA"
+            android:id="@+id/create"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="415dp"
+            android:width="300dp"
+            android:background="@color/bgbtnamarillo" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="YA TENGO UNA CUENTA"
+            android:id="@+id/login"
+            android:layout_gravity="center_horizontal"
+            android:width="300dp"
+            android:background="@color/bgbtnblanco"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+
+
+
+</android.support.design.widget.CoordinatorLayout>
