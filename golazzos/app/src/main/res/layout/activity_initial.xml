@@ -1,38 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:fitsSystemWindows="true"
-    tools:context="games.buendia.jhon.golazzos.activities.InitialActivity"
-    android:background="@mipmap/mob_login">
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical">
-z
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    android:layout_alignParentBottom="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CREA TU CUENTA"
+            android:text="@string/crea_tu_cuenta"
             android:id="@+id/create"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="415dp"
+            android:gravity="center"
             android:width="300dp"
-            android:background="@color/bgbtnamarillo" />
+            android:background="@color/bgbtnamarillo"
+            android:layout_gravity="center_horizontal"
+            android:layout_above="@+id/login"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp" />
 
         <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ya_tengo_una_cuenta"
+                android:id="@+id/login"
+                android:gravity="center"
+                android:width="300dp"
+                android:background="@color/bgbtnblanco"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/fondo_wizard"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="60dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="YA TENGO UNA CUENTA"
-            android:id="@+id/login"
-            android:layout_gravity="center_horizontal"
-            android:width="300dp"
-            android:background="@color/bgbtnblanco"
-            android:layout_marginTop="8dp" />
-    </LinearLayout>
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/acceso_rapido"
+                android:id="@+id/textViewAccesoRapido"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="28dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ingresa_con_facebook"
+                android:id="@+id/textViewFacebook"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:textColor="@color/yellow_facebook"
+                android:layout_alignTop="@+id/textView"
+                android:layout_toRightOf="@+id/textView"
+                android:layout_toEndOf="@+id/textView" />
+        </LinearLayout>
+
+    </RelativeLayout>
 
 
+</LinearLayout>
 
-</android.support.design.widget.CoordinatorLayout>

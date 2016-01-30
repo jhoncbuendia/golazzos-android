@@ -9,5 +9,9 @@
     <color name="txtbtnamarillo">#4a572d</color>
     <color name="bgbtnamarillo">#d7ff02</color>
     <color name="bgbtnblanco">#ffffff</color>
+    <color name="letrasazules">#4487a0</color>
+    <color name="fondo_wizard">#005b7d</color>
+    <color name="yellow_letters_wizard">#d2ff00</color>
+    <color name="yellow_facebook">#c4f300</color>
 
 </resources>

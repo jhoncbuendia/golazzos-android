@@ -17,8 +17,8 @@
         <item>Liga Española</item>
         <item>Liga Inglesa</item>
         <item>Liga Italiana</item>
-
     </string-array>
+    
     <string name="title_activity_sign_in">Iniciar sesión</string>
     <string name="title_activity_sign_up">Crear una cuenta</string>
     <string name="title_activity_wizard_onectivity">Copy Wizard</string>
@@ -26,4 +26,30 @@
     <string name="title_activity_wizard_three">Copy Wizard</string>
     <string name="title_activity_wizard_four">Copy Wizard</string>
     <string name="title_activity_initial">InitialActivity</string>
+
+    <!-- Splash -->
+
+    <string name="ya_tengo_una_cuenta">YA TENGO UNA CUENTA</string>
+    <string name="crea_tu_cuenta">CREA TU CUENTA</string>
+    <string name="acceso_rapido">¿Acceso rápido?</string>
+    <string name="ingresa_con_facebook">" Ingresa con facebook</string>
+    
+    <!-- Primer wizard -->
+    
+    <string name="te_damos_la_bienvenida">¡Te damos la bienvenida!</string>
+    <string name="antes_de_jugar">Antes de comenzar a jugar es necesario realizar\nunos pasos de calentamiento...</string>
+    <string name="ponte_la_camiseta">PONTE LA CAMISETA DE TU EQUIPO</string>
+    <string name="todos_tenemos_equipo_alma">Todos tenemos un equipo del alma,\nselecciona uno</string>
+    <string name="siguiente_button">SIGUIENTE</string>
+    
+    <!-- Segundo wizard -->
+
+    <string name="clubes_ponen_celebrar">CLUBES QUE TAMBIÉN\nTE PONEN A CELEBRAR</string>
+    <string name="selecciona_tus_equipos">Selecciona tus equipos favoritos (Máx. 8)</string>
+    <string name="agregar_button">AGREGAR</string>
+    <string name="debes_seleccionar_una_liga">Debes seleccionar una liga</string>
+    <string name="debes_seleccionar_un_equipo">Debes seleccionar un equipo</string>
+    <string name="equipo_agregado">Este equipo ya esta entre tus favoritos</string>
+    <string name="equipos_agregados_completos">Ya no puedes agregar a más equipos</string>
+
 </resources>
