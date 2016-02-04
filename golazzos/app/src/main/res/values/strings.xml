@@ -52,4 +52,15 @@
     <string name="equipo_agregado">Este equipo ya esta entre tus favoritos</string>
     <string name="equipos_agregados_completos">Ya no puedes agregar a más equipos</string>
 
+
+    <!-- Login -->
+
+    <string name="o_llena_los_campos">ó llena los campos</string>
+    <string name="error_facebook">Existió un error al momento de realizar la conexión con facebook, por favor intente nuevamente</string>
+
+
+    <!-- Loaders -->
+
+    <string name="loader_descarga">Realizando operación, por favor espera.</string>
+
 </resources>

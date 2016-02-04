@@ -35,4 +35,13 @@ public class ApplicationConstants {
                            "http://www.footballkitnews.com/wp-content/uploads/2015/01/Atletico-Nacional-Home-Shirt-2015.jpg",
                            "http://www.footballkitnews.com/wp-content/uploads/2013/05/New-Man-City-Nike-Kit-13-14.jpg"));
 
+    // Constantes para manejo de preferencias (aqui se va a guardar el objeto usuario)
+
+    public static final String keyPreferences = "myPreferences";
+    public static final String idKey = "idKey";
+    public static final String nameKey = "nameKey";
+    public static final String emailKey = "emailKey";
+    public static final String avatarKey = "avatarKey";
+    public static final String soulTeamKey = "soulTeamKey";
+
 }
