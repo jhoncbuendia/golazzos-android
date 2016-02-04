@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"
-            android:text="ó llena los capos"
+            android:text="@string/o_llena_los_campos"
             android:layout_gravity="center"
             android:layout_marginTop="35dp"
             android:textColor="@color/txtblanco" />

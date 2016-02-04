@@ -41,4 +41,19 @@ public class JSONBuilder {
         }
         return jsonObject;
     }
+
+    public JSONObject getRegisterUserJSON(String email, String pwd){
+        try {
+            userData.put("email", email);
+            userData.put("password", pwd);
+            userData.put("first_name", email);
+            userData.put("last_name", email);
+
+            jsonObject = new JSONObject();
+            jsonObject.put("user", userData);
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
 }
