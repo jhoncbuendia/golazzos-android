@@ -62,5 +62,6 @@
     <!-- Loaders -->
 
     <string name="loader_descarga">Realizando operación, por favor espera.</string>
+    <string name="response">response</string>
 
 </resources>
