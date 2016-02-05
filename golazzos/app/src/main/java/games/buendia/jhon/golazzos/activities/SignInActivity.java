@@ -99,15 +99,18 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
 
             @Override
             public void onResponse(JSONObject response) {
-                Intent intent = new Intent(GolazzosApplication.getInstance(), WizardOnectivity.class);
-                startActivity(intent);
+                try {
+                    PreferencesHelper.storeUserInPreferences(response.getJSONObject(getString(R.string.response)));
+                    startActivity(new Intent(GolazzosApplication.getInstance(), WizardOnectivity.class));
+                } catch (JSONException e){
+                    // TODO - Implementar manager de mensajes de error.
+                }
             }
         }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.i("error:", error.toString());
-
+                // TODO - Implementar manager de mensajes de error.
             }
         });
 
