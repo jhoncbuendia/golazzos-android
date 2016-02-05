@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import games.buendia.jhon.golazzos.GolazzosApplication;
@@ -24,7 +25,10 @@ public class PreferencesHelper {
                 getSharedPreferences(ApplicationConstants.keyPreferences, Context.MODE_PRIVATE);
     }
 
-    public static void storeUserInPreferences (JSONObject response){
-        
+    public static void storeUserInPreferences (JSONObject response) throws JSONException {
+        instanciateSharedPreferences();
+        editor = sharedPreferences.edit();
+        editor.putString(ApplicationConstants.tokenKey, response.getString(ApplicationConstants.jsonKeyJwt));
+        editor.commit();
     }
 }

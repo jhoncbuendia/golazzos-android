@@ -29,6 +29,7 @@ import games.buendia.jhon.golazzos.queryService.RequestInterface;
 import games.buendia.jhon.golazzos.queryService.VolleyService;
 import games.buendia.jhon.golazzos.utils.DialogHelper;
 import games.buendia.jhon.golazzos.utils.JSONBuilder;
+import games.buendia.jhon.golazzos.utils.PreferencesHelper;
 
 public class SignInActivity extends AppCompatActivity implements RequestInterface {
 
@@ -98,7 +99,6 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
 
             @Override
             public void onResponse(JSONObject response) {
-                // TODO Auto-generated method stub
                 Intent intent = new Intent(GolazzosApplication.getInstance(), WizardOnectivity.class);
                 startActivity(intent);
             }
@@ -106,7 +106,6 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                // TODO Auto-generated method stub
                 Log.i("error:", error.toString());
 
             }
@@ -120,7 +119,12 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
     @Override
     public void onSuccessCallBack(JSONObject response) {
         DialogHelper.hideLoaderDialog();
-        startActivity(new Intent(GolazzosApplication.getInstance(), WizardOnectivity.class));
+        try {
+            PreferencesHelper.storeUserInPreferences(response.getJSONObject(getString(R.string.response)));
+            startActivity(new Intent(GolazzosApplication.getInstance(), WizardOnectivity.class));
+        } catch (JSONException e){
+            // TODO - Implementar manager de mensajes de error.
+        }
     }
 
     @Override

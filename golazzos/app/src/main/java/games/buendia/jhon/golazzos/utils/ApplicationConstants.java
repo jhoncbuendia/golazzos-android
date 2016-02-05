@@ -38,10 +38,7 @@ public class ApplicationConstants {
     // Constantes para manejo de preferencias (aqui se va a guardar el objeto usuario)
 
     public static final String keyPreferences = "myPreferences";
-    public static final String idKey = "idKey";
-    public static final String nameKey = "nameKey";
-    public static final String emailKey = "emailKey";
-    public static final String avatarKey = "avatarKey";
-    public static final String soulTeamKey = "soulTeamKey";
+    public static final String tokenKey = "tokenKey";
+    public static final String jsonKeyJwt = "jwt";
 
 }
