@@ -3,5 +3,6 @@
     <string name="url_base">https://www.golazzos.com/api/v2/</string>
     <string name="tokens_endpoint">tokens</string>
     <string name="users_endpoint">users</string>
+    <string name="matches_endpoint">matches</string>
     <string name="format_url">%1$s/%2$s</string>
 </resources>

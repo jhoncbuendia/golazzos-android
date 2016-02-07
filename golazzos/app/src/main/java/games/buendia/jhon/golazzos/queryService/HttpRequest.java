@@ -65,23 +65,32 @@ public class HttpRequest {
                 {
                     @Override
                     public void onResponse(String response) {
-                        // response
-                        Log.d("Response", response);
+                        try {
+                            requestInterface.onSuccessCallBack(new JSONObject(response));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener()
                 {
                     @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // TODO Auto-generated method stub
-                        Log.d("ERROR", "error => " + error.toString());
+                    public void onErrorResponse(VolleyError volleyError) {
+                        VolleyError error = new VolleyError(new String(volleyError.networkResponse.data));
+                        JSONObject jsonObj = null;
+
+                        try {
+                            jsonObj = new JSONObject(error.getLocalizedMessage());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        requestInterface.onErrorCallBack(jsonObj);
                     }
                 }
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String>  params = new HashMap<String, String>();
-                Log.i("token => ", PreferencesHelper.getUserToken());
                 params.put("Authorization", "Token "+PreferencesHelper.getUserToken());
                 return params;
             }

@@ -1,30 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:fitsSystemWindows="true"
-    tools:context="games.buendia.jhon.golazzos.activities.SignInActivity"
-    android:background="#0e5b7f">
 
-
-<ScrollView
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
     <LinearLayout android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-      >
+        android:background="#0e5b7f">
 
 
-        <TextView
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:src="@drawable/golazzos_session_header"
+        android:layout_margin="30dp"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"
+            android:drawableLeft="@drawable/left_arrow"
+            android:drawableRight="@drawable/right_arrow"
+            android:drawablePadding="10dp"
             android:text="INICIA SESIÓN"
             android:layout_gravity="center"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="10dp"
             android:textColor="@color/txtamarillo" />
 
         <com.facebook.login.widget.LoginButton
@@ -80,8 +79,3 @@
             android:textColor="@color/txtbtnamarillo" />
 
     </LinearLayout>
-
-</ScrollView>
-
-
-</android.support.design.widget.CoordinatorLayout>
