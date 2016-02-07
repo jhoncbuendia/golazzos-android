@@ -3,13 +3,20 @@ package games.buendia.jhon.golazzos.queryService;
 import android.content.Context;
 import android.util.Log;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import games.buendia.jhon.golazzos.utils.PreferencesHelper;
 
 /**
  * Created by jhon on 19/01/16.
@@ -29,17 +36,13 @@ public class HttpRequest {
 
             @Override
             public void onResponse(JSONObject response) {
-                // TODO Auto-generated method stub
                 Log.i("respuesta:", response.toString());
                 requestInterface.onSuccessCallBack(response);
-                //Intent intent = new Intent(context, WizardOnectivity.class);
-                //startActivity(intent);
             }
         }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                // TODO Auto-generated method stub
                 VolleyError error = new VolleyError(new String(volleyError.networkResponse.data));
                 JSONObject jsonObj = null;
 
@@ -48,21 +51,44 @@ public class HttpRequest {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
-
-                    requestInterface.onErrorCallBack(jsonObj);
-                    //Log.i("error:",jsonObj.getString("messages"));
-
-
+                requestInterface.onErrorCallBack(jsonObj);
             }
         });
         volley = VolleyService.getInstance(context);
         volley.getRequestQueue().add(jsObjRequest);
+    }
 
+    public void sendAuthenticatedPostRequest(Context context, String url ){
 
+        StringRequest postRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response) {
+                        // response
+                        Log.d("Response", response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO Auto-generated method stub
+                        Log.d("ERROR", "error => " + error.toString());
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+                Log.i("token => ", PreferencesHelper.getUserToken());
+                params.put("Authorization", "Token "+PreferencesHelper.getUserToken());
+                return params;
+            }
+        };
 
-
+        volley = VolleyService.getInstance(context);
+        volley.getRequestQueue().add(postRequest);
     }
 
 

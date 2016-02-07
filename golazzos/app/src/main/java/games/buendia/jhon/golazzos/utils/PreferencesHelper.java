@@ -25,10 +25,15 @@ public class PreferencesHelper {
                 getSharedPreferences(ApplicationConstants.keyPreferences, Context.MODE_PRIVATE);
     }
 
-    public static void storeUserInPreferences (JSONObject response) throws JSONException {
+    public static void storeUserInPreferences(JSONObject response) throws JSONException {
         instanciateSharedPreferences();
         editor = sharedPreferences.edit();
         editor.putString(ApplicationConstants.tokenKey, response.getString(ApplicationConstants.jsonKeyJwt));
         editor.commit();
+    }
+
+    public static String getUserToken(){
+        instanciateSharedPreferences();
+        return sharedPreferences.getString(ApplicationConstants.tokenKey,"");
     }
 }

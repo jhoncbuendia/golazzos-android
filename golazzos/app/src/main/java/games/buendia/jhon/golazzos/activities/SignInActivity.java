@@ -124,7 +124,7 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
         DialogHelper.hideLoaderDialog();
         try {
             PreferencesHelper.storeUserInPreferences(response.getJSONObject(getString(R.string.response)));
-            startActivity(new Intent(GolazzosApplication.getInstance(), WizardOnectivity.class));
+            startActivity(new Intent(GolazzosApplication.getInstance(), TestActivity.class));
         } catch (JSONException e){
             // TODO - Implementar manager de mensajes de error.
         }
