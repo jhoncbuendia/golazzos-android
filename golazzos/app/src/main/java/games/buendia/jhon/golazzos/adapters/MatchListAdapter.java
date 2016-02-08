@@ -83,8 +83,8 @@ public class MatchListAdapter extends BaseAdapter {
 
         Match match = matchArrayList.get(position);
 
-        holder.nombreEquipoLocal.setText(match.getLocalTeam().getCompleteTeamName());
-        holder.nombreEquipoVisitante.setText(match.getAwayTeam().getCompleteTeamName());
+        holder.nombreEquipoLocal.setText(match.getLocalTeam().getTeamName());
+        holder.nombreEquipoVisitante.setText(match.getAwayTeam().getTeamName());
         holder.spinnerPredicciones.setAdapter(new CustomSpinnerAdapter(context,ApplicationConstants.pronosticos));
 
         holder.nombreTorneoPartido.setText(match.getLocalTeam().getTournamentTeam().getNameTornament());

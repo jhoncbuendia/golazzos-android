@@ -29,7 +29,6 @@ import games.buendia.jhon.golazzos.model.Tournament;
  */
 public class MatchListFragment extends Fragment {
 
-
     private boolean spinnerLigasPressed = false;
     private boolean spinnerEquiposPressed = false;
 

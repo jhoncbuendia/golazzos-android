@@ -50,7 +50,6 @@ public class MatchListActivity extends FragmentActivity implements RequestInterf
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         idTournament = 0;
         url = validateUrlToRequestMatch(getIntent());
-        Log.i("url",url);
         DialogHelper.showLoaderDialog(MatchListActivity.this);
 
         runOnUiThread(new Runnable() {

@@ -99,7 +99,7 @@ public class SignUpActivity extends AppCompatActivity implements RequestInterfac
             @Override
             public void onResponse(JSONObject response) {
                 // TODO Auto-generated method stub
-                Intent intent = new Intent(GolazzosApplication.getInstance(), WizardOnectivity.class);
+                Intent intent = new Intent(GolazzosApplication.getInstance(), SignInActivity.class);
                 startActivity(intent);
             }
         }, new Response.ErrorListener() {
@@ -120,7 +120,7 @@ public class SignUpActivity extends AppCompatActivity implements RequestInterfac
     @Override
     public void onSuccessCallBack(JSONObject response, ServicesCall servicesCall) {
         DialogHelper.hideLoaderDialog();
-        startActivity(new Intent(GolazzosApplication.getInstance(), WizardOnectivity.class));
+        startActivity(new Intent(GolazzosApplication.getInstance(), SignInActivity.class));
     }
 
     @Override

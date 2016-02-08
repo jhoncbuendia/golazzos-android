@@ -99,7 +99,7 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
             public void onResponse(JSONObject response) {
                 try {
                     PreferencesHelper.storeUserInPreferences(response.getJSONObject(getString(R.string.response)));
-                    startActivity(new Intent(GolazzosApplication.getInstance(), WizardOnectivity.class));
+                    startActivity(new Intent(GolazzosApplication.getInstance(), MatchListActivity.class));
                 } catch (JSONException e){
                     // TODO - Implementar manager de mensajes de error.
                 }
