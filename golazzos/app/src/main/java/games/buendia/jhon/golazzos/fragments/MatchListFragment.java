@@ -43,7 +43,7 @@ public class MatchListFragment extends Fragment {
 
         final View view = inflater.inflate(R.layout.fragment_list_match, container, false);
 
-        Bundle arguments = getArguments();
+        final Bundle arguments = getArguments();
 
         ArrayList<Match> matches = (ArrayList<Match>) arguments.getSerializable("matches");
         final ArrayList<Tournament> tournaments = (ArrayList<Tournament>) arguments.getSerializable("leagues");
@@ -102,6 +102,7 @@ public class MatchListFragment extends Fragment {
                if (spinnerEquiposPressed) {
                    Intent intent = new Intent(getActivity(), MatchListActivity.class);
                    intent.putExtra("team_name", teams.get(i).getTeamName());
+                   intent.putExtra("tournament_id", arguments.getInt("tournament_id"));
                    startActivity(intent);
                    getActivity().finish();
                }
