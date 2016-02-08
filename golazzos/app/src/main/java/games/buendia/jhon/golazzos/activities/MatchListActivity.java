@@ -50,6 +50,7 @@ public class MatchListActivity extends FragmentActivity implements RequestInterf
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         idTournament = 0;
         url = validateUrlToRequestMatch(getIntent());
+        Log.i("url",url);
         DialogHelper.showLoaderDialog(MatchListActivity.this);
 
         runOnUiThread(new Runnable() {
@@ -173,14 +174,14 @@ public class MatchListActivity extends FragmentActivity implements RequestInterf
 
         if (isFilterTeam && isFilterTournament){
             idTournament = intent.getIntExtra("tournament_id", 0);
-            return String.format(getString(R.string.format_url_matches_team_name_and_tournament),intent.getStringExtra("team_name"), String.valueOf(idTournament));
+            return String.format(getString(R.string.format_url_matches_team_name_and_tournament),intent.getStringExtra("team_name").replace(" ","%20"), String.valueOf(idTournament));
         }
         else if (isFilterTournament){
             idTournament = intent.getIntExtra("tournament_id", 0);
             return String.format(getString(R.string.format_url_matches_tournament),String.valueOf(intent.getIntExtra("tournament_id", 0)));
         }
         else if (isFilterTeam){
-            return String.format(getString(R.string.format_url_matches_team_name),intent.getStringExtra("team_name"));
+            return String.format(getString(R.string.format_url_matches_team_name),intent.getStringExtra("team_name").replace(" ","%20"));
         }
 
 
