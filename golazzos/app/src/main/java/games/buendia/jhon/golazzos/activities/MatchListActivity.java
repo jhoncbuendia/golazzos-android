@@ -41,12 +41,14 @@ public class MatchListActivity extends FragmentActivity implements RequestInterf
     private ArrayList<Match> matchArrayList;
     private ArrayList<Team> teamsArrayList;
     private ArrayList<Tournament> tournamentArrayList;
+    private int idTournament;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.base_menu_layout);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        idTournament = 0;
         url = validateUrlToRequestMatch(getIntent());
         DialogHelper.showLoaderDialog(MatchListActivity.this);
 
@@ -71,8 +73,8 @@ public class MatchListActivity extends FragmentActivity implements RequestInterf
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.teams_endpoint));
-                                        HttpRequest h = new HttpRequest(MatchListActivity.this, ServicesCall.TEAMS);
+                                        url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.tournaments_endpoint));
+                                        HttpRequest h = new HttpRequest(MatchListActivity.this, ServicesCall.LEAGUES);
                                         h.sendAuthenticatedPostRequest(getApplicationContext(), url);
                                     }
                                 });
@@ -83,15 +85,10 @@ public class MatchListActivity extends FragmentActivity implements RequestInterf
 
             case TEAMS:     teamsLoaded = true;
                             try {
-                                teamsArrayList = builderJsonList.getTeams();
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.tournaments_endpoint));
-                                        HttpRequest h = new HttpRequest(MatchListActivity.this, ServicesCall.LEAGUES);
-                                        h.sendAuthenticatedPostRequest(getApplicationContext(), url);
-                                    }
-                                });
+                                if (idTournament != 0)
+                                    teamsArrayList = builderJsonList.getTeams();
+                                else
+                                    teamsArrayList = new ArrayList<Team>();
                             }catch (JSONException e){
                                 e.printStackTrace();
                             }
@@ -101,6 +98,19 @@ public class MatchListActivity extends FragmentActivity implements RequestInterf
             case LEAGUES:   leaguesLoaded = true;
                             try {
                                 tournamentArrayList = builderJsonList.getTournaments();
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (idTournament == 0) {
+                                            url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.teams_endpoint));
+                                        }
+                                        else {
+                                            url = String.format(getString(R.string.format_url_teams_tournament), String.valueOf(idTournament));
+                                        }
+                                        HttpRequest h = new HttpRequest(MatchListActivity.this, ServicesCall.TEAMS);
+                                        h.sendAuthenticatedPostRequest(getApplicationContext(), url);
+                                    }
+                                });
                             } catch (JSONException e){
                                 e.printStackTrace();
                             }
@@ -114,6 +124,7 @@ public class MatchListActivity extends FragmentActivity implements RequestInterf
             arguments.putSerializable("matches", matchArrayList);
             arguments.putSerializable("leagues", tournamentArrayList);
             arguments.putSerializable("teams", teamsArrayList);
+            arguments.putSerializable("tournament_id", idTournament);
             matchListFragment.setArguments(arguments);
             DialogHelper.hideLoaderDialog();
             makeTransaction(matchListFragment, getSupportFragmentManager(), R.id.content_frame);
@@ -160,12 +171,18 @@ public class MatchListActivity extends FragmentActivity implements RequestInterf
 
         }
 
-        if (isFilterTournament){
+        if (isFilterTeam && isFilterTournament){
+            idTournament = intent.getIntExtra("tournament_id", 0);
+            return String.format(getString(R.string.format_url_matches_team_name_and_tournament),intent.getStringExtra("team_name"), String.valueOf(idTournament));
+        }
+        else if (isFilterTournament){
+            idTournament = intent.getIntExtra("tournament_id", 0);
             return String.format(getString(R.string.format_url_matches_tournament),String.valueOf(intent.getIntExtra("tournament_id", 0)));
         }
         else if (isFilterTeam){
             return String.format(getString(R.string.format_url_matches_team_name),intent.getStringExtra("team_name"));
         }
+
 
         return String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.matches_endpoint));
     }

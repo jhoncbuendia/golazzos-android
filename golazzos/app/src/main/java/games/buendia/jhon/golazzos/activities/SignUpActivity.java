@@ -29,6 +29,7 @@ import games.buendia.jhon.golazzos.queryService.RequestInterface;
 import games.buendia.jhon.golazzos.queryService.VolleyService;
 import games.buendia.jhon.golazzos.utils.DialogHelper;
 import games.buendia.jhon.golazzos.utils.JSONBuilder;
+import games.buendia.jhon.golazzos.utils.ServicesCall;
 
 public class SignUpActivity extends AppCompatActivity implements RequestInterface{
 
@@ -117,7 +118,7 @@ public class SignUpActivity extends AppCompatActivity implements RequestInterfac
     }
 
     @Override
-    public void onSuccessCallBack(JSONObject response) {
+    public void onSuccessCallBack(JSONObject response, ServicesCall servicesCall) {
         DialogHelper.hideLoaderDialog();
         startActivity(new Intent(GolazzosApplication.getInstance(), WizardOnectivity.class));
     }

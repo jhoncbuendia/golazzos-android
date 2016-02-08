@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import games.buendia.jhon.golazzos.utils.PreferencesHelper;
+import games.buendia.jhon.golazzos.utils.ServicesCall;
 
 /**
  * Created by jhon on 19/01/16.
@@ -25,9 +26,15 @@ public class HttpRequest {
 
     private VolleyService volley;
     private RequestInterface requestInterface;
+    private ServicesCall servicesCall;
 
     public HttpRequest(RequestInterface r){
         requestInterface = r;
+    }
+
+    public HttpRequest(RequestInterface r, ServicesCall servicesCall){
+        requestInterface = r;
+        this.servicesCall = servicesCall;
     }
 
     public void starPostRequest(Context context, String url, JSONObject data_send){
@@ -37,7 +44,7 @@ public class HttpRequest {
             @Override
             public void onResponse(JSONObject response) {
                 Log.i("respuesta:", response.toString());
-                requestInterface.onSuccessCallBack(response);
+                requestInterface.onSuccessCallBack(response, servicesCall);
             }
         }, new Response.ErrorListener() {
 
@@ -66,7 +73,7 @@ public class HttpRequest {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            requestInterface.onSuccessCallBack(new JSONObject(response));
+                            requestInterface.onSuccessCallBack(new JSONObject(response), servicesCall);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
