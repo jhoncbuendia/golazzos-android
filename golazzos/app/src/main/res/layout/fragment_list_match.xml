@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#005b7d">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <ImageButton
+                android:layout_width="25dp"
+                android:layout_height="20dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/btn_menulateral"
+                android:background="@null"
+                android:layout_margin="10dp"
+                android:id="@+id/imageButtonHamburguerMenu" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/partidos"
+                android:textColor="@android:color/white"
+                android:textSize="20dp"
+                android:id="@+id/textViewPartidos"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton"
+                android:background="@null"
+                android:src="@android:drawable/ic_menu_search"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="#f3f3f3">
+
+
+            <TextView
+                android:id="@+id/textViewPorJugar"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:background="#323232"
+                android:textStyle="bold"
+                android:text="@string/por_jugar"
+                android:textColor="#FFF" />
+
+
+
+            <TextView
+                android:id="@+id/textViewEnVivo"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/textViewPorJugar"
+                android:clickable="true"
+                android:gravity="center"
+                android:background="@android:color/white"
+                android:text="@string/en_vivo"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:textColor="#005b7d" />
+
+
+            <TextView
+                android:id="@+id/textViewFinalizado"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/textViewEnVivo"
+                android:clickable="true"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:text="@string/finalizado"
+                android:textColor="#005b7d" />
+
+
+        </LinearLayout>
+
+</LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/slide_banner">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:background="#005b7d"
+        android:layout_height="70dp">
+
+        <Spinner
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="#fbfbfb"
+            android:layout_margin="5dp"
+            android:spinnerMode="dialog"
+            android:id="@+id/spinnerLigas" />
+
+        <Spinner
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:background="#fbfbfb"
+            android:spinnerMode="dialog"
+            android:id="@+id/spinnerEquipos" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPagerMatches"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+        </android.support.v4.view.ViewPager>
+
+    </LinearLayout>
+
+</LinearLayout>

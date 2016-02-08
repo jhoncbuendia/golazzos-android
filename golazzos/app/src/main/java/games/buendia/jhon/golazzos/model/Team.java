@@ -22,6 +22,11 @@ public class Team {
         this.setUrlTeam(urlTeam);
     }
 
+    public Team(int idTeam, String teamName){
+        this.setTeamName(teamName);
+        this.setIdTeam(idTeam);
+    }
+
     public Team(String urlTeam, int idTeam, String initialsTeam, String completeTeamName, String countryTeam, Tournament tournamentTeam) {
         this.urlTeam = urlTeam;
         this.idTeam = idTeam;

@@ -29,10 +29,9 @@ import games.buendia.jhon.golazzos.queryService.VolleyService;
 import games.buendia.jhon.golazzos.utils.DialogHelper;
 import games.buendia.jhon.golazzos.utils.JSONBuilder;
 import games.buendia.jhon.golazzos.utils.PreferencesHelper;
+import games.buendia.jhon.golazzos.utils.ServicesCall;
 
 public class SignInActivity extends AppCompatActivity implements RequestInterface {
-
-
     private LoginButton loginButton;
     private EditText userEditText;
     private EditText passwordEditText;
@@ -119,11 +118,11 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
     }
 
     @Override
-    public void onSuccessCallBack(JSONObject response) {
+    public void onSuccessCallBack(JSONObject response, ServicesCall servicesCall) {
         DialogHelper.hideLoaderDialog();
         try {
             PreferencesHelper.storeUserInPreferences(response.getJSONObject(getString(R.string.response)));
-            startActivity(new Intent(GolazzosApplication.getInstance(), TestActivity.class));
+            startActivity(new Intent(GolazzosApplication.getInstance(), MatchListActivity.class));
         } catch (JSONException e){
             // TODO - Implementar manager de mensajes de error.
         }
