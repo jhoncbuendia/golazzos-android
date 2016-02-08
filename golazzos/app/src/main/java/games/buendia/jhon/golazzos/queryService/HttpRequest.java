@@ -107,5 +107,47 @@ public class HttpRequest {
         volley.getRequestQueue().add(postRequest);
     }
 
+    public void startPostRequestAuthenticated(Context context, String url, JSONObject data_send, int idTeam){
+
+        JSONObject jo = new JSONObject();
+        try {
+            jo.put("team_id", idTeam);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, jo, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.i("respuesta:", response.toString());
+                requestInterface.onSuccessCallBack(response, servicesCall);
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                VolleyError error = new VolleyError(new String(volleyError.networkResponse.data));
+                JSONObject jsonObj = null;
+
+                try {
+                    jsonObj = new JSONObject(error.getLocalizedMessage());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                requestInterface.onErrorCallBack(jsonObj);
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("Authorization", "Token "+PreferencesHelper.getUserToken());
+                return params;
+            }
+        };
+        volley = VolleyService.getInstance(context);
+        volley.getRequestQueue().add(jsObjRequest);
+    }
+
 
 }

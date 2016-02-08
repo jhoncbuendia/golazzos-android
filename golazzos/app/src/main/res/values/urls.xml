@@ -6,7 +6,8 @@
     <string name="matches_endpoint">matches</string>
     <string name="teams_endpoint">teams?results=20</string>
     <string name="tournaments_endpoint">tournaments</string>
-    <string name="format_url">%1$s/%2$s</string>
+    <string name="format_url">%1$s%2$s</string>
+    <string name="favorite_team_endpoint">favorite_teams</string>
     <string name="format_url_matches_tournament">https://www.golazzos.com/api/v2/matches?tournament_id=%1$s</string>
     <string name="format_url_matches_team_name">https://www.golazzos.com/api/v2/matches?team_name=%1$s</string>
     <string name="format_url_matches_team_name_and_tournament">https://www.golazzos.com/api/v2/matches?team_name=%1$s&amp;tournament_id=%2$s</string>

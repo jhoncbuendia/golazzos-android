@@ -56,4 +56,13 @@ public class JSONBuilder {
         }
         return jsonObject;
     }
+
+    public JSONObject getFavoriteTeamJSON(String idTeam){
+        try {
+            userData.put("team_id", Integer.valueOf(idTeam));
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return userData;
+    }
 }

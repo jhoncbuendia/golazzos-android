@@ -27,6 +27,19 @@ public class Team {
         this.setIdTeam(idTeam);
     }
 
+    public Team(int idTeam, String teamName, String urlTeam){
+        this.setTeamName(teamName);
+        this.setIdTeam(idTeam);
+        this.setUrlTeam(urlTeam);
+    }
+
+    public Team(int idTeam, String teamName, String urlTeam, Tournament tournament){
+        this.setTeamName(teamName);
+        this.setIdTeam(idTeam);
+        this.setUrlTeam(urlTeam);
+        this.setTournamentTeam(tournament);
+    }
+
     public Team(String urlTeam, int idTeam, String initialsTeam, String completeTeamName, String countryTeam, Tournament tournamentTeam) {
         this.urlTeam = urlTeam;
         this.idTeam = idTeam;
