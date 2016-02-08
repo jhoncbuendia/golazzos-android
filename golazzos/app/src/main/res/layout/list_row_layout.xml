@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f6f6f6">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cierra_en"
+                android:id="@+id/textViewCierraEn"
+                android:textColor="@android:color/black"
+                android:layout_margin="5dp"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1 | 2 | 41"
+                android:textSize="20dp"
+                android:layout_margin="5dp"
+                android:textColor="#878787"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/textViewDiaHorasMinutos" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/format_horas_text"
+                android:layout_margin="5dp"
+                android:textSize="10dp"
+                android:textColor="#878787"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/textViewLeyendaDiaHoras" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UEFA Champions League"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:drawableRight="@drawable/black_row"
+                android:drawablePadding="5dp"
+                android:layout_margin="5dp"
+                android:textSize="10dp"
+                android:layout_gravity="right"
+                android:id="@+id/textViewNombreTorneo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Oct 22 3:30pm"
+                android:layout_margin="10dp"
+                android:layout_gravity="right"
+                android:textColor="#878787"
+                android:id="@+id/textViewHoraPartido" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:scaleType="fitXY"
+                android:id="@+id/imageViewLocalTeam"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/textViewNombreEquipoLocal"
+                android:gravity="center"
+                android:textColor="#005b7d"
+                android:textStyle="bold"
+                android:textSize="10dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/imageViewLocalTeam"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/local"
+                android:textSize="10dp"
+                android:id="@+id/textViewLocal"
+                android:textColor="#878787"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/textViewNombreEquipoLocal"
+                android:layout_centerHorizontal="true" />
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBarEquipoLocal"
+                android:layout_alignTop="@+id/imageViewLocalTeam"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinnerPronostico"
+                    android:layout_gravity="top|center"
+                    android:spinnerMode="dialog"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:scaleType="fitXY"
+                android:id="@+id/imageViewAwayTeam"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/textViewNombreEquipoVisitante"
+                android:gravity="center"
+                android:textColor="#005b7d"
+                android:textStyle="bold"
+                android:textSize="10dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/imageViewAwayTeam"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/visitante"
+                android:textSize="10dp"
+                android:id="@+id/textViewVisitante"
+                android:textColor="#878787"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/textViewNombreEquipoVisitante"
+                android:layout_centerHorizontal="true" />
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBarEquipoVisitante"
+                android:layout_marginTop="16dp"
+                android:layout_alignTop="@+id/imageViewAwayTeam"
+                android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/cardViewEstadisticas"
+            android:layout_gravity="center"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            card_view:cardBackgroundColor="#005b7d"
+            card_view:cardCornerRadius="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/estadisticas"
+                android:id="@+id/textViewEstadisticas"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:drawableLeft="@drawable/grafico"
+                android:drawablePadding="8dp"
+                android:layout_gravity="center" />
+
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp">
+
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/cardViewInfoPuntos"
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            card_view:cardBackgroundColor="#444444"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="4dp">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/juegas"
+                        android:textColor="@android:color/white"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:id="@+id/textViewJuegas"
+                        android:layout_gravity="center_horizontal" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cincuenta_puntos"
+                        android:id="@+id/buttonCincuentaPuntos"
+                        android:textColor="#005b7d"
+                        android:textStyle="bold|italic"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:textSize="20dp"
+                        android:background="#f6f6f6"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_gravity="center_horizontal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.1"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/separador_gris"
+                        android:id="@+id/imageViewSeparador" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ganas"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:textColor="@android:color/white"
+                        android:id="@+id/textViewGanas"
+                        android:layout_gravity="center_horizontal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/cien_puntos"
+                        android:gravity="center"
+                        android:textSize="20dp"
+                        android:textStyle="bold|italic"
+                        android:textColor="#ddfd46"
+                        android:id="@+id/textViewCienPuntos"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_gravity="center_horizontal" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/cardViewJugar"
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            card_view:cardBackgroundColor="#ddfd46"
+            android:layout_height="match_parent"
+            card_view:cardCornerRadius="4dp">
+
+            <TextView
+                android:id="@+id/textViewJugar"
+                android:text="@string/jugar"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="#323232"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+</LinearLayout>

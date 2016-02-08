@@ -73,7 +73,7 @@
 
         <activity
             android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:name=".activities.TestActivity" >
+            android:name=".activities.MatchListActivity" >
         </activity>
     </application>
 

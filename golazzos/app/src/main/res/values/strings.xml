@@ -64,4 +64,21 @@
     <string name="loader_descarga">Realizando operación, por favor espera.</string>
     <string name="response">response</string>
 
+    <!-- Lista de partidos -->
+    <string name="partidos">PARTIDOS</string>
+    <string name="por_jugar">POR JUGAR</string>
+    <string name="en_vivo">EN VIVO</string>
+    <string name="finalizado">FINALIZADO</string>
+    <string name="format_horas">%1$s|%2$s|%3$s</string>
+    <string name="format_horas_text"> DÍA | HORAS | MINS </string>
+    <string name="cierra_en">Cierra en:</string>
+    <string name="local">Local</string>
+    <string name="visitante">Visitante</string>
+    <string name="estadisticas">ESTADÍSTICAS</string>
+    <string name="jugar">JUGAR</string>
+    <string name="cincuenta_puntos">50\nPUNTOS</string>
+    <string name="juegas">JUEGAS</string>
+    <string name="ganas">GANAS</string>
+    <string name="cien_puntos">100\nPUNTOS</string>
+
 </resources>

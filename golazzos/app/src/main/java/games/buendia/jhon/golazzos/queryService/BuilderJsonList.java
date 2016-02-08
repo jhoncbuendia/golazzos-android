@@ -23,6 +23,31 @@ public class BuilderJsonList {
         this.jsonObject = jsonObject;
     }
 
+    public ArrayList<Team> getTeams() throws JSONException {
+        JSONArray teams = jsonObject.getJSONArray("response");
+        ArrayList<Team> teamArrayList = new ArrayList<Team>();
+
+        for (int i = 0; i < teams.length(); i++){
+            JSONObject teamObject = teams.getJSONObject(i);
+            teamArrayList.add(new Team(teamObject.getInt("id"),
+                    teamObject.getString("name")));
+        }
+        return teamArrayList;
+
+    }
+
+    public ArrayList<Tournament> getTournaments() throws JSONException {
+        JSONArray tournaments = jsonObject.getJSONArray("response");
+        ArrayList<Tournament> tournamentArrayList = new ArrayList<Tournament>();
+
+        for (int i = 0; i < tournaments.length(); i++){
+            JSONObject tournamentObject = tournaments.getJSONObject(i);
+            tournamentArrayList.add(new Tournament(tournamentObject.getInt("id"),
+                                                   tournamentObject.getString("name")));
+        }
+        return tournamentArrayList;
+    }
+
     public ArrayList<Match> getMatches() throws JSONException {
 
         JSONArray matches = jsonObject.getJSONArray("response");
@@ -40,14 +65,14 @@ public class BuilderJsonList {
             Team localTeam = new Team(localTeamObject.getString("image_path"),
                                       localTeamObject.getInt("id"),
                                       localTeamObject.getString("initials"),
-                                      localTeamObject.getString("complete_name"),
+                                      localTeamObject.getString("name"),
                                       localTeamObject.getString("country_name"),
                                       tournament);
 
             Team awayTeam = new Team(awayTeamObject.getString("image_path"),
                                      awayTeamObject.getInt("id"),
                                      awayTeamObject.getString("initials"),
-                                     awayTeamObject.getString("complete_name"),
+                                     awayTeamObject.getString("name"),
                                      awayTeamObject.getString("country_name"),
                                      tournament);
 
