@@ -109,14 +109,8 @@ public class HttpRequest {
 
     public void startPostRequestAuthenticated(Context context, String url, JSONObject data_send, int idTeam){
 
-        JSONObject jo = new JSONObject();
-        try {
-            jo.put("team_id", idTeam);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
-        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, jo, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, data_send, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {

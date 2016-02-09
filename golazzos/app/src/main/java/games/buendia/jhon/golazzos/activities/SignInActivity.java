@@ -23,6 +23,7 @@ import org.json.JSONObject;
 import java.util.Arrays;
 import games.buendia.jhon.golazzos.GolazzosApplication;
 import games.buendia.jhon.golazzos.R;
+import games.buendia.jhon.golazzos.queryService.BuilderJsonList;
 import games.buendia.jhon.golazzos.queryService.HttpRequest;
 import games.buendia.jhon.golazzos.queryService.RequestInterface;
 import games.buendia.jhon.golazzos.queryService.VolleyService;
@@ -85,7 +86,7 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
 
     public void loginrMailUser(String email, String pwd){
         jsonBuilder = new JSONBuilder();
-        HttpRequest h = new HttpRequest(this);
+        HttpRequest h = new HttpRequest(this, ServicesCall.LOGIN);
         h.starPostRequest(getApplicationContext(), url, jsonBuilder.getSingleRegisterJSON(email,pwd));
     }
 
@@ -119,12 +120,36 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
 
     @Override
     public void onSuccessCallBack(JSONObject response, ServicesCall servicesCall) {
-        DialogHelper.hideLoaderDialog();
-        try {
-            PreferencesHelper.storeUserInPreferences(response.getJSONObject(getString(R.string.response)));
-            startActivity(new Intent(GolazzosApplication.getInstance(), MatchListActivity.class));
-        } catch (JSONException e){
-            // TODO - Implementar manager de mensajes de error.
+
+        HttpRequest h;
+        BuilderJsonList builderJsonList;
+
+        switch (servicesCall) {
+
+            case LOGIN: try {
+                            PreferencesHelper.storeUserInPreferences(response.getJSONObject(getString(R.string.response)));
+                            h = new HttpRequest(this, ServicesCall.ME);
+                            url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.me_endpoint));
+                            h.sendAuthenticatedPostRequest(getApplicationContext(), url);
+                        } catch (JSONException e) {
+                            // TODO - Implementar manager de mensajes de error.
+                        }
+                        break;
+
+           case ME: try {
+                           builderJsonList = new BuilderJsonList(response.getJSONObject(getString(R.string.response)));
+
+                           if (builderJsonList.isWizardCompleted()){
+                               startActivity(new Intent(GolazzosApplication.getInstance(), MatchListActivity.class));
+                           }
+                           else {
+                               startActivity(new Intent(GolazzosApplication.getInstance(), WizardOnectivity.class));
+                           }
+
+                       } catch (JSONException e) {
+                            startActivity(new Intent(GolazzosApplication.getInstance(), WizardOnectivity.class));
+                       }
+                       break;
         }
     }
 

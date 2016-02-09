@@ -23,6 +23,10 @@ public class BuilderJsonList {
         this.jsonObject = jsonObject;
     }
 
+    public boolean isWizardCompleted() throws JSONException {
+        return jsonObject.getJSONObject("soul_team") != null;
+    }
+
     public ArrayList<Team> getTeams() throws JSONException {
         JSONArray teams = jsonObject.getJSONArray("response");
         ArrayList<Team> teamArrayList = new ArrayList<Team>();
