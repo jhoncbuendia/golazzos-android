@@ -41,6 +41,8 @@ public class WizardOnectivity extends AppCompatActivity implements RequestInterf
     private boolean spinnerLigasPressed = false;
     private boolean spinnerEquiposPressed = false;
     private Team soulTeam;
+    private int indexSelected = 0;
+    private boolean ifIsSelected = false, findIt = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,9 +75,25 @@ public class WizardOnectivity extends AppCompatActivity implements RequestInterf
         loaderImagen = (ProgressBar) findViewById(R.id.progressBarLoaderImage);
         imagenEquipo = (ImageView) findViewById(R.id.imageViewTeam);
 
+        boolean ifIsSelected = idTournament != 0, findIt = false;
         String[] tournamentsStringArray = new String[tournamentArrayList.size()];
-        for (int i = 0; i < tournamentArrayList.size(); i++)
+
+        for (int i = 0; i < tournamentArrayList.size(); i++) {
             tournamentsStringArray[i] = tournamentArrayList.get(i).getNameTornament();
+            if (ifIsSelected){
+                if (!findIt){
+                    if (tournamentArrayList.get(i).getIdTournament() == idTournament) {
+                        findIt = true;
+                        indexSelected = i;
+                    }
+                }
+            }
+        }
+
+        if (ifIsSelected){
+            tournamentsStringArray[indexSelected] = tournamentArrayList.get(0).getNameTornament();
+            tournamentsStringArray[0] = tournamentArrayList.get(indexSelected).getNameTornament();
+        }
 
         String[] teamsStringArray = new String[teamsArrayList.size()];
         for (int i = 0; i < teamsArrayList.size(); i++)
@@ -109,11 +127,10 @@ public class WizardOnectivity extends AppCompatActivity implements RequestInterf
         spinnerEquipos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (spinnerEquiposPressed){
+                if (spinnerEquiposPressed) {
                     soulTeam = teamsArrayList.get(i);
                     changeShirtUrl(teamsArrayList.get(i).getUrlTeam());
-                }
-                else spinnerEquiposPressed = true;
+                } else spinnerEquiposPressed = true;
             }
 
             @Override
@@ -132,6 +149,7 @@ public class WizardOnectivity extends AppCompatActivity implements RequestInterf
                 h.startPostRequestAuthenticated(getApplicationContext(), url, jsonBuilder.getFavoriteTeamJSON(String.valueOf(soulTeam.getIdTeam())),soulTeam.getIdTeam());
             }
         });
+
     }
 
     private void changeShirtUrl(String urlImage){

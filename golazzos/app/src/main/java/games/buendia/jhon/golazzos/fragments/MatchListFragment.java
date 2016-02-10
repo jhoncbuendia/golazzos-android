@@ -86,9 +86,27 @@ public class MatchListFragment extends Fragment {
             }
         });
 
+        int indexSelected = 0;
         String[] tournamentsStringArray = new String[tournaments.size()];
-        for (int i = 0; i < tournaments.size(); i++)
+        int idTournament = arguments.getInt("tournament_id");
+        boolean ifIsSelected = idTournament != 0, findIt = false;
+
+        for (int i = 0; i < tournaments.size(); i++) {
             tournamentsStringArray[i] = tournaments.get(i).getNameTornament();
+            if (ifIsSelected){
+                if (!findIt) {
+                    if (tournaments.get(i).getIdTournament() == idTournament){
+                        indexSelected = i;
+                        findIt = true;
+                    }
+                }
+            }
+        }
+
+        if (ifIsSelected){
+            tournamentsStringArray[indexSelected] = tournaments.get(0).getNameTornament();
+            tournamentsStringArray[0] = tournaments.get(indexSelected).getNameTornament();
+        }
 
         String[] teamsStringArray = new String[teams.size()];
         for (int i = 0; i < teams.size(); i++)
@@ -147,6 +165,7 @@ public class MatchListFragment extends Fragment {
 
             }
         });
+
 
         return view;
     }
@@ -228,7 +247,7 @@ public class MatchListFragment extends Fragment {
 
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView((LinearLayout)object);
+            container.removeView((LinearLayout) object);
         }
     }
 }
