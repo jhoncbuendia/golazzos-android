@@ -19,49 +19,40 @@
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".MainActivity"
             android:windowSoftInputMode="stateHidden"
-            android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
             android:name=".activities.SignInActivity"
             android:windowSoftInputMode="stateHidden"
-            android:label="@string/title_activity_sign_in"
             android:theme="@style/Theme.AppCompat.NoActionBar" >
         </activity>
         <activity
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:name=".activities.SignUpActivity"
-            android:label="@string/title_activity_sign_up"
             android:windowSoftInputMode="stateHidden">
         </activity>
         <activity
             android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:name=".activities.WizardOnectivity"
-            android:label="@string/title_activity_wizard_onectivity" >
+            android:name=".activities.WizardOnectivity">
         </activity>
         <activity
             android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:name=".activities.WizardTwoActivity"
-            android:label="@string/title_activity_wizard_two" >
+            android:name=".activities.WizardTwoActivity" >
         </activity>
         <activity
             android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:name=".activities.WizardThreeActivity"
-            android:label="@string/title_activity_wizard_three" >
+            android:name=".activities.WizardThreeActivity" >
         </activity>
         <activity
             android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:name=".activities.WizardFourActivity"
-            android:label="@string/title_activity_wizard_four" >
+            android:name=".activities.WizardFourActivity" >
         </activity>
         <activity
             android:name=".activities.InitialActivity"
-            android:label="@string/title_activity_initial"
             android:theme="@style/AppTheme.NoActionBar" >
 
             <intent-filter>
