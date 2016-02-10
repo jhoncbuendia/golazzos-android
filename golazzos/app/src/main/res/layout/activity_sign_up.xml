@@ -50,7 +50,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/userup"
-
+            android:singleLine="true"
+            android:maxLines="1"
             android:layout_marginTop="10dp"
             android:hint="EMAIL"
             android:textAlignment="textStart"
@@ -61,7 +62,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:id="@+id/pwdup"
-
+            android:singleLine="true"
+            android:maxLines="1"
             android:hint="CONTRASEÑA"
             android:textAlignment="textStart"
             android:inputType="textCapWords|textPassword"

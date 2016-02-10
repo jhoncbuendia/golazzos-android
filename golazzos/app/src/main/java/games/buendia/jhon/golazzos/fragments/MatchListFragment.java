@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import games.buendia.jhon.golazzos.R;
 import games.buendia.jhon.golazzos.activities.MatchListActivity;
@@ -31,6 +34,8 @@ public class MatchListFragment extends Fragment {
 
     private boolean spinnerLigasPressed = false;
     private boolean spinnerEquiposPressed = false;
+    private ViewPager viewPagerMatches;
+    private TextView textViewPorJugar, textViewEnVivo, textViewFinalizado;
 
     public MatchListFragment(){
 
@@ -48,9 +53,38 @@ public class MatchListFragment extends Fragment {
         final ArrayList<Tournament> tournaments = (ArrayList<Tournament>) arguments.getSerializable("leagues");
         final ArrayList<Team> teams = (ArrayList<Team>) arguments.getSerializable("teams");
 
-        ViewPager viewPagerMatches = (ViewPager) view.findViewById(R.id.viewPagerMatches);
+        viewPagerMatches = (ViewPager) view.findViewById(R.id.viewPagerMatches);
         viewPagerMatches.setAdapter(new MyPagerAdapter(matches));
         viewPagerMatches.setCurrentItem(0);
+
+        textViewPorJugar = (TextView) view.findViewById(R.id.textViewPorJugar);
+        textViewEnVivo = (TextView) view.findViewById(R.id.textViewEnVivo);
+        textViewFinalizado = (TextView) view.findViewById(R.id.textViewFinalizado);
+
+        textViewFinalizado.setClickable(true);
+        textViewEnVivo.setClickable(true);
+        textViewPorJugar.setClickable(true);
+
+        textViewPorJugar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                putViewPagerAtPosition(0);
+            }
+        });
+
+        textViewEnVivo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                putViewPagerAtPosition(1);
+            }
+        });
+
+        textViewFinalizado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                putViewPagerAtPosition(2);
+            }
+        });
 
         String[] tournamentsStringArray = new String[tournaments.size()];
         for (int i = 0; i < tournaments.size(); i++)
@@ -117,6 +151,38 @@ public class MatchListFragment extends Fragment {
         return view;
     }
 
+    public void checkCurrentItem(){
+        switch (viewPagerMatches.getCurrentItem()){
+            case 0: textViewPorJugar.setBackgroundColor(Color.parseColor("#323232"));
+                    textViewPorJugar.setTextColor(Color.parseColor("#FFFFFF"));
+                    textViewFinalizado.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    textViewEnVivo.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    textViewFinalizado.setTextColor(Color.parseColor("#005b7d"));
+                    textViewEnVivo.setTextColor(Color.parseColor("#005b7d"));
+                    break;
+
+            case 1: textViewEnVivo.setBackgroundColor(Color.parseColor("#323232"));
+                    textViewEnVivo.setTextColor(Color.parseColor("#FFFFFF"));
+                    textViewFinalizado.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    textViewPorJugar.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    textViewFinalizado.setTextColor(Color.parseColor("#005b7d"));
+                    textViewPorJugar.setTextColor(Color.parseColor("#005b7d"));
+                    break;
+
+            case 2: textViewFinalizado.setBackgroundColor(Color.parseColor("#323232"));
+                    textViewFinalizado.setTextColor(Color.parseColor("#FFFFFF"));
+                    textViewEnVivo.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    textViewPorJugar.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    textViewEnVivo.setTextColor(Color.parseColor("#005b7d"));
+                    textViewPorJugar.setTextColor(Color.parseColor("#005b7d"));
+                    break;
+        }
+    }
+
+    private void putViewPagerAtPosition(int position){
+        viewPagerMatches.setCurrentItem(position);
+    }
+
     private class MyPagerAdapter extends PagerAdapter {
 
         private ArrayList<Match> arrayListMatches;
@@ -132,6 +198,7 @@ public class MatchListFragment extends Fragment {
 
         @Override
         public boolean isViewFromObject(View view, Object object) {
+            checkCurrentItem();
             return view == object;
         }
 
@@ -153,7 +220,7 @@ public class MatchListFragment extends Fragment {
             lv.setDivider(new ColorDrawable(Color.TRANSPARENT));
 
             layout.addView(lv);
-
+            checkCurrentItem();
             container.addView(layout);
 
             return layout;
