@@ -36,4 +36,31 @@ public class PreferencesHelper {
         instanciateSharedPreferences();
         return sharedPreferences.getString(ApplicationConstants.tokenKey,"");
     }
+
+    public static void storeUserObjectIntoPreferences(JSONObject response) throws JSONException {
+        instanciateSharedPreferences();
+        editor = sharedPreferences.edit();
+        editor.putInt(ApplicationConstants.idUserKey, response.getInt("id"));
+        editor.putString(ApplicationConstants.nameUserKey, response.getString("name"));
+        editor.putString(ApplicationConstants.emailUserKey, response.getString("email"));
+        editor.putInt(ApplicationConstants.pointsUserKey, response.getInt("points"));
+        editor.putString(ApplicationConstants.urlImageKey, response.getString("profile_pic_url"));
+        editor.putBoolean(ApplicationConstants.paidSubscriptionKey, response.getBoolean("paid_subscription"));
+        editor.commit();
+    }
+
+    public static void storeSoulTeamIntoPreferences(JSONObject response){
+        try {
+            instanciateSharedPreferences();
+            JSONObject jsonObject = response.getJSONObject("soul_team");
+            editor = sharedPreferences.edit();
+            editor.putInt(ApplicationConstants.soutTeamIdKey, jsonObject.getInt("id"));
+            editor.putString(ApplicationConstants.soutTeamNameKey, jsonObject.getString("name"));
+            editor.putString(ApplicationConstants.soutTeamNameKey, jsonObject.getString("image_path"));
+            editor.commit();
+        }
+        catch (JSONException e){
+            // Nothing to do here.
+        }
+    }
 }

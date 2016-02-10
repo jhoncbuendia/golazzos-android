@@ -91,31 +91,10 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
     }
 
     public void registerFbUser(String token){
-
         jsonBuilder = new JSONBuilder();
-
-        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, jsonBuilder.getFacebookRegisterJSON(token), new Response.Listener<JSONObject>() {
-
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    PreferencesHelper.storeUserInPreferences(response.getJSONObject(getString(R.string.response)));
-                    startActivity(new Intent(GolazzosApplication.getInstance(), MatchListActivity.class));
-                } catch (JSONException e){
-                    // TODO - Implementar manager de mensajes de error.
-                }
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                // TODO - Implementar manager de mensajes de error.
-            }
-        });
-
-        VolleyService v = VolleyService.getInstance(GolazzosApplication.getInstance());
-        v.getRequestQueue().add(jsObjRequest);
-
+        DialogHelper.showLoaderDialog(SignInActivity.this);
+        HttpRequest h = new HttpRequest(this, ServicesCall.LOGIN);
+        h.starPostRequest(getApplicationContext(), url, jsonBuilder.getFacebookRegisterJSON(token));
     }
 
     @Override
@@ -138,6 +117,9 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
 
            case ME: try {
                            builderJsonList = new BuilderJsonList(response.getJSONObject(getString(R.string.response)));
+
+                           PreferencesHelper.storeUserObjectIntoPreferences(response.getJSONObject(getString(R.string.response)));
+                           PreferencesHelper.storeSoulTeamIntoPreferences(response.getJSONObject(getString(R.string.response)));
 
                            if (builderJsonList.isWizardCompleted()){
                                startActivity(new Intent(GolazzosApplication.getInstance(), MatchListActivity.class));

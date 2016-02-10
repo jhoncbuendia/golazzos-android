@@ -43,4 +43,14 @@ public class ApplicationConstants {
     public static final String tokenKey = "tokenKey";
     public static final String jsonKeyJwt = "jwt";
 
+    public static final String idUserKey = "idUserKey";
+    public static final String nameUserKey = "nameUserKey";
+    public static final String pointsUserKey = "pointsUserKey";
+    public static final String emailUserKey = "emailUserKey";
+    public static final String urlImageKey = "urlImageKey";
+    public static final String paidSubscriptionKey = "paidSubscriptionKey";
+    public static final String soutTeamIdKey = "soutTeamIdKey";
+    public static final String soutTeamNameKey = "soutTeamNameKey";
+    public static final String soulTeamImageUrlKey = "soulTeamImageUrlKey";
+
 }
