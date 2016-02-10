@@ -7,9 +7,15 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,6 +23,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import games.buendia.jhon.golazzos.R;
+import games.buendia.jhon.golazzos.adapters.DrawerAdapterList;
 import games.buendia.jhon.golazzos.fragments.MatchListFragment;
 import games.buendia.jhon.golazzos.interfaces.BaseMethodsActivity;
 import games.buendia.jhon.golazzos.model.Match;
@@ -26,6 +33,7 @@ import games.buendia.jhon.golazzos.queryService.BuilderJsonList;
 import games.buendia.jhon.golazzos.queryService.HttpRequest;
 import games.buendia.jhon.golazzos.queryService.RequestInterface;
 import games.buendia.jhon.golazzos.utils.DialogHelper;
+import games.buendia.jhon.golazzos.utils.PreferencesHelper;
 import games.buendia.jhon.golazzos.utils.ServicesCall;
 
 /**
@@ -51,6 +59,7 @@ public class MatchListActivity extends FragmentActivity implements RequestInterf
         idTournament = 0;
         url = validateUrlToRequestMatch(getIntent());
         DialogHelper.showLoaderDialog(MatchListActivity.this);
+        buildMenu();
 
         runOnUiThread(new Runnable() {
             @Override
@@ -59,6 +68,35 @@ public class MatchListActivity extends FragmentActivity implements RequestInterf
                 h.sendAuthenticatedPostRequest(getApplicationContext(), url);
             }
         });
+    }
+
+    private void buildMenu(){
+        String[] optionsMenu = {getString(R.string.perfil_menu),
+                                getString(R.string.estadio_menu),
+                                getString(R.string.partidos_menu),
+                                getString(R.string.jugadas_menu),
+                                getString(R.string.ayuda_menu),
+                                getString(R.string.golazzos_menu)};
+
+        int resourceLevel = PreferencesHelper.getUserLevel();
+
+        ((ListView) findViewById(R.id.listViewMenu)).setAdapter(new DrawerAdapterList(this, optionsMenu));
+        ((TextView) findViewById(R.id.tvPuntos)).setText(String.valueOf(PreferencesHelper.getUserPoints()));
+        findViewById(R.id.cardViewQuieroSerTitular).setVisibility(resourceLevel == R.string.suplente ? View.VISIBLE : View.GONE);
+        ((TextView) findViewById(R.id.textViewCondicion)).setText(getString(resourceLevel));
+        ((TextView) findViewById(R.id.textViewUsuario)).setText(String.format(getString(R.string.format_hola), PreferencesHelper.getUserName()));
+
+        ImageView imageViewUser = (ImageView) findViewById(R.id.imageViewPictureUser);
+
+        String urlImage = PreferencesHelper.getUrlPhoto();
+
+        if (!urlImage.contains("http")){
+            urlImage = "http:"+urlImage;
+        }
+
+        Picasso.with(this)
+                .load(urlImage)
+                .into(imageViewUser);
     }
 
     @Override
@@ -151,7 +189,7 @@ public class MatchListActivity extends FragmentActivity implements RequestInterf
 
     @Override
     public void openDrawerMenu(View v) {
-        mDrawerLayout.openDrawer((ListView) findViewById(R.id.listViewMenu));
+        mDrawerLayout.openDrawer((LinearLayout) findViewById(R.id.layoutBaseMenu));
     }
 
     private String validateUrlToRequestMatch(Intent intent){

@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import games.buendia.jhon.golazzos.GolazzosApplication;
+import games.buendia.jhon.golazzos.R;
 
 /**
  * Created by User on 03/02/2016.
@@ -63,4 +64,28 @@ public class PreferencesHelper {
             // Nothing to do here.
         }
     }
+
+    public static String getUserName(){
+        instanciateSharedPreferences();
+        return sharedPreferences.getString(ApplicationConstants.nameUserKey, "");
+    }
+
+    public static int getUserPoints(){
+        instanciateSharedPreferences();
+        return sharedPreferences.getInt(ApplicationConstants.pointsUserKey, 0);
+    }
+
+    public static int getUserLevel(){
+        instanciateSharedPreferences();
+        if (sharedPreferences.getBoolean(ApplicationConstants.paidSubscriptionKey, false))
+            return R.string.titular;
+        else return R.string.suplente;
+    }
+
+    public static String getUrlPhoto(){
+        instanciateSharedPreferences();
+        return sharedPreferences.getString(ApplicationConstants.urlImageKey, "");
+    }
+
+
 }
