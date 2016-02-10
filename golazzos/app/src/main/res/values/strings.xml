@@ -81,4 +81,18 @@
     <string name="ganas">GANAS</string>
     <string name="cien_puntos">100\nPUNTOS</string>
 
+
+    <!-- Menu -->
+    <string name="format_hola">Hola, %1$s</string>
+    <string name="puntos_label">PUNTOS</string>
+    <string name="suplente">Suplente</string>
+    <string name="titular">Titular</string>
+    <string name="quiero_ser_titular">¡Quiero ser titular!</string>
+    <string name="perfil_menu">PERFIL</string>
+    <string name="estadio_menu">ESTADIO</string>
+    <string name="partidos_menu">PARTIDOS</string>
+    <string name="jugadas_menu">JUGADAS</string>
+    <string name="ayuda_menu">AYUDA</string>
+    <string name="golazzos_menu">GOLAZZOS</string>
+
 </resources>
