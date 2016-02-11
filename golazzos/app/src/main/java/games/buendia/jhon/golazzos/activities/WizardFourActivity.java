@@ -34,7 +34,7 @@ public class WizardFourActivity extends AppCompatActivity {
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
                 Log.i("status", "Runing SingUp Intent");
-                Intent intent = new Intent(context, MainActivity.class);
+                Intent intent = new Intent(context, MatchListActivity.class);
                 startActivity(intent);
 
             }
