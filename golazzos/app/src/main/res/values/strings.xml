@@ -95,4 +95,7 @@
     <string name="ayuda_menu">AYUDA</string>
     <string name="golazzos_menu">GOLAZZOS</string>
 
+    <!-- Tercer wizard -->
+    <string name="haz_tu_convocatoria">HAZ TU CONVOCATORIA</string>
+    <string name="invita_a_tus_amigos">¡Invita a tus amigos y te regalamos <b>300 puntos</b>!</string>
 </resources>
