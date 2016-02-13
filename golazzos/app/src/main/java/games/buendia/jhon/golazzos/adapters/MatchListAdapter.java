@@ -1,12 +1,18 @@
 package games.buendia.jhon.golazzos.adapters;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -19,6 +25,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import games.buendia.jhon.golazzos.R;
+import games.buendia.jhon.golazzos.activities.ConfirmacionJugadaActivity;
 import games.buendia.jhon.golazzos.model.Match;
 import games.buendia.jhon.golazzos.utils.ApplicationConstants;
 
@@ -57,7 +64,7 @@ public class MatchListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
 
-        ViewHolder holder;
+        final ViewHolder holder;
         View v = listViewMatches.getChildAt(position - listViewMatches.getFirstVisiblePosition());
 
         if (v == null) {
@@ -69,11 +76,13 @@ public class MatchListAdapter extends BaseAdapter {
             holder.nombreEquipoVisitante = (TextView) v.findViewById(R.id.textViewNombreEquipoVisitante);
             holder.imageEquipoLocal = (ImageView) v.findViewById(R.id.imageViewLocalTeam);
             holder.imageEquipoVisitante  = (ImageView) v.findViewById(R.id.imageViewAwayTeam);
-            holder.spinnerPredicciones = (Spinner) v.findViewById(R.id.spinnerPronostico);
             holder.estadisticasCardView = (CardView) v.findViewById(R.id.cardViewEstadisticas);
             holder.progressBarEquipoLocal = (ProgressBar) v.findViewById(R.id.progressBarEquipoLocal);
             holder.progressBarEquipoVisitante = (ProgressBar) v.findViewById(R.id.progressBarEquipoVisitante);
             holder.nombreTorneoPartido = (TextView) v.findViewById(R.id.textViewNombreTorneo);
+            holder.marcadorEquipoLocal = (EditText) v.findViewById(R.id.editTextMarcadorLocal);
+            holder.marcadorEquipoVisitante = (EditText) v.findViewById(R.id.editTextMarcadorVisitante);
+            holder.jugarButton = (CardView) v.findViewById(R.id.cardViewJugar);
 
             v.setTag(holder);
 
@@ -81,11 +90,36 @@ public class MatchListAdapter extends BaseAdapter {
             holder = (ViewHolder) v.getTag();
         }
 
-        Match match = matchArrayList.get(position);
+        final Match match = matchArrayList.get(position);
 
         holder.nombreEquipoLocal.setText(match.getLocalTeam().getTeamName());
         holder.nombreEquipoVisitante.setText(match.getAwayTeam().getTeamName());
-        holder.spinnerPredicciones.setAdapter(new CustomSpinnerAdapter(context,ApplicationConstants.pronosticos));
+        holder.jugarButton.setClickable(true);
+
+        holder.jugarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(context)
+                        .setTitle(context.getString(R.string.titulo_alerta))
+                        .setSingleChoiceItems(ApplicationConstants.opcionesAlerta, 0, null)
+                        .setPositiveButton(R.string.aceptar_button, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                int selectedPosition = ((AlertDialog)dialog).getListView().getCheckedItemPosition();
+                                if (selectedPosition >= 0) {
+                                    dialog.dismiss();
+                                    match.setMarcadorLocal(Integer.parseInt(holder.marcadorEquipoLocal.getText().toString()));
+                                    match.setMarcadorVisitante(Integer.parseInt(holder.marcadorEquipoVisitante.getText().toString()));
+                                    Intent intent = new Intent(context, ConfirmacionJugadaActivity.class);
+                                    intent.putExtra("match", match);
+                                    intent.putExtra("opcion", ApplicationConstants.opcionesAlerta[selectedPosition]);
+                                    context.startActivity(intent);
+                                    ((Activity) context).finish();
+                                }
+                            }
+                        })
+                        .show();
+            }
+        });
 
         holder.nombreTorneoPartido.setText(match.getLocalTeam().getTournamentTeam().getNameTornament());
 
@@ -126,12 +160,14 @@ public class MatchListAdapter extends BaseAdapter {
     static class ViewHolder {
         TextView nombreEquipoLocal;
         TextView nombreEquipoVisitante;
-        Spinner spinnerPredicciones;
+        EditText marcadorEquipoLocal;
+        EditText marcadorEquipoVisitante;
         ImageView imageEquipoLocal;
         ImageView imageEquipoVisitante;
         CardView estadisticasCardView;
         ProgressBar progressBarEquipoLocal;
         ProgressBar progressBarEquipoVisitante;
         TextView nombreTorneoPartido;
+        CardView jugarButton;
     }
 }

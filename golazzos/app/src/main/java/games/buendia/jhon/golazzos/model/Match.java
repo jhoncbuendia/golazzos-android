@@ -1,13 +1,17 @@
 package games.buendia.jhon.golazzos.model;
 
+import java.io.Serializable;
+
 /**
  * Created by User on 07/02/2016.
  */
-public class Match {
+public class Match implements Serializable{
 
     private int id;
     private String timeLabelMatch;
     private String urlMatch;
+    private int marcadorLocal;
+    private int marcadorVisitante;
     private Team localTeam;
     private Team awayTeam;
 
@@ -57,5 +61,21 @@ public class Match {
 
     public void setAwayTeam(Team awayTeam) {
         this.awayTeam = awayTeam;
+    }
+
+    public int getMarcadorLocal() {
+        return marcadorLocal;
+    }
+
+    public void setMarcadorLocal(int marcadorLocal) {
+        this.marcadorLocal = marcadorLocal;
+    }
+
+    public int getMarcadorVisitante() {
+        return marcadorVisitante;
+    }
+
+    public void setMarcadorVisitante(int marcadorVisitante) {
+        this.marcadorVisitante = marcadorVisitante;
     }
 }

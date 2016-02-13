@@ -2,6 +2,7 @@
 <resources>
     <string name="url_base">https://www.golazzos.com/api/v2/</string>
     <string name="tokens_endpoint">tokens</string>
+    <string name="bet_endpoint">bets</string>
     <string name="users_endpoint">users</string>
     <string name="matches_endpoint">matches</string>
     <string name="me_endpoint">users/me</string>

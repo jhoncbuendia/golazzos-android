@@ -1,9 +1,11 @@
 package games.buendia.jhon.golazzos.model;
 
+import java.io.Serializable;
+
 /**
  * Created by User on 30/01/2016.
  */
-public class Team {
+public class Team implements Serializable{
 
     private String teamName;
     private String urlTeam;

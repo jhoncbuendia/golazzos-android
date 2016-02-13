@@ -109,7 +109,6 @@ public class HttpRequest {
 
     public void startPostRequestAuthenticated(Context context, String url, JSONObject data_send, int idTeam){
 
-
         JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, data_send, new Response.Listener<JSONObject>() {
 
             @Override
@@ -142,6 +141,5 @@ public class HttpRequest {
         volley = VolleyService.getInstance(context);
         volley.getRequestQueue().add(jsObjRequest);
     }
-
 
 }

@@ -98,4 +98,20 @@
     <!-- Tercer wizard -->
     <string name="haz_tu_convocatoria">HAZ TU CONVOCATORIA</string>
     <string name="invita_a_tus_amigos">¡Invita a tus amigos y te regalamos <b>300 puntos</b>!</string>
+
+    <!-- Alertas -->
+    <string name="aceptar_button">Aceptar</string>
+    <string name="titulo_alerta">Selecciona tipo de jugada</string>
+
+    <!-- Confirmacion jugada-->
+
+    <string name="format_jugada">Jugaste en el:</string>
+    <string name="marcador">Marcador</string>
+    <string name="gana_pierde">Gana/Pierde</string>
+    <string name="gana_visitante">Gana Visitante</string>
+    <string name="gana_local">Gana Local</string>
+    <string name="empate">Empate</string>
+    <string name="confirmar_jugada">Confirmar Jugada</string>
+    <string name="confirmacion_titulo">CONFIRMACIÓN</string>
+
 </resources>

@@ -1,9 +1,11 @@
 package games.buendia.jhon.golazzos.model;
 
+import java.io.Serializable;
+
 /**
  * Created by User on 07/02/2016.
  */
-public class Tournament {
+public class Tournament implements Serializable{
     private int idTournament;
     private String nameTornament;
 
