@@ -26,6 +26,7 @@ import games.buendia.jhon.golazzos.queryService.BuilderJsonList;
 import games.buendia.jhon.golazzos.queryService.HttpRequest;
 import games.buendia.jhon.golazzos.queryService.RequestInterface;
 import games.buendia.jhon.golazzos.utils.DialogHelper;
+import games.buendia.jhon.golazzos.utils.JSONBuilder;
 import games.buendia.jhon.golazzos.utils.ServicesCall;
 
 public class WizardTwoActivity extends Activity implements RequestInterface, AdapterView.OnItemSelectedListener {
@@ -45,6 +46,7 @@ public class WizardTwoActivity extends Activity implements RequestInterface, Ada
     private int check = 0;
     private ImageView firstTeamImageView, secondTeamImageView, thirdTeamImageView, fourTeamImageView,
                       fifthTeamImageView, sixTeamImageView, sevenTeamImageView, eightTeamImageView;
+    private int teamsToUp = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,7 +124,20 @@ public class WizardTwoActivity extends Activity implements RequestInterface, Ada
         buttonSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(WizardTwoActivity.this, WizardThreeActivity.class));
+                if (favoriteTeams.size() != 0) {
+                    teamsToUp = 1;
+                    DialogHelper.showLoaderDialog(WizardTwoActivity.this);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            sendFavoriteTeamRequest(favoriteTeams.get(0));
+                        }
+                    });
+
+                }
+                else {
+                    startActivity(new Intent(WizardTwoActivity.this, WizardThreeActivity.class));
+                }
             }
         });
 
@@ -139,6 +154,13 @@ public class WizardTwoActivity extends Activity implements RequestInterface, Ada
             }
         });
 
+    }
+
+    private void sendFavoriteTeamRequest(Team soulTeam){
+        url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.favorite_team_endpoint));
+        JSONBuilder jsonBuilder = new JSONBuilder();
+        HttpRequest h = new HttpRequest(WizardTwoActivity.this, ServicesCall.FAVORITE_ADD);
+        h.startPostRequestAuthenticated(getApplicationContext(), url, jsonBuilder.getFavoriteTeamJSON(String.valueOf(soulTeam.getIdTeam()), false),soulTeam.getIdTeam());
     }
 
     private boolean isInTeamList(String teamName){
@@ -194,8 +216,6 @@ public class WizardTwoActivity extends Activity implements RequestInterface, Ada
         if (!url.contains("http"))
             url = "http:"+url;
 
-        Log.i("url =>", url);
-
         Picasso.with(this)
                 .load(url)
                 .into(imageView, new Callback() {
@@ -248,6 +268,19 @@ public class WizardTwoActivity extends Activity implements RequestInterface, Ada
                     e.printStackTrace();
                 }
                 break;
+
+            case FAVORITE_ADD: if (teamsToUp != favoriteTeams.size()) {
+                                    final Team team = favoriteTeams.get(teamsToUp);
+                                    teamsToUp++;
+                                    teamsLoaded = false;
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            sendFavoriteTeamRequest(team);
+                                        }
+                                    });
+                                }
+                                break;
         }
 
         if (idTournament == 0) {
@@ -260,11 +293,16 @@ public class WizardTwoActivity extends Activity implements RequestInterface, Ada
             initUI();
             DialogHelper.hideLoaderDialog();
         }
+        else if (teamsToUp == favoriteTeams.size()){
+            DialogHelper.hideLoaderDialog();
+            startActivity(new Intent(this, WizardThreeActivity.class));
+        }
     }
 
     @Override
     public void onErrorCallBack(JSONObject response) {
-
+        DialogHelper.hideLoaderDialog();
+        Log.i("resp", response.toString());
     }
 
     @Override
