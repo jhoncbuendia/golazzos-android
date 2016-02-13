@@ -26,8 +26,6 @@ public class WizardFourActivity extends AppCompatActivity {
 
         context = this;
 
-
-
         empezar = (Button)findViewById(R.id.empezar);
         empezar.setOnClickListener(new View.OnClickListener() {
             @Override

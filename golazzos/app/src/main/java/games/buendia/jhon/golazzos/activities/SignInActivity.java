@@ -125,11 +125,11 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
                                startActivity(new Intent(GolazzosApplication.getInstance(), MatchListActivity.class));
                            }
                            else {
-                               startActivity(new Intent(GolazzosApplication.getInstance(), WizardTwoActivity.class));
+                               startActivity(new Intent(GolazzosApplication.getInstance(), WizardOnectivity.class));
                            }
 
                        } catch (JSONException e) {
-                            startActivity(new Intent(GolazzosApplication.getInstance(), WizardTwoActivity.class));
+                            startActivity(new Intent(GolazzosApplication.getInstance(), WizardOnectivity.class));
                        }
                        break;
         }

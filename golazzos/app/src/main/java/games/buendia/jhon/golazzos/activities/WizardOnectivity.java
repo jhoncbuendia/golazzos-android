@@ -142,11 +142,13 @@ public class WizardOnectivity extends AppCompatActivity implements RequestInterf
         buttonSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                spinnerEquiposPressed = false;
+                spinnerLigasPressed = false;
                 DialogHelper.showLoaderDialog(WizardOnectivity.this);
                 url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.favorite_team_endpoint));
                 JSONBuilder jsonBuilder = new JSONBuilder();
                 HttpRequest h = new HttpRequest(WizardOnectivity.this, ServicesCall.FAVORITE_ADD);
-                h.startPostRequestAuthenticated(getApplicationContext(), url, jsonBuilder.getFavoriteTeamJSON(String.valueOf(soulTeam.getIdTeam())),soulTeam.getIdTeam());
+                h.startPostRequestAuthenticated(getApplicationContext(), url, jsonBuilder.getFavoriteTeamJSON(String.valueOf(soulTeam.getIdTeam()), true),soulTeam.getIdTeam());
             }
         });
 

@@ -57,12 +57,15 @@ public class JSONBuilder {
         return jsonObject;
     }
 
-    public JSONObject getFavoriteTeamJSON(String idTeam){
+    public JSONObject getFavoriteTeamJSON(String idTeam, boolean soulTeam){
         try {
             userData.put("team_id", Integer.valueOf(idTeam));
+            userData.put("soul", soulTeam);
+            jsonObject = new JSONObject();
+            jsonObject.put("favorite_team", userData);
         }catch (JSONException e) {
             e.printStackTrace();
         }
-        return userData;
+        return jsonObject;
     }
 }
