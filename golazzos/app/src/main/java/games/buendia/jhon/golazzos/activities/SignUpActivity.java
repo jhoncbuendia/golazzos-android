@@ -28,6 +28,7 @@ import games.buendia.jhon.golazzos.queryService.HttpRequest;
 import games.buendia.jhon.golazzos.queryService.RequestInterface;
 import games.buendia.jhon.golazzos.queryService.VolleyService;
 import games.buendia.jhon.golazzos.utils.DialogHelper;
+import games.buendia.jhon.golazzos.utils.EmailValidator;
 import games.buendia.jhon.golazzos.utils.JSONBuilder;
 import games.buendia.jhon.golazzos.utils.ServicesCall;
 
@@ -74,10 +75,17 @@ public class SignUpActivity extends AppCompatActivity implements RequestInterfac
         ingresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
+
+                EmailValidator validator = new EmailValidator();
                 userEditText = (EditText) findViewById(R.id.userup);
                 passwordEditText = (EditText) findViewById(R.id.pwdup);
-                DialogHelper.showLoaderDialog(SignUpActivity.this);
-                loginrMailUser(userEditText.getText().toString(), passwordEditText.getText().toString());
+                if (validator.validate(userEditText.getText().toString()) && passwordEditText.getText().toString().length() >= 8) {
+                    DialogHelper.showLoaderDialog(SignUpActivity.this);
+                    loginrMailUser(userEditText.getText().toString(), passwordEditText.getText().toString());
+                }
+                else {
+                    Toast.makeText(SignUpActivity.this,getString(R.string.validador),Toast.LENGTH_LONG).show();
+                }
             }
         });
 
