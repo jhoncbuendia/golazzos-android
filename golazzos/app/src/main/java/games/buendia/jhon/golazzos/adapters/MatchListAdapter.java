@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
+import android.text.InputType;
+import android.text.method.TextKeyListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.NumberPicker;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -80,8 +83,8 @@ public class MatchListAdapter extends BaseAdapter {
             holder.progressBarEquipoLocal = (ProgressBar) v.findViewById(R.id.progressBarEquipoLocal);
             holder.progressBarEquipoVisitante = (ProgressBar) v.findViewById(R.id.progressBarEquipoVisitante);
             holder.nombreTorneoPartido = (TextView) v.findViewById(R.id.textViewNombreTorneo);
-            holder.marcadorEquipoLocal = (EditText) v.findViewById(R.id.editTextMarcadorLocal);
-            holder.marcadorEquipoVisitante = (EditText) v.findViewById(R.id.editTextMarcadorVisitante);
+            holder.marcadorEquipoLocal = (TextView) v.findViewById(R.id.editTextMarcadorLocal);
+            holder.marcadorEquipoVisitante = (TextView) v.findViewById(R.id.editTextMarcadorVisitante);
             holder.jugarButton = (CardView) v.findViewById(R.id.cardViewJugar);
 
             v.setTag(holder);
@@ -96,6 +99,49 @@ public class MatchListAdapter extends BaseAdapter {
         holder.nombreEquipoVisitante.setText(match.getAwayTeam().getTeamName());
         holder.jugarButton.setClickable(true);
 
+
+        holder.marcadorEquipoLocal.setClickable(true);
+        holder.marcadorEquipoLocal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NumberPicker myNumberPicker = new NumberPicker(context);
+                myNumberPicker.setMaxValue(100);
+                myNumberPicker.setMinValue(0);
+
+                NumberPicker.OnValueChangeListener myValChangedListener = new NumberPicker.OnValueChangeListener() {
+                    @Override
+                    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                        holder.marcadorEquipoLocal.setText(String.valueOf(newVal));
+                    }
+                };
+
+                myNumberPicker.setOnValueChangedListener(myValChangedListener);
+
+                new AlertDialog.Builder(context).setView(myNumberPicker).show();
+            }
+        });
+
+        holder.marcadorEquipoVisitante.setClickable(true);
+        holder.marcadorEquipoVisitante.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NumberPicker myNumberPicker = new NumberPicker(context);
+                myNumberPicker.setMaxValue(100);
+                myNumberPicker.setMinValue(0);
+
+                NumberPicker.OnValueChangeListener myValChangedListener = new NumberPicker.OnValueChangeListener() {
+                    @Override
+                    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                        holder.marcadorEquipoVisitante.setText(String.valueOf(newVal));
+                    }
+                };
+
+                myNumberPicker.setOnValueChangedListener(myValChangedListener);
+
+                new AlertDialog.Builder(context).setView(myNumberPicker).show();
+            }
+        });
+
         holder.jugarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,7 +150,7 @@ public class MatchListAdapter extends BaseAdapter {
                         .setSingleChoiceItems(ApplicationConstants.opcionesAlerta, 0, null)
                         .setPositiveButton(R.string.aceptar_button, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                int selectedPosition = ((AlertDialog)dialog).getListView().getCheckedItemPosition();
+                                int selectedPosition = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
                                 if (selectedPosition >= 0) {
                                     dialog.dismiss();
                                     match.setMarcadorLocal(Integer.parseInt(holder.marcadorEquipoLocal.getText().toString()));
@@ -120,6 +166,8 @@ public class MatchListAdapter extends BaseAdapter {
                         .show();
             }
         });
+
+
 
         holder.nombreTorneoPartido.setText(match.getLocalTeam().getTournamentTeam().getNameTornament());
 
@@ -160,8 +208,8 @@ public class MatchListAdapter extends BaseAdapter {
     static class ViewHolder {
         TextView nombreEquipoLocal;
         TextView nombreEquipoVisitante;
-        EditText marcadorEquipoLocal;
-        EditText marcadorEquipoVisitante;
+        TextView marcadorEquipoLocal;
+        TextView marcadorEquipoVisitante;
         ImageView imageEquipoLocal;
         ImageView imageEquipoVisitante;
         CardView estadisticasCardView;

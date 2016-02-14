@@ -130,20 +130,19 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="16dp" />
 
-            <EditText
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:background="@drawable/edit_text_background"
-                android:inputType="numberDecimal"
-                android:ems="10"
                 android:id="@+id/editTextMarcadorLocal"
                 android:singleLine="true"
                 android:maxLines="1"
                 android:gravity="center"
                 android:textColor="@android:color/black"
                 android:layout_alignBottom="@+id/imageViewLocalTeam"
-                android:layout_toEndOf="@+id/imageViewLocalTeam"
-                android:layout_marginRight="3dp" />
+                android:layout_marginRight="3dp"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/imageViewLocalTeam" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -194,13 +193,14 @@
                 android:layout_alignTop="@+id/imageViewAwayTeam"
                 android:layout_centerHorizontal="true" />
 
-            <EditText
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:background="@drawable/edit_text_background"
                 android:id="@+id/editTextMarcadorVisitante"
                 android:singleLine="true"
                 android:gravity="center"
+                android:textIsSelectable="true"
                 android:textColor="@android:color/black"
                 android:maxLines="1"
                 android:inputType="numberDecimal"
