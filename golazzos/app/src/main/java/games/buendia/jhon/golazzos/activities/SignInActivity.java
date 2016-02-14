@@ -132,13 +132,16 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
 
                            if (builderJsonList.isWizardCompleted()){
                                startActivity(new Intent(GolazzosApplication.getInstance(), MatchListActivity.class));
+                               finish();
                            }
                            else {
                                startActivity(new Intent(GolazzosApplication.getInstance(), WizardOnectivity.class));
+                               finish();
                            }
 
                        } catch (JSONException e) {
                             startActivity(new Intent(GolazzosApplication.getInstance(), WizardOnectivity.class));
+                            finish();
                        }
                        break;
         }
