@@ -269,10 +269,10 @@ public class WizardTwoActivity extends Activity implements RequestInterface, Ada
                 }
                 break;
 
-            case FAVORITE_ADD: if (teamsToUp != favoriteTeams.size()) {
+            case FAVORITE_ADD:  teamsLoaded = false;
+                                if (teamsToUp != favoriteTeams.size()) {
                                     final Team team = favoriteTeams.get(teamsToUp);
                                     teamsToUp++;
-                                    teamsLoaded = false;
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
@@ -293,7 +293,7 @@ public class WizardTwoActivity extends Activity implements RequestInterface, Ada
             initUI();
             DialogHelper.hideLoaderDialog();
         }
-        else if (teamsToUp == favoriteTeams.size()){
+        else if (teamsToUp >= favoriteTeams.size()){
             DialogHelper.hideLoaderDialog();
             startActivity(new Intent(this, WizardThreeActivity.class));
             finish();
