@@ -114,4 +114,6 @@
     <string name="confirmar_jugada">Confirmar Jugada</string>
     <string name="confirmacion_titulo">CONFIRMACIÓN</string>
 
+    <string name="validador">Por favor verifique los datos e intente nuevamente</string>
+
 </resources>
