@@ -101,6 +101,7 @@ public class MatchListAdapter extends BaseAdapter {
 
 
         holder.marcadorEquipoLocal.setClickable(true);
+        holder.marcadorEquipoLocal.setFocusable(false);
         holder.marcadorEquipoLocal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,6 +123,7 @@ public class MatchListAdapter extends BaseAdapter {
         });
 
         holder.marcadorEquipoVisitante.setClickable(true);
+        holder.marcadorEquipoVisitante.setFocusable(false);
         holder.marcadorEquipoVisitante.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
