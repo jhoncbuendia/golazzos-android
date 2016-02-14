@@ -6,79 +6,91 @@
     android:background="#0e5b7f">
 
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView2"
-        android:src="@drawable/golazzos_session_header"
-        android:layout_margin="30dp"
-        android:layout_gravity="center_horizontal" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView2" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:drawableLeft="@drawable/left_arrow"
-            android:drawableRight="@drawable/right_arrow"
-            android:drawablePadding="10dp"
-            android:text="CREA TU CUENTA"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/txtamarillo" />
-
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/login_button"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="40dp"
-            android:width="300dp"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp" />
+            android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:text="@string/o_llena_los_campos"
-            android:layout_gravity="center"
-            android:layout_marginTop="35dp"
-            android:textColor="@color/txtblanco" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView2"
+                android:src="@drawable/golazzos_session_header"
+                android:layout_margin="30dp"
+                android:layout_gravity="center_horizontal" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/userup"
-            android:singleLine="true"
-            android:maxLines="1"
-            android:layout_marginTop="10dp"
-            android:hint="EMAIL"
-            android:textAlignment="textStart"
-            android:textColor="@color/txtblanco" />
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:drawableLeft="@drawable/left_arrow"
+                    android:drawableRight="@drawable/right_arrow"
+                    android:drawablePadding="10dp"
+                    android:text="CREA TU CUENTA"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/txtamarillo" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:id="@+id/pwdup"
-            android:singleLine="true"
-            android:maxLines="1"
-            android:hint="CONTRASEÑA"
-            android:textAlignment="textStart"
-            android:inputType="textCapWords|textPassword"
-            android:autoText="false"
-            android:textColor="@color/txtblanco" />
+            <com.facebook.login.widget.LoginButton
+                    android:id="@+id/login_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="40dp"
+                    android:width="300dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Crear"
-            android:id="@+id/crear_cuenta"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            android:background="@color/bgbtnamarillo"
-            android:width="300dp"
-            android:textColor="@color/txtbtnamarillo" />
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:text="@string/o_llena_los_campos"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="35dp"
+                    android:textColor="@color/txtblanco" />
 
-    </LinearLayout>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/userup"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:layout_marginTop="10dp"
+                    android:hint="EMAIL"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/txtblanco" />
+
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:id="@+id/pwdup"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:hint="CONTRASEÑA"
+                    android:textAlignment="textStart"
+                    android:inputType="textCapWords|textPassword"
+                    android:autoText="false"
+                    android:textColor="@color/txtblanco" />
+
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Crear"
+                    android:id="@+id/crear_cuenta"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/bgbtnamarillo"
+                    android:width="300dp"
+                    android:textColor="@color/txtbtnamarillo" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -30,4 +30,5 @@ dependencies {
     compile 'com.android.support:support-v4:23.1.0'
     compile 'com.google.android.gms:play-services:8.3.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.github.supervital:swipenumberpicker:1.0.3'
 }
