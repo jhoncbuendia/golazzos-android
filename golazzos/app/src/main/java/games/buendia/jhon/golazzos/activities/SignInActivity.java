@@ -96,7 +96,7 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
     public void loginrMailUser(String email, String pwd){
         jsonBuilder = new JSONBuilder();
         HttpRequest h = new HttpRequest(this, ServicesCall.LOGIN);
-        h.starPostRequest(getApplicationContext(), url, jsonBuilder.getSingleRegisterJSON(email,pwd));
+        h.starPostRequest(getApplicationContext(), url, jsonBuilder.getSingleRegisterJSON(email, pwd));
     }
 
     public void registerFbUser(String token){
@@ -159,6 +159,13 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this, InitialActivity.class));
+        finish();
     }
 
 }

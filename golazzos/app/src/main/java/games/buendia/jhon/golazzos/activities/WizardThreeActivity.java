@@ -21,6 +21,7 @@ public class WizardThreeActivity extends AppCompatActivity {
             public void onClick(View arg0) {
                 Intent intent = new Intent(WizardThreeActivity.this, WizardFourActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 

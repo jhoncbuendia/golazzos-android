@@ -216,6 +216,7 @@ public class WizardOnectivity extends AppCompatActivity implements RequestInterf
 
             case FAVORITE_ADD:  DialogHelper.hideLoaderDialog();
                                 startActivity(new Intent(WizardOnectivity.this, WizardTwoActivity.class));
+                                finish();
                                 break;
        }
 

@@ -116,4 +116,10 @@
 
     <string name="validador">Por favor verifique los datos e intente nuevamente</string>
 
+    <!-- Cuarto wizard -->
+
+    <string name="no_te_quedes_en_banca">NO TE QUEDES EN LA BANCA,\nCOMIENZA COMO TITULAR</string>
+    <string name="estas_listo"><b>¡Estás listo!</b>\nSuscríbete y comienza a jugar como <b>Titular</b></string>
+    <string name="comenzar_a_jugar">COMENZAR A JUGAR</string>
+
 </resources>

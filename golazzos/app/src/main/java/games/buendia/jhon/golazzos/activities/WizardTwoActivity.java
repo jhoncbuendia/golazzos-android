@@ -296,6 +296,7 @@ public class WizardTwoActivity extends Activity implements RequestInterface, Ada
         else if (teamsToUp == favoriteTeams.size()){
             DialogHelper.hideLoaderDialog();
             startActivity(new Intent(this, WizardThreeActivity.class));
+            finish();
         }
     }
 
