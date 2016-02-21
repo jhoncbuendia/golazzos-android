@@ -136,4 +136,8 @@
 
     <string name="puntos_a_jugar">Indica puntos a jugar</string>
 
+    <string name="no_tienes_suficientes_puntos">No tienes suficientes puntos para hacer esta jugada.</string>
+
+    <string name="error_transaccional">Existió un error al momento de realizar la operación, intenta nuevamente</string>
+
 </resources>

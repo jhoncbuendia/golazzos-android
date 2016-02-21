@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import org.json.JSONObject;
@@ -22,6 +24,7 @@ import games.buendia.jhon.golazzos.queryService.HttpRequest;
 import games.buendia.jhon.golazzos.queryService.RequestInterface;
 import games.buendia.jhon.golazzos.utils.DialogHelper;
 import games.buendia.jhon.golazzos.utils.JSONBuilder;
+import games.buendia.jhon.golazzos.utils.PreferencesHelper;
 import games.buendia.jhon.golazzos.utils.ServicesCall;
 
 /**
@@ -37,7 +40,7 @@ public class ConfirmacionJugadaActivity extends Activity implements RequestInter
     private ProgressBar progressBarImage;
     private CardView cardViewConfirmarJugada;
     private boolean isLocalWin = false, isAwayWin = false, isWithTypeBet = false;
-    private int idBet = 0;
+    private int idBet = 0, pointsToBet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,14 +138,19 @@ public class ConfirmacionJugadaActivity extends Activity implements RequestInter
 
                 alert.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        int pointsToBet = Integer.parseInt(edittext.getText().toString());
+                        pointsToBet = Integer.parseInt(edittext.getText().toString());
                         if (pointsToBet >= 0) {
-                            DialogHelper.showLoaderDialog(ConfirmacionJugadaActivity.this);
-                            HttpRequest h = new HttpRequest(ConfirmacionJugadaActivity.this, null);
-                            JSONBuilder builderJson = new JSONBuilder();
-                            String url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.bet_endpoint));
-                            h.startPostRequestAuthenticated(ConfirmacionJugadaActivity.this, url, builderJson.getBetJSON(match, isWithTypeBet, idBet, pointsToBet * 100), 0);
-                            dialog.dismiss();
+                            if (PreferencesHelper.getUserPoints() - pointsToBet >= 0) {
+                                DialogHelper.showLoaderDialog(ConfirmacionJugadaActivity.this);
+                                HttpRequest h = new HttpRequest(ConfirmacionJugadaActivity.this, null);
+                                JSONBuilder builderJson = new JSONBuilder();
+                                String url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.bet_endpoint));
+                                h.startPostRequestAuthenticated(ConfirmacionJugadaActivity.this, url, builderJson.getBetJSON(match, isWithTypeBet, idBet, pointsToBet * 100), 0);
+                                dialog.dismiss();
+                            }
+                            else {
+                                Toast.makeText(ConfirmacionJugadaActivity.this, getString(R.string.no_tienes_suficientes_puntos), Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
                 });
@@ -162,13 +170,15 @@ public class ConfirmacionJugadaActivity extends Activity implements RequestInter
     @Override
     public void onSuccessCallBack(JSONObject response, ServicesCall serviceCall) {
         DialogHelper.hideLoaderDialog();
+        PreferencesHelper.updateUserPoints(PreferencesHelper.getUserPoints() - pointsToBet);
         startActivity(new Intent(this, MatchListActivity.class));
         finish();
     }
 
     @Override
     public void onErrorCallBack(JSONObject response) {
-
+        DialogHelper.hideLoaderDialog();
+        Toast.makeText(ConfirmacionJugadaActivity.this, getString(R.string.error_transaccional), Toast.LENGTH_SHORT).show();
     }
 
     @Override

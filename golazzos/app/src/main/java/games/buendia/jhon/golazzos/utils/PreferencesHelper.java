@@ -26,6 +26,14 @@ public class PreferencesHelper {
                 getSharedPreferences(ApplicationConstants.keyPreferences, Context.MODE_PRIVATE);
     }
 
+    public static void updateUserPoints(int points){
+        instanciateSharedPreferences();
+        editor = sharedPreferences.edit();
+        editor.putInt(ApplicationConstants.pointsUserKey, points);
+        editor.commit();
+
+    }
+
     public static void storeUserInPreferences(JSONObject response) throws JSONException {
         instanciateSharedPreferences();
         editor = sharedPreferences.edit();
