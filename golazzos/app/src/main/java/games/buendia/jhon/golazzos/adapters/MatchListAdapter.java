@@ -6,15 +6,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
-import android.text.InputType;
-import android.text.method.TextKeyListener;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -22,16 +17,11 @@ import android.widget.NumberPicker;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
-
 import games.buendia.jhon.golazzos.R;
 import games.buendia.jhon.golazzos.activities.ConfirmacionJugadaActivity;
-import games.buendia.jhon.golazzos.activities.EnVivoMatchActivity;
-import games.buendia.jhon.golazzos.activities.MatchListActivity;
 import games.buendia.jhon.golazzos.model.Match;
 import games.buendia.jhon.golazzos.utils.ApplicationConstants;
 
@@ -91,7 +81,7 @@ public class MatchListAdapter extends BaseAdapter {
             holder.marcadorEquipoLocal = (TextView) v.findViewById(R.id.editTextMarcadorLocal);
             holder.marcadorEquipoVisitante = (TextView) v.findViewById(R.id.editTextMarcadorVisitante);
             holder.jugarButton = (CardView) v.findViewById(R.id.cardViewJugar);
-            holder.resultadosSpinner = (Spinner) v.findViewById(R.id.spinnerPronostico);
+            holder.resultadosSpinner = (TextView) v.findViewById(R.id.spinnerPronostico);
             holder.linearLayoutResultados = (LinearLayout) v.findViewById(R.id.marcadorLayout);
 
             v.setTag(holder);
@@ -153,25 +143,34 @@ public class MatchListAdapter extends BaseAdapter {
         holder.jugarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new AlertDialog.Builder(context)
-                        .setTitle(context.getString(R.string.titulo_alerta))
-                        .setSingleChoiceItems(ApplicationConstants.opcionesAlerta, 0, null)
-                        .setPositiveButton(R.string.aceptar_button, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                                int selectedPosition = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
-                                if (selectedPosition >= 0) {
-                                    dialog.dismiss();
-                                    match.setMarcadorLocal(Integer.parseInt(holder.marcadorEquipoLocal.getText().toString()));
-                                    match.setMarcadorVisitante(Integer.parseInt(holder.marcadorEquipoVisitante.getText().toString()));
-                                    Intent intent = new Intent(context, ConfirmacionJugadaActivity.class);
-                                    intent.putExtra("match", match);
-                                    intent.putExtra("opcion", ApplicationConstants.opcionesAlerta[selectedPosition]);
-                                    context.startActivity(intent);
-                                    ((Activity) context).finish();
-                                }
-                            }
-                        })
-                        .show();
+                if (!filterBet){
+                    match.setMarcadorLocal(Integer.parseInt(holder.marcadorEquipoLocal.getText().toString()));
+                    match.setMarcadorVisitante(Integer.parseInt(holder.marcadorEquipoVisitante.getText().toString()));
+                    Intent intent = new Intent(context, ConfirmacionJugadaActivity.class);
+                    intent.putExtra("match", match);
+                    intent.putExtra("opcion", context.getString(R.string.marcador));
+                    context.startActivity(intent);
+                    ((Activity) context).finish();
+                }
+                else {
+                    if (holder.resultadosSpinner.getText().toString().equals(context.getString(R.string.gana_visitante))) {
+                        match.setMarcadorLocal(0);
+                        match.setMarcadorVisitante(1);
+                    }
+                    else if (holder.resultadosSpinner.getText().toString().equals(context.getString(R.string.gana_local))) {
+                        match.setMarcadorLocal(1);
+                        match.setMarcadorVisitante(0);
+                    }
+                    else {
+                        match.setMarcadorLocal(0);
+                        match.setMarcadorVisitante(0);
+                    }
+                    Intent intent = new Intent(context, ConfirmacionJugadaActivity.class);
+                    intent.putExtra("match", match);
+                    intent.putExtra("opcion", context.getString(R.string.gana_pierde));
+                    context.startActivity(intent);
+                    ((Activity) context).finish();
+                }
             }
         });
 
@@ -180,7 +179,25 @@ public class MatchListAdapter extends BaseAdapter {
             holder.linearLayoutResultados.setVisibility(View.VISIBLE);
             holder.marcadorEquipoLocal.setVisibility(View.GONE);
             holder.marcadorEquipoVisitante.setVisibility(View.GONE);
-            holder.resultadosSpinner.setAdapter(new CustomSpinnerAdapter(context, ApplicationConstants.pronosticos));
+            holder.resultadosSpinner.setClickable(true);
+            holder.resultadosSpinner.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    new AlertDialog.Builder(context)
+                            .setTitle(context.getString(R.string.titulo_alerta))
+                            .setSingleChoiceItems(ApplicationConstants.pronosticos, 0, null)
+                            .setPositiveButton(R.string.aceptar_button, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    int selectedPosition = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
+                                    if (selectedPosition >= 0) {
+                                        dialog.dismiss();
+                                        holder.resultadosSpinner.setText(ApplicationConstants.pronosticos[selectedPosition]);
+                                    }
+                                }
+                            })
+                            .show();
+                }
+            });
         }
         else {
             holder.linearLayoutResultados.setVisibility(View.GONE);
@@ -236,7 +253,7 @@ public class MatchListAdapter extends BaseAdapter {
         ProgressBar progressBarEquipoVisitante;
         TextView nombreTorneoPartido;
         CardView jugarButton;
-        Spinner resultadosSpinner;
+        TextView resultadosSpinner;
         LinearLayout linearLayoutResultados;
     }
 }
