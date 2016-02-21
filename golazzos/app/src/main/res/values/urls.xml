@@ -5,13 +5,32 @@
     <string name="bet_endpoint">bets</string>
     <string name="users_endpoint">users</string>
     <string name="matches_endpoint">matches</string>
+    <string name="matches_live_endpoint">matches?status=playing</string>
+    <string name="matches_end_endpoint">matches?status=played</string>
     <string name="me_endpoint">users/me</string>
     <string name="teams_endpoint">teams?results=20</string>
     <string name="tournaments_endpoint">tournaments</string>
     <string name="format_url">%1$s%2$s</string>
     <string name="favorite_team_endpoint">favorite_teams</string>
+
+    <!-- Urls not played matches -->
+
     <string name="format_url_matches_tournament">https://www.golazzos.com/api/v2/matches?tournament_id=%1$s</string>
     <string name="format_url_matches_team_name">https://www.golazzos.com/api/v2/matches?team_name=%1$s</string>
     <string name="format_url_matches_team_name_and_tournament">https://www.golazzos.com/api/v2/matches?team_name=%1$s&amp;tournament_id=%2$s</string>
+
+    <!-- Urls playing matches -->
+
+    <string name="format_url_live_matches_tournament">https://www.golazzos.com/api/v2/matches?status=playing&amp;tournament_id=%1$s</string>
+    <string name="format_url_live_matches_team_name">https://www.golazzos.com/api/v2/matches?status=playing&amp;team_name=%1$s</string>
+    <string name="format_url_live_matches_team_name_and_tournament">https://www.golazzos.com/api/v2/matches?status=playing&amp;team_name=%1$s&amp;tournament_id=%2$s</string>
+
+    <!-- Urls played matches -->
+
+    <string name="format_url_end_matches_tournament">https://www.golazzos.com/api/v2/matches?status=played&amp;tournament_id=%1$s</string>
+    <string name="format_url_end_matches_team_name">https://www.golazzos.com/api/v2/matches?status=played&amp;team_name=%1$s</string>
+    <string name="format_url_end_matches_team_name_and_tournament">https://www.golazzos.com/api/v2/matches?status=played&amp;team_name=%1$s&amp;tournament_id=%2$s</string>
+
     <string name="format_url_teams_tournament">https://www.golazzos.com/api/v2/teams?tournament_id=%1$s&amp;results=20</string>
+
 </resources>

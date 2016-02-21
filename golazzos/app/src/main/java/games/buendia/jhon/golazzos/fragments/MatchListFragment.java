@@ -1,5 +1,6 @@
 package games.buendia.jhon.golazzos.fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -20,6 +21,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import games.buendia.jhon.golazzos.R;
+import games.buendia.jhon.golazzos.activities.EnVivoMatchActivity;
+import games.buendia.jhon.golazzos.activities.FinalizadosMatchActivity;
 import games.buendia.jhon.golazzos.activities.MatchListActivity;
 import games.buendia.jhon.golazzos.adapters.CustomSpinnerAdapter;
 import games.buendia.jhon.golazzos.adapters.MatchListAdapter;
@@ -36,6 +39,7 @@ public class MatchListFragment extends Fragment {
     private boolean spinnerEquiposPressed = false;
     private ViewPager viewPagerMatches;
     private TextView textViewPorJugar, textViewEnVivo, textViewFinalizado;
+    private Class activityToRefresh;
 
     public MatchListFragment(){
 
@@ -68,21 +72,24 @@ public class MatchListFragment extends Fragment {
         textViewPorJugar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                putViewPagerAtPosition(0);
+                startActivity(new Intent(getActivity(), MatchListActivity.class));
+                getActivity().finish();
             }
         });
 
         textViewEnVivo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                putViewPagerAtPosition(1);
+                startActivity(new Intent(getActivity(), EnVivoMatchActivity.class));
+                getActivity().finish();
             }
         });
 
         textViewFinalizado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                putViewPagerAtPosition(2);
+                startActivity(new Intent(getActivity(), FinalizadosMatchActivity.class));
+                getActivity().finish();
             }
         });
 
@@ -122,6 +129,20 @@ public class MatchListFragment extends Fragment {
         spinnerEquipos.setFocusable(false);
         spinnerLigas.setFocusable(false);
 
+
+        if (getActivity() instanceof MatchListActivity){
+            activityToRefresh = MatchListActivity.class;
+            checkCurrentItem(0);
+        }
+        else if (getActivity() instanceof EnVivoMatchActivity) {
+            activityToRefresh = EnVivoMatchActivity.class;
+            checkCurrentItem(1);
+        }
+        else if (getActivity() instanceof FinalizadosMatchActivity){
+            activityToRefresh = FinalizadosMatchActivity.class;
+            checkCurrentItem(2);
+        }
+
         view.findViewById(R.id.imageButtonHamburguerMenu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -133,7 +154,7 @@ public class MatchListFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (spinnerLigasPressed) {
-                    Intent intent = new Intent(getActivity(), MatchListActivity.class);
+                    Intent intent = new Intent(getActivity(), activityToRefresh);
                     intent.putExtra("tournament_id", tournaments.get(i).getIdTournament());
                     startActivity(intent);
                     getActivity().finish();
@@ -151,7 +172,7 @@ public class MatchListFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                if (spinnerEquiposPressed) {
-                   Intent intent = new Intent(getActivity(), MatchListActivity.class);
+                   Intent intent = new Intent(getActivity(), activityToRefresh);
                    intent.putExtra("team_name", teams.get(i).getTeamName());
                    intent.putExtra("tournament_id", arguments.getInt("tournament_id"));
                    startActivity(intent);
@@ -170,31 +191,31 @@ public class MatchListFragment extends Fragment {
         return view;
     }
 
-    public void checkCurrentItem(){
-        switch (viewPagerMatches.getCurrentItem()){
+    public void checkCurrentItem(int position){
+        switch (position){
             case 0: textViewPorJugar.setBackgroundColor(Color.parseColor("#323232"));
-                    textViewPorJugar.setTextColor(Color.parseColor("#FFFFFF"));
-                    textViewFinalizado.setBackgroundColor(Color.parseColor("#FFFFFF"));
-                    textViewEnVivo.setBackgroundColor(Color.parseColor("#FFFFFF"));
-                    textViewFinalizado.setTextColor(Color.parseColor("#005b7d"));
-                    textViewEnVivo.setTextColor(Color.parseColor("#005b7d"));
-                    break;
+                textViewPorJugar.setTextColor(Color.parseColor("#FFFFFF"));
+                textViewFinalizado.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                textViewEnVivo.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                textViewFinalizado.setTextColor(Color.parseColor("#005b7d"));
+                textViewEnVivo.setTextColor(Color.parseColor("#005b7d"));
+                break;
 
             case 1: textViewEnVivo.setBackgroundColor(Color.parseColor("#323232"));
-                    textViewEnVivo.setTextColor(Color.parseColor("#FFFFFF"));
-                    textViewFinalizado.setBackgroundColor(Color.parseColor("#FFFFFF"));
-                    textViewPorJugar.setBackgroundColor(Color.parseColor("#FFFFFF"));
-                    textViewFinalizado.setTextColor(Color.parseColor("#005b7d"));
-                    textViewPorJugar.setTextColor(Color.parseColor("#005b7d"));
-                    break;
+                textViewEnVivo.setTextColor(Color.parseColor("#FFFFFF"));
+                textViewFinalizado.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                textViewPorJugar.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                textViewFinalizado.setTextColor(Color.parseColor("#005b7d"));
+                textViewPorJugar.setTextColor(Color.parseColor("#005b7d"));
+                break;
 
             case 2: textViewFinalizado.setBackgroundColor(Color.parseColor("#323232"));
-                    textViewFinalizado.setTextColor(Color.parseColor("#FFFFFF"));
-                    textViewEnVivo.setBackgroundColor(Color.parseColor("#FFFFFF"));
-                    textViewPorJugar.setBackgroundColor(Color.parseColor("#FFFFFF"));
-                    textViewEnVivo.setTextColor(Color.parseColor("#005b7d"));
-                    textViewPorJugar.setTextColor(Color.parseColor("#005b7d"));
-                    break;
+                textViewFinalizado.setTextColor(Color.parseColor("#FFFFFF"));
+                textViewEnVivo.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                textViewPorJugar.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                textViewEnVivo.setTextColor(Color.parseColor("#005b7d"));
+                textViewPorJugar.setTextColor(Color.parseColor("#005b7d"));
+                break;
         }
     }
 
@@ -212,12 +233,11 @@ public class MatchListFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return 3;
+            return 1;
         }
 
         @Override
         public boolean isViewFromObject(View view, Object object) {
-            checkCurrentItem();
             return view == object;
         }
 
@@ -239,7 +259,6 @@ public class MatchListFragment extends Fragment {
             lv.setDivider(new ColorDrawable(Color.TRANSPARENT));
 
             layout.addView(lv);
-            checkCurrentItem();
             container.addView(layout);
 
             return layout;

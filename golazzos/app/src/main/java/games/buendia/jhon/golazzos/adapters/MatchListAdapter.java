@@ -29,6 +29,8 @@ import java.util.ArrayList;
 
 import games.buendia.jhon.golazzos.R;
 import games.buendia.jhon.golazzos.activities.ConfirmacionJugadaActivity;
+import games.buendia.jhon.golazzos.activities.EnVivoMatchActivity;
+import games.buendia.jhon.golazzos.activities.MatchListActivity;
 import games.buendia.jhon.golazzos.model.Match;
 import games.buendia.jhon.golazzos.utils.ApplicationConstants;
 

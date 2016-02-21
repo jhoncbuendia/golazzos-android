@@ -19,6 +19,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import games.buendia.jhon.golazzos.npaysdkdemo.MainActivity;
 import games.buendia.jhon.golazzos.queryService.VolleyService;
 
 /**

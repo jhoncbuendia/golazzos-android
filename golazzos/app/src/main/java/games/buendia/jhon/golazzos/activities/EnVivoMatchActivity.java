@@ -39,7 +39,7 @@ import games.buendia.jhon.golazzos.utils.ServicesCall;
 /**
  * Created by User on 06/02/2016.
  */
-public class MatchListActivity extends FragmentActivity implements RequestInterface, BaseMethodsActivity{
+public class EnVivoMatchActivity extends FragmentActivity implements RequestInterface, BaseMethodsActivity{
 
     private String url;
     private BuilderJsonList builderJsonList;
@@ -58,13 +58,13 @@ public class MatchListActivity extends FragmentActivity implements RequestInterf
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         idTournament = 0;
         url = validateUrlToRequestMatch(getIntent());
-        DialogHelper.showLoaderDialog(MatchListActivity.this);
+        DialogHelper.showLoaderDialog(EnVivoMatchActivity.this);
         buildMenu();
 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                HttpRequest h = new HttpRequest(MatchListActivity.this, ServicesCall.MATCHES);
+                HttpRequest h = new HttpRequest(EnVivoMatchActivity.this, ServicesCall.MATCHES);
                 h.sendAuthenticatedPostRequest(getApplicationContext(), url);
             }
         });
@@ -72,11 +72,11 @@ public class MatchListActivity extends FragmentActivity implements RequestInterf
 
     private void buildMenu(){
         String[] optionsMenu = {getString(R.string.perfil_menu),
-                                getString(R.string.estadio_menu),
-                                getString(R.string.partidos_menu),
-                                getString(R.string.jugadas_menu),
-                                getString(R.string.ayuda_menu),
-                                getString(R.string.golazzos_menu)};
+                getString(R.string.estadio_menu),
+                getString(R.string.partidos_menu),
+                getString(R.string.jugadas_menu),
+                getString(R.string.ayuda_menu),
+                getString(R.string.golazzos_menu)};
 
         int resourceLevel = PreferencesHelper.getUserLevel();
 
@@ -106,53 +106,53 @@ public class MatchListActivity extends FragmentActivity implements RequestInterf
 
         switch (servicesCall) {
             case MATCHES:   try {
-                                matchArrayList = builderJsonList.getMatches();
-                                matchsLoaded = true;
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.tournaments_endpoint));
-                                        HttpRequest h = new HttpRequest(MatchListActivity.this, ServicesCall.LEAGUES);
-                                        h.sendAuthenticatedPostRequest(getApplicationContext(), url);
-                                    }
-                                });
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            break;
+                matchArrayList = builderJsonList.getMatches();
+                matchsLoaded = true;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.tournaments_endpoint));
+                        HttpRequest h = new HttpRequest(EnVivoMatchActivity.this, ServicesCall.LEAGUES);
+                        h.sendAuthenticatedPostRequest(getApplicationContext(), url);
+                    }
+                });
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+                break;
 
             case TEAMS:     teamsLoaded = true;
-                            try {
-                                if (idTournament != 0)
-                                    teamsArrayList = builderJsonList.getTeams();
-                                else
-                                    teamsArrayList = new ArrayList<Team>();
-                            }catch (JSONException e){
-                                e.printStackTrace();
-                            }
+                try {
+                    if (idTournament != 0)
+                        teamsArrayList = builderJsonList.getTeams();
+                    else
+                        teamsArrayList = new ArrayList<Team>();
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
 
-                            break;
+                break;
 
             case LEAGUES:   leaguesLoaded = true;
-                            try {
-                                tournamentArrayList = builderJsonList.getTournaments();
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        if (idTournament == 0) {
-                                            url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.teams_endpoint));
-                                        }
-                                        else {
-                                            url = String.format(getString(R.string.format_url_teams_tournament), String.valueOf(idTournament));
-                                        }
-                                        HttpRequest h = new HttpRequest(MatchListActivity.this, ServicesCall.TEAMS);
-                                        h.sendAuthenticatedPostRequest(getApplicationContext(), url);
-                                    }
-                                });
-                            } catch (JSONException e){
-                                e.printStackTrace();
+                try {
+                    tournamentArrayList = builderJsonList.getTournaments();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (idTournament == 0) {
+                                url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.teams_endpoint));
                             }
-                            break;
+                            else {
+                                url = String.format(getString(R.string.format_url_teams_tournament), String.valueOf(idTournament));
+                            }
+                            HttpRequest h = new HttpRequest(EnVivoMatchActivity.this, ServicesCall.TEAMS);
+                            h.sendAuthenticatedPostRequest(getApplicationContext(), url);
+                        }
+                    });
+                } catch (JSONException e){
+                    e.printStackTrace();
+                }
+                break;
         }
 
         if (matchsLoaded && leaguesLoaded && teamsLoaded){
@@ -211,17 +211,17 @@ public class MatchListActivity extends FragmentActivity implements RequestInterf
 
         if (isFilterTeam && isFilterTournament){
             idTournament = intent.getIntExtra("tournament_id", 0);
-            return String.format(getString(R.string.format_url_matches_team_name_and_tournament),intent.getStringExtra("team_name").replace(" ","%20"), String.valueOf(idTournament));
+            return String.format(getString(R.string.format_url_live_matches_team_name_and_tournament),intent.getStringExtra("team_name").replace(" ","%20"), String.valueOf(idTournament));
         }
         else if (isFilterTournament){
             idTournament = intent.getIntExtra("tournament_id", 0);
-            return String.format(getString(R.string.format_url_matches_tournament),String.valueOf(intent.getIntExtra("tournament_id", 0)));
+            return String.format(getString(R.string.format_url_live_matches_tournament),String.valueOf(intent.getIntExtra("tournament_id", 0)));
         }
         else if (isFilterTeam){
-            return String.format(getString(R.string.format_url_matches_team_name),intent.getStringExtra("team_name").replace(" ","%20"));
+            return String.format(getString(R.string.format_url_live_matches_team_name),intent.getStringExtra("team_name").replace(" ","%20"));
         }
 
 
-        return String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.matches_endpoint));
+        return String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.matches_live_endpoint));
     }
 }

@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">golazzos</string>
-    <string name="facebook_app_id">717244748375587</string>
+    <string name="facebook_app_id">972710989474575</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="sdk_key">b1431e56dcb20ec91a020287268d120bacf4db1c362752d08b3f654633322021</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Mi Cuenta</string>
@@ -121,5 +122,16 @@
     <string name="no_te_quedes_en_banca">NO TE QUEDES EN LA BANCA,\nCOMIENZA COMO TITULAR</string>
     <string name="estas_listo"><b>¡Estás listo!</b>\nSuscríbete y comienza a jugar como <b>Titular</b></string>
     <string name="comenzar_a_jugar">COMENZAR A JUGAR</string>
+
+
+    <string name="hello_world">NPay SDK Main functions:</string>
+    <string name="get_catalog_button">Get Configured Catalog&#8230;</string>
+    <string name="pay_action_button">Request Item Purchase&#8230;</string>
+    <string name="restore_purchases_button">Restore Purchased Items&#8230;</string>
+    <string name="countries_list_action_button">Get Countries List&#8230;</string>
+    <string name="user_data_valid_action_button">Check if User Data is Valid&#8230;</string>
+    <string name="send_pin_action_button">Send Pin&#8230;</string>
+    <string name="validate_pin_action_button">Validate Pin&#8230;</string>
+    <string name="get_subscription_status_action_button">Check if User has Permission to Access&#8230;</string>
 
 </resources>

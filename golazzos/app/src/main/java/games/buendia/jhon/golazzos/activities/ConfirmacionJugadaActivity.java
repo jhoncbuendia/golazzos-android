@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -123,6 +124,7 @@ public class ConfirmacionJugadaActivity extends Activity implements RequestInter
                 HttpRequest h = new HttpRequest(ConfirmacionJugadaActivity.this, null);
                 JSONBuilder builderJson = new JSONBuilder();
                 String url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.bet_endpoint));
+                Log.i("json", builderJson.getBetJSON(match, isWithTypeBet, idBet).toString());
                 h.startPostRequestAuthenticated(ConfirmacionJugadaActivity.this, url, builderJson.getBetJSON(match, isWithTypeBet, idBet),0);
             }
         });

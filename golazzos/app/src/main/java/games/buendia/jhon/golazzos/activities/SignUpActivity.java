@@ -50,7 +50,7 @@ public class SignUpActivity extends AppCompatActivity implements RequestInterfac
         callbackManager = CallbackManager.Factory.create();
         ingresar = (Button) findViewById(R.id.crear_cuenta);
         loginButton = (LoginButton)findViewById(R.id.login_button);
-        loginButton.setReadPermissions(Arrays.asList("public_profile, email, user_birthday, user_friends"));
+        loginButton.setReadPermissions(Arrays.asList("public_profile, email, user_friends"));
 
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
