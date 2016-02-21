@@ -108,8 +108,40 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/slide_banner">
+        android:layout_height="wrap_content">
+
+        <com.daimajia.swipe.SwipeLayout
+            android:id="@+id/swipe"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent" android:layout_height="80dp"
+            >
+            <!-- Bottom View Start-->
+            <!--What you want to show-->
+
+            <LinearLayout
+                android:padding="10dp"
+                android:id="@+id/slide_banner_gana_pierde"
+                android:orientation="vertical"
+                android:background="@drawable/slide_banner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </LinearLayout>
+            <!-- Bottom View End-->
+
+            <!-- Surface View Start -->
+            <LinearLayout
+                android:padding="10dp"
+                android:orientation="vertical"
+                android:id="@+id/slide_banner_marcador"
+                android:background="@drawable/banner_marcador"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <!--What you want to show in SurfaceView-->
+
+            </LinearLayout>
+            <!-- Surface View End -->
+        </com.daimajia.swipe.SwipeLayout>
 
     </LinearLayout>
 

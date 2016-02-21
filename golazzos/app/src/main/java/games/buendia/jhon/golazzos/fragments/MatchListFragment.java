@@ -19,6 +19,8 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.daimajia.swipe.SwipeLayout;
+
 import java.util.ArrayList;
 import games.buendia.jhon.golazzos.R;
 import games.buendia.jhon.golazzos.activities.EnVivoMatchActivity;
@@ -68,6 +70,45 @@ public class MatchListFragment extends Fragment {
         textViewFinalizado.setClickable(true);
         textViewEnVivo.setClickable(true);
         textViewPorJugar.setClickable(true);
+
+        SwipeLayout swipeLayout =  (SwipeLayout) view.findViewById(R.id.swipe);
+
+        swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
+        swipeLayout.setDragEdge(SwipeLayout.DragEdge.Left);
+
+        swipeLayout.addSwipeListener(new SwipeLayout.SwipeListener() {
+
+            @Override
+            public void onStartOpen(SwipeLayout swipeLayout) {
+
+            }
+
+            @Override
+            public void onOpen(SwipeLayout swipeLayout) {
+
+            }
+
+            @Override
+            public void onStartClose(SwipeLayout swipeLayout) {
+
+            }
+
+            @Override
+            public void onClose(SwipeLayout swipeLayout) {
+
+            }
+
+            @Override
+            public void onUpdate(SwipeLayout swipeLayout, int i, int i2) {
+
+            }
+
+            @Override
+            public void onHandRelease(SwipeLayout swipeLayout, float v, float v2) {
+
+            }
+
+        });
 
         textViewPorJugar.setOnClickListener(new View.OnClickListener() {
             @Override

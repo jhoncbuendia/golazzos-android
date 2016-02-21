@@ -1,9 +1,5 @@
 package games.buendia.jhon.golazzos.activities;
 
-/**
- * Created by User on 21/02/2016.
- */
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
