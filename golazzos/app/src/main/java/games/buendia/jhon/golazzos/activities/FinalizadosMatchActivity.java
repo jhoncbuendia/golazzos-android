@@ -44,7 +44,7 @@ public class FinalizadosMatchActivity extends FragmentActivity implements Reques
     private BuilderJsonList builderJsonList;
     private DrawerLayout mDrawerLayout;
     private FragmentTransaction fragmentTransaction;
-    private boolean matchsLoaded = false, teamsLoaded = false, leaguesLoaded = false;
+    private boolean matchsLoaded = false, teamsLoaded = false, leaguesLoaded = false, filterBets = false;;
     private ArrayList<Match> matchArrayList;
     private ArrayList<Team> teamsArrayList;
     private ArrayList<Tournament> tournamentArrayList;
@@ -162,6 +162,7 @@ public class FinalizadosMatchActivity extends FragmentActivity implements Reques
             arguments.putSerializable("leagues", tournamentArrayList);
             arguments.putSerializable("teams", teamsArrayList);
             arguments.putSerializable("tournament_id", idTournament);
+            arguments.putSerializable("filter_beat", filterBets);
             matchListFragment.setArguments(arguments);
             DialogHelper.hideLoaderDialog();
             makeTransaction(matchListFragment, getSupportFragmentManager(), R.id.content_frame);
@@ -195,6 +196,7 @@ public class FinalizadosMatchActivity extends FragmentActivity implements Reques
 
         boolean isFilterTeam = false;
         boolean isFilterTournament = false;
+        filterBets = intent.getBooleanExtra("filter_bet", false);
 
         try {
             isFilterTeam = !intent.getStringExtra("team_name").isEmpty();

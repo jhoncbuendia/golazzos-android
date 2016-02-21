@@ -1,6 +1,5 @@
 package games.buendia.jhon.golazzos.fragments;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -18,9 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import com.daimajia.swipe.SwipeLayout;
-
 import java.util.ArrayList;
 import games.buendia.jhon.golazzos.R;
 import games.buendia.jhon.golazzos.activities.EnVivoMatchActivity;
@@ -39,9 +36,12 @@ public class MatchListFragment extends Fragment {
 
     private boolean spinnerLigasPressed = false;
     private boolean spinnerEquiposPressed = false;
+    private boolean filterBet = false;
     private ViewPager viewPagerMatches;
     private TextView textViewPorJugar, textViewEnVivo, textViewFinalizado;
     private Class activityToRefresh;
+    private SwipeLayout swipeLayout;
+    private LinearLayout startSlide, endSlide;
 
     public MatchListFragment(){
 
@@ -59,6 +59,9 @@ public class MatchListFragment extends Fragment {
         final ArrayList<Tournament> tournaments = (ArrayList<Tournament>) arguments.getSerializable("leagues");
         final ArrayList<Team> teams = (ArrayList<Team>) arguments.getSerializable("teams");
 
+        filterBet = arguments.getBoolean("filter_beat");
+        Log.i("filter", ""+filterBet);
+
         viewPagerMatches = (ViewPager) view.findViewById(R.id.viewPagerMatches);
         viewPagerMatches.setAdapter(new MyPagerAdapter(matches));
         viewPagerMatches.setCurrentItem(0);
@@ -66,77 +69,16 @@ public class MatchListFragment extends Fragment {
         textViewPorJugar = (TextView) view.findViewById(R.id.textViewPorJugar);
         textViewEnVivo = (TextView) view.findViewById(R.id.textViewEnVivo);
         textViewFinalizado = (TextView) view.findViewById(R.id.textViewFinalizado);
+        startSlide = (LinearLayout) view.findViewById(R.id.slide_start);
+        endSlide = (LinearLayout) view.findViewById(R.id.slide_end);
 
         textViewFinalizado.setClickable(true);
         textViewEnVivo.setClickable(true);
         textViewPorJugar.setClickable(true);
 
-        SwipeLayout swipeLayout =  (SwipeLayout) view.findViewById(R.id.swipe);
-
-        swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
-        swipeLayout.setDragEdge(SwipeLayout.DragEdge.Left);
-
-        swipeLayout.addSwipeListener(new SwipeLayout.SwipeListener() {
-
-            @Override
-            public void onStartOpen(SwipeLayout swipeLayout) {
-
-            }
-
-            @Override
-            public void onOpen(SwipeLayout swipeLayout) {
-
-            }
-
-            @Override
-            public void onStartClose(SwipeLayout swipeLayout) {
-
-            }
-
-            @Override
-            public void onClose(SwipeLayout swipeLayout) {
-
-            }
-
-            @Override
-            public void onUpdate(SwipeLayout swipeLayout, int i, int i2) {
-
-            }
-
-            @Override
-            public void onHandRelease(SwipeLayout swipeLayout, float v, float v2) {
-
-            }
-
-        });
-
-        textViewPorJugar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), MatchListActivity.class));
-                getActivity().finish();
-            }
-        });
-
-        textViewEnVivo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), EnVivoMatchActivity.class));
-                getActivity().finish();
-            }
-        });
-
-        textViewFinalizado.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), FinalizadosMatchActivity.class));
-                getActivity().finish();
-            }
-        });
-
         int indexSelected = 0;
         String[] tournamentsStringArray = new String[tournaments.size()];
-        int idTournament = arguments.getInt("tournament_id");
+        final int idTournament = arguments.getInt("tournament_id");
         boolean ifIsSelected = idTournament != 0, findIt = false;
 
         for (int i = 0; i < tournaments.size(); i++) {
@@ -171,6 +113,33 @@ public class MatchListFragment extends Fragment {
         spinnerLigas.setFocusable(false);
 
 
+        textViewPorJugar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MatchListActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
+
+        textViewEnVivo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), EnVivoMatchActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
+
+        textViewFinalizado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), FinalizadosMatchActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
+
         if (getActivity() instanceof MatchListActivity){
             activityToRefresh = MatchListActivity.class;
             checkCurrentItem(0);
@@ -183,6 +152,61 @@ public class MatchListFragment extends Fragment {
             activityToRefresh = FinalizadosMatchActivity.class;
             checkCurrentItem(2);
         }
+
+        swipeLayout = (SwipeLayout) view.findViewById(R.id.swipe);
+        swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
+
+        if (!filterBet) {
+            swipeLayout.setDragEdge(SwipeLayout.DragEdge.Left);
+        }
+        else {
+            swipeLayout.setDragEdge(SwipeLayout.DragEdge.Right);
+            startSlide.setBackgroundResource(R.drawable.slide_banner);
+            endSlide.setBackgroundResource(R.drawable.banner_marcador);
+        }
+
+        swipeLayout.addSwipeListener(new SwipeLayout.SwipeListener() {
+
+            @Override
+            public void onStartOpen(SwipeLayout swipeLayout) {
+
+            }
+
+            @Override
+            public void onOpen(SwipeLayout swipeLayout) {
+                Intent intent = new Intent(getActivity(), activityToRefresh);
+                intent.putExtra("tournament_id", idTournament);
+                intent.putExtra("filter_bet", !filterBet);
+                startActivity(intent);
+                getActivity().finish();
+            }
+
+            @Override
+            public void onStartClose(SwipeLayout swipeLayout) {
+
+            }
+
+            @Override
+            public void onClose(SwipeLayout swipeLayout) {
+                Intent intent = new Intent(getActivity(), activityToRefresh);
+                intent.putExtra("tournament_id", idTournament);
+                intent.putExtra("filter_bet", !filterBet);
+                startActivity(intent);
+                getActivity().finish();
+            }
+
+            @Override
+            public void onUpdate(SwipeLayout swipeLayout, int i, int i2) {
+
+            }
+
+            @Override
+            public void onHandRelease(SwipeLayout swipeLayout, float v, float v2) {
+
+            }
+
+        });
+
 
         view.findViewById(R.id.imageButtonHamburguerMenu).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -295,7 +319,7 @@ public class MatchListFragment extends Fragment {
 
             ListView lv = new ListView(getActivity());
 
-            lv.setAdapter(new MatchListAdapter(arrayListMatches, getActivity(), lv));
+            lv.setAdapter(new MatchListAdapter(arrayListMatches, getActivity(), lv, filterBet));
 
             lv.setDivider(new ColorDrawable(Color.TRANSPARENT));
 

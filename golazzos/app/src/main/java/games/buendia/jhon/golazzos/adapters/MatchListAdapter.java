@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.ProgressBar;
@@ -43,12 +44,14 @@ public class MatchListAdapter extends BaseAdapter {
     private Context context;
     private ListView listViewMatches;
     private LayoutInflater layoutInflater;
+    private boolean filterBet;
 
-    public MatchListAdapter(ArrayList<Match> matchArrayList, Context context, ListView listViewMatches) {
+    public MatchListAdapter(ArrayList<Match> matchArrayList, Context context, ListView listViewMatches, boolean filterBet) {
         this.matchArrayList = matchArrayList;
         this.context = context;
         this.listViewMatches = listViewMatches;
         layoutInflater = LayoutInflater.from(context);
+        this.filterBet = filterBet;
     }
 
     @Override
@@ -88,6 +91,8 @@ public class MatchListAdapter extends BaseAdapter {
             holder.marcadorEquipoLocal = (TextView) v.findViewById(R.id.editTextMarcadorLocal);
             holder.marcadorEquipoVisitante = (TextView) v.findViewById(R.id.editTextMarcadorVisitante);
             holder.jugarButton = (CardView) v.findViewById(R.id.cardViewJugar);
+            holder.resultadosSpinner = (Spinner) v.findViewById(R.id.spinnerPronostico);
+            holder.linearLayoutResultados = (LinearLayout) v.findViewById(R.id.marcadorLayout);
 
             v.setTag(holder);
 
@@ -100,7 +105,6 @@ public class MatchListAdapter extends BaseAdapter {
         holder.nombreEquipoLocal.setText(match.getLocalTeam().getTeamName());
         holder.nombreEquipoVisitante.setText(match.getAwayTeam().getTeamName());
         holder.jugarButton.setClickable(true);
-
 
         holder.marcadorEquipoLocal.setClickable(true);
         holder.marcadorEquipoLocal.setFocusable(false);
@@ -172,6 +176,17 @@ public class MatchListAdapter extends BaseAdapter {
         });
 
 
+        if (filterBet){
+            holder.linearLayoutResultados.setVisibility(View.VISIBLE);
+            holder.marcadorEquipoLocal.setVisibility(View.GONE);
+            holder.marcadorEquipoVisitante.setVisibility(View.GONE);
+            holder.resultadosSpinner.setAdapter(new CustomSpinnerAdapter(context, ApplicationConstants.pronosticos));
+        }
+        else {
+            holder.linearLayoutResultados.setVisibility(View.GONE);
+            holder.marcadorEquipoLocal.setVisibility(View.VISIBLE);
+            holder.marcadorEquipoVisitante.setVisibility(View.VISIBLE);
+        }
 
         holder.nombreTorneoPartido.setText(match.getLocalTeam().getTournamentTeam().getNameTornament());
 
@@ -221,5 +236,7 @@ public class MatchListAdapter extends BaseAdapter {
         ProgressBar progressBarEquipoVisitante;
         TextView nombreTorneoPartido;
         CardView jugarButton;
+        Spinner resultadosSpinner;
+        LinearLayout linearLayoutResultados;
     }
 }
