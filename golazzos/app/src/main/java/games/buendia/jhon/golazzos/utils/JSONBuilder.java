@@ -71,7 +71,7 @@ public class JSONBuilder {
         return jsonObject;
     }
 
-    public JSONObject getBetJSON(Match match, boolean isWithBetType, int betType){
+    public JSONObject getBetJSON(Match match, boolean isWithBetType, int betType, int pointsToBet){
         try {
             userData.put("match_id", match.getId());
             if (isWithBetType){
@@ -82,7 +82,7 @@ public class JSONBuilder {
                 userData.put("visitant_score", match.getMarcadorVisitante());
             }
 
-            userData.put("amount_centavos", 5000);
+            userData.put("amount_centavos", pointsToBet);
             jsonObject = new JSONObject();
             jsonObject.put("bet", userData);
 

@@ -134,4 +134,6 @@
     <string name="validate_pin_action_button">Validate Pin&#8230;</string>
     <string name="get_subscription_status_action_button">Check if User has Permission to Access&#8230;</string>
 
+    <string name="puntos_a_jugar">Indica puntos a jugar</string>
+
 </resources>

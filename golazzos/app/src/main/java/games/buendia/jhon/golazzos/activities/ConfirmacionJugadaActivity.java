@@ -1,11 +1,15 @@
 package games.buendia.jhon.golazzos.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.util.Log;
+import android.text.InputType;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -120,12 +124,36 @@ public class ConfirmacionJugadaActivity extends Activity implements RequestInter
         cardViewConfirmarJugada.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogHelper.showLoaderDialog(ConfirmacionJugadaActivity.this);
-                HttpRequest h = new HttpRequest(ConfirmacionJugadaActivity.this, null);
-                JSONBuilder builderJson = new JSONBuilder();
-                String url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.bet_endpoint));
-                Log.i("json", builderJson.getBetJSON(match, isWithTypeBet, idBet).toString());
-                h.startPostRequestAuthenticated(ConfirmacionJugadaActivity.this, url, builderJson.getBetJSON(match, isWithTypeBet, idBet),0);
+
+                AlertDialog.Builder alert = new AlertDialog.Builder(ConfirmacionJugadaActivity.this);
+                final EditText edittext = new EditText(ConfirmacionJugadaActivity.this);
+                edittext.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_CLASS_NUMBER);
+                edittext.setGravity(Gravity.CENTER);
+                alert.setTitle(R.string.puntos_a_jugar);
+                alert.setCancelable(false);
+                alert.setView(edittext);
+
+                alert.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int pointsToBet = Integer.parseInt(edittext.getText().toString());
+                        if (pointsToBet >= 0) {
+                            DialogHelper.showLoaderDialog(ConfirmacionJugadaActivity.this);
+                            HttpRequest h = new HttpRequest(ConfirmacionJugadaActivity.this, null);
+                            JSONBuilder builderJson = new JSONBuilder();
+                            String url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.bet_endpoint));
+                            h.startPostRequestAuthenticated(ConfirmacionJugadaActivity.this, url, builderJson.getBetJSON(match, isWithTypeBet, idBet, pointsToBet * 100), 0);
+                            dialog.dismiss();
+                        }
+                    }
+                });
+
+                alert.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.dismiss();
+                    }
+                });
+
+                alert.show();
             }
         });
 
