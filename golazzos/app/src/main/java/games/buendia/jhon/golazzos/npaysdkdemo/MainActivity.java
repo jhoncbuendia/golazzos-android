@@ -32,7 +32,13 @@ public class MainActivity extends Activity {
 	
 	//Instance of NPay Object
 	NPay npay;
-	
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		finish();
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -238,4 +244,6 @@ public class MainActivity extends Activity {
 			
 	  		npay.getSubscriptionStatus();
 		}
+
+
 }
