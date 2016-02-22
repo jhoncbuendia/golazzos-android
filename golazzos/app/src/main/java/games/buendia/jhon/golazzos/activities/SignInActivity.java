@@ -16,6 +16,7 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import org.json.JSONException;
@@ -48,8 +49,10 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_sign_in);
         url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.tokens_endpoint));
+
         callbackManager = CallbackManager.Factory.create();
         ingresar = (Button)findViewById(R.id.ingresar_cuenta);
+        LoginManager.getInstance().logOut();
         loginButton = (LoginButton)findViewById(R.id.login_button);
         loginButton.setReadPermissions(Arrays.asList("public_profile, email, user_friends"));
 

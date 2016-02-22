@@ -17,6 +17,7 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import org.json.JSONException;
@@ -49,6 +50,7 @@ public class SignUpActivity extends AppCompatActivity implements RequestInterfac
         setContentView(R.layout.activity_sign_up);
         callbackManager = CallbackManager.Factory.create();
         ingresar = (Button) findViewById(R.id.crear_cuenta);
+        LoginManager.getInstance().logOut();
         loginButton = (LoginButton)findViewById(R.id.login_button);
         loginButton.setReadPermissions(Arrays.asList("public_profile, email, user_friends"));
 
