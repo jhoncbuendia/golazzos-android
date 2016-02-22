@@ -124,9 +124,9 @@
     <string name="comenzar_a_jugar">COMENZAR A JUGAR</string>
 
 
-    <string name="hello_world">NPay SDK Main functions:</string>
-    <string name="get_catalog_button">Get Configured Catalog&#8230;</string>
-    <string name="pay_action_button">Request Item Purchase&#8230;</string>
+    <string name="hello_world">Funciones pagos golazzos:</string>
+    <string name="get_catalog_button">Obtener Catalogo&#8230;</string>
+    <string name="pay_action_button">Solicitar compra de Item&#8230;</string>
     <string name="restore_purchases_button">Restore Purchased Items&#8230;</string>
     <string name="countries_list_action_button">Get Countries List&#8230;</string>
     <string name="user_data_valid_action_button">Check if User Data is Valid&#8230;</string>

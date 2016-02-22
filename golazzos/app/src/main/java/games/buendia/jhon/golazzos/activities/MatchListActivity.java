@@ -29,6 +29,7 @@ import games.buendia.jhon.golazzos.interfaces.BaseMethodsActivity;
 import games.buendia.jhon.golazzos.model.Match;
 import games.buendia.jhon.golazzos.model.Team;
 import games.buendia.jhon.golazzos.model.Tournament;
+import games.buendia.jhon.golazzos.npaysdkdemo.MainActivity;
 import games.buendia.jhon.golazzos.queryService.BuilderJsonList;
 import games.buendia.jhon.golazzos.queryService.HttpRequest;
 import games.buendia.jhon.golazzos.queryService.RequestInterface;
@@ -70,19 +71,26 @@ public class MatchListActivity extends FragmentActivity implements RequestInterf
         });
     }
 
-    private void buildMenu(){
+    private void buildMenu() {
         String[] optionsMenu = {getString(R.string.perfil_menu),
-                                getString(R.string.estadio_menu),
-                                getString(R.string.partidos_menu),
-                                getString(R.string.jugadas_menu),
-                                getString(R.string.ayuda_menu),
-                                getString(R.string.golazzos_menu)};
+                getString(R.string.estadio_menu),
+                getString(R.string.partidos_menu),
+                getString(R.string.jugadas_menu),
+                getString(R.string.ayuda_menu),
+                getString(R.string.golazzos_menu)};
 
         int resourceLevel = PreferencesHelper.getUserLevel();
 
         ((ListView) findViewById(R.id.listViewMenu)).setAdapter(new DrawerAdapterList(this, optionsMenu));
         ((TextView) findViewById(R.id.tvPuntos)).setText(String.valueOf(PreferencesHelper.getUserPoints()));
         findViewById(R.id.cardViewQuieroSerTitular).setVisibility(resourceLevel == R.string.suplente ? View.VISIBLE : View.GONE);
+        findViewById(R.id.cardViewQuieroSerTitular).setClickable(true);
+        findViewById(R.id.cardViewQuieroSerTitular).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MatchListActivity.this, MainActivity.class));
+            }
+        });
         ((TextView) findViewById(R.id.textViewCondicion)).setText(getString(resourceLevel));
         ((TextView) findViewById(R.id.textViewUsuario)).setText(String.format(getString(R.string.format_hola), PreferencesHelper.getUserName()));
 
