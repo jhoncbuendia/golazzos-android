@@ -53,6 +53,7 @@ public class ConfirmacionJugadaActivity extends Activity implements RequestInter
 
         intent = getIntent();
         match = (Match) intent.getSerializableExtra("match");
+        pointsToBet = intent.getIntExtra("pointsToBet",0);
         tipoJugada = (TextView) findViewById(R.id.textViewTipoJugada);
         tipoVictoria = (TextView) findViewById(R.id.textViewModoVictoria);
         equipoLocal = (TextView) findViewById(R.id.textViewIndicadorLocal);
@@ -127,42 +128,15 @@ public class ConfirmacionJugadaActivity extends Activity implements RequestInter
         cardViewConfirmarJugada.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                AlertDialog.Builder alert = new AlertDialog.Builder(ConfirmacionJugadaActivity.this);
-                final EditText edittext = new EditText(ConfirmacionJugadaActivity.this);
-                edittext.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_CLASS_NUMBER);
-                edittext.setGravity(Gravity.CENTER);
-                alert.setTitle(R.string.puntos_a_jugar);
-                alert.setCancelable(false);
-                alert.setView(edittext);
-
-                alert.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        pointsToBet = Integer.parseInt(edittext.getText().toString());
-                        if (pointsToBet >= 0) {
-                            if (PreferencesHelper.getUserPoints() - pointsToBet >= 0) {
-                                DialogHelper.showLoaderDialog(ConfirmacionJugadaActivity.this);
-                                HttpRequest h = new HttpRequest(ConfirmacionJugadaActivity.this, null);
-                                JSONBuilder builderJson = new JSONBuilder();
-                                String url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.bet_endpoint));
-                                h.startPostRequestAuthenticated(ConfirmacionJugadaActivity.this, url, builderJson.getBetJSON(match, isWithTypeBet, idBet, pointsToBet * 100), 0);
-                                dialog.dismiss();
-                            }
-                            else {
-                                Toast.makeText(ConfirmacionJugadaActivity.this, getString(R.string.no_tienes_suficientes_puntos), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }
-                });
-
-                alert.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        dialog.dismiss();
-                    }
-                });
-
-                alert.show();
+                if (PreferencesHelper.getUserPoints() - pointsToBet >= 0) {
+                    DialogHelper.showLoaderDialog(ConfirmacionJugadaActivity.this);
+                    HttpRequest h = new HttpRequest(ConfirmacionJugadaActivity.this, null);
+                    JSONBuilder builderJson = new JSONBuilder();
+                    String url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.bet_endpoint));
+                    h.startPostRequestAuthenticated(ConfirmacionJugadaActivity.this, url, builderJson.getBetJSON(match, isWithTypeBet, idBet, pointsToBet * 100), 0);
+                }
             }
+
         });
 
     }

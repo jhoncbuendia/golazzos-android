@@ -136,7 +136,7 @@ public class WizardTwoActivity extends Activity implements RequestInterface, Ada
 
                 }
                 else {
-                    startActivity(new Intent(WizardTwoActivity.this, WizardThreeActivity.class));
+                    Toast.makeText(WizardTwoActivity.this, getString(R.string.debes_seleccionar_equipo_favorito), Toast.LENGTH_SHORT).show();
                 }
             }
         });

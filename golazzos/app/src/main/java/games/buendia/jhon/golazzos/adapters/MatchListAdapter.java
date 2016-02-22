@@ -10,12 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
@@ -23,6 +26,7 @@ import games.buendia.jhon.golazzos.R;
 import games.buendia.jhon.golazzos.activities.ConfirmacionJugadaActivity;
 import games.buendia.jhon.golazzos.model.Match;
 import games.buendia.jhon.golazzos.utils.ApplicationConstants;
+import games.buendia.jhon.golazzos.utils.PreferencesHelper;
 
 /**
  * Created by User on 07/02/2016.
@@ -82,6 +86,8 @@ public class MatchListAdapter extends BaseAdapter {
             holder.jugarButton = (CardView) v.findViewById(R.id.cardViewJugar);
             holder.resultadosSpinner = (TextView) v.findViewById(R.id.spinnerPronostico);
             holder.linearLayoutResultados = (LinearLayout) v.findViewById(R.id.marcadorLayout);
+            holder.buttonPlayPoints = (Button) v.findViewById(R.id.buttonCincuentaPuntos);
+            holder.textViewCienPuntos = (TextView) v.findViewById(R.id.textViewCienPuntos);
 
             v.setTag(holder);
 
@@ -94,6 +100,32 @@ public class MatchListAdapter extends BaseAdapter {
         holder.nombreEquipoLocal.setText(match.getLocalTeam().getTeamName());
         holder.nombreEquipoVisitante.setText(match.getAwayTeam().getTeamName());
         holder.jugarButton.setClickable(true);
+
+        holder.buttonPlayPoints.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(context)
+                        .setTitle(context.getString(R.string.puntos_a_jugar))
+                        .setSingleChoiceItems(ApplicationConstants.pointsToBet, 0, null)
+                        .setPositiveButton(R.string.aceptar_button, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                int selectedPosition = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
+                                if (selectedPosition >= 0) {
+                                    if (selectedPosition != 0){
+                                        holder.textViewCienPuntos.setText(context.getString(R.string.doscientos_puntos));
+                                        holder.buttonPlayPoints.setText(context.getString(R.string.cien_puntos));
+                                    }
+                                    else {
+                                        holder.textViewCienPuntos.setText(context.getString(R.string.cien_puntos));
+                                        holder.buttonPlayPoints.setText(context.getString(R.string.cincuenta_puntos));
+                                    }
+                                    dialog.dismiss();
+                                }
+                            }
+                        })
+                        .show();
+            }
+        });
 
         holder.marcadorEquipoLocal.setClickable(true);
         holder.marcadorEquipoLocal.setFocusable(false);
@@ -142,14 +174,20 @@ public class MatchListAdapter extends BaseAdapter {
         holder.jugarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(context, ConfirmacionJugadaActivity.class);
+
+                int pointsToBet = 0;
+
+                if (holder.buttonPlayPoints.getText().toString().contains("50")){
+                    pointsToBet = 50;
+                }
+                else pointsToBet = 100;
+
                 if (!filterBet){
                     match.setMarcadorLocal(Integer.parseInt(holder.marcadorEquipoLocal.getText().toString()));
                     match.setMarcadorVisitante(Integer.parseInt(holder.marcadorEquipoVisitante.getText().toString()));
-                    Intent intent = new Intent(context, ConfirmacionJugadaActivity.class);
                     intent.putExtra("match", match);
                     intent.putExtra("opcion", context.getString(R.string.marcador));
-                    context.startActivity(intent);
-                    ((Activity) context).finish();
                 }
                 else {
                     if (holder.resultadosSpinner.getText().toString().equals(context.getString(R.string.gana_visitante))) {
@@ -164,11 +202,18 @@ public class MatchListAdapter extends BaseAdapter {
                         match.setMarcadorLocal(0);
                         match.setMarcadorVisitante(0);
                     }
-                    Intent intent = new Intent(context, ConfirmacionJugadaActivity.class);
+                    intent = new Intent(context, ConfirmacionJugadaActivity.class);
                     intent.putExtra("match", match);
                     intent.putExtra("opcion", context.getString(R.string.gana_pierde));
+                }
+
+                if (PreferencesHelper.getUserPoints() - pointsToBet >= 0) {
+                    intent.putExtra("pointsToBet", pointsToBet);
                     context.startActivity(intent);
                     ((Activity) context).finish();
+                }
+                else {
+                    Toast.makeText(context, context.getString(R.string.no_tienes_suficientes_puntos), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -254,5 +299,7 @@ public class MatchListAdapter extends BaseAdapter {
         CardView jugarButton;
         TextView resultadosSpinner;
         LinearLayout linearLayoutResultados;
+        Button buttonPlayPoints;
+        TextView textViewCienPuntos;
     }
 }

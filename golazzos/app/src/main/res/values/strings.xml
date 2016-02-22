@@ -81,7 +81,7 @@
     <string name="juegas">JUEGAS</string>
     <string name="ganas">GANAS</string>
     <string name="cien_puntos">100\nPUNTOS</string>
-
+    <string name="doscientos_puntos">200\nPUNTOS</string>
 
     <!-- Menu -->
     <string name="format_hola">Hola, %1$s</string>
@@ -139,5 +139,8 @@
     <string name="no_tienes_suficientes_puntos">No tienes suficientes puntos para hacer esta jugada.</string>
 
     <string name="error_transaccional">Existió un error al momento de realizar la operación, intenta nuevamente</string>
+
+    <string name="debes_seleccionar_equipo_del_alma">Debes seleccionar un equipo del alma</string>
+    <string name="debes_seleccionar_equipo_favorito">Debes seleccionar al menos un equipo favorito</string>
 
 </resources>

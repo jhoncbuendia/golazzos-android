@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.Toast;
+
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import org.json.JSONException;
@@ -40,7 +42,7 @@ public class WizardOnectivity extends AppCompatActivity implements RequestInterf
     private int idTournament;
     private boolean spinnerLigasPressed = false;
     private boolean spinnerEquiposPressed = false;
-    private Team soulTeam;
+    private Team soulTeam = null;
     private int indexSelected = 0;
     private boolean ifIsSelected = false, findIt = false;
 
@@ -142,13 +144,18 @@ public class WizardOnectivity extends AppCompatActivity implements RequestInterf
         buttonSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                spinnerEquiposPressed = false;
-                spinnerLigasPressed = false;
-                DialogHelper.showLoaderDialog(WizardOnectivity.this);
-                url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.favorite_team_endpoint));
-                JSONBuilder jsonBuilder = new JSONBuilder();
-                HttpRequest h = new HttpRequest(WizardOnectivity.this, ServicesCall.FAVORITE_ADD);
-                h.startPostRequestAuthenticated(getApplicationContext(), url, jsonBuilder.getFavoriteTeamJSON(String.valueOf(soulTeam.getIdTeam()), true),soulTeam.getIdTeam());
+                if (soulTeam != null) {
+                    spinnerEquiposPressed = false;
+                    spinnerLigasPressed = false;
+                    DialogHelper.showLoaderDialog(WizardOnectivity.this);
+                    url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.favorite_team_endpoint));
+                    JSONBuilder jsonBuilder = new JSONBuilder();
+                    HttpRequest h = new HttpRequest(WizardOnectivity.this, ServicesCall.FAVORITE_ADD);
+                    h.startPostRequestAuthenticated(getApplicationContext(), url, jsonBuilder.getFavoriteTeamJSON(String.valueOf(soulTeam.getIdTeam()), true), soulTeam.getIdTeam());
+                }
+                else {
+                    Toast.makeText(WizardOnectivity.this, getString(R.string.debes_seleccionar_equipo_del_alma), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

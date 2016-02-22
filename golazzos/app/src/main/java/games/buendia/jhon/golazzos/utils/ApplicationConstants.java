@@ -24,5 +24,6 @@ public class ApplicationConstants {
     public static final String soulTeamImageUrlKey = "soulTeamImageUrlKey";
 
     public static String[] opcionesAlerta = {"Gana/Pierde", "Marcador"};
+    public static String[] pointsToBet = {"50", "100"};
 
 }
