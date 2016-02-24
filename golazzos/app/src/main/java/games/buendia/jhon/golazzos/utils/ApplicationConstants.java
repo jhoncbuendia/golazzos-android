@@ -12,6 +12,7 @@ public class ApplicationConstants {
     public static final String keyPreferences = "myPreferences";
     public static final String tokenKey = "tokenKey";
     public static final String jsonKeyJwt = "jwt";
+    public static final String userLoggedKey = "userLoggedKey";
 
     public static final String idUserKey = "idUserKey";
     public static final String nameUserKey = "nameUserKey";

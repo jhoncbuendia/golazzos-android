@@ -99,6 +99,7 @@
     <string name="jugadas_menu">JUGADAS</string>
     <string name="ayuda_menu">AYUDA</string>
     <string name="golazzos_menu">GOLAZZOS</string>
+    <string name="cerrar_sesion">CERRAR SESIÓN</string>
 
     <!-- Tercer wizard -->
     <string name="haz_tu_convocatoria">HAZ TU CONVOCATORIA</string>

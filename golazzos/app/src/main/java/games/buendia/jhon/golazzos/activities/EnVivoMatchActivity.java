@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -76,7 +77,8 @@ public class EnVivoMatchActivity extends FragmentActivity implements RequestInte
                 getString(R.string.partidos_menu),
                 getString(R.string.jugadas_menu),
                 getString(R.string.ayuda_menu),
-                getString(R.string.golazzos_menu)};
+                getString(R.string.golazzos_menu),
+                getString(R.string.cerrar_sesion)};
 
         int resourceLevel = PreferencesHelper.getUserLevel();
 
@@ -104,6 +106,18 @@ public class EnVivoMatchActivity extends FragmentActivity implements RequestInte
         Picasso.with(this)
                 .load(urlImage)
                 .into(imageViewUser);
+
+        ListView listViewMenu = (ListView) findViewById(R.id.listViewMenu);
+        listViewMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                if (position == 6) {
+                    PreferencesHelper.unLogUser();
+                    startActivity(new Intent(EnVivoMatchActivity.this, InitialActivity.class));
+                    finish();
+                }
+            }
+        });
     }
 
     @Override

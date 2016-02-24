@@ -13,6 +13,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import android.content.pm.Signature;
 import games.buendia.jhon.golazzos.R;
+import games.buendia.jhon.golazzos.utils.PreferencesHelper;
 
 public class InitialActivity extends AppCompatActivity {
 
@@ -22,50 +23,59 @@ public class InitialActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_initial);
 
-        try {
-            PackageInfo info = getPackageManager().
-                    getPackageInfo(this.getPackageName(), PackageManager.GET_SIGNATURES);
+        if (!PreferencesHelper.isUserLogged()) {
 
-            for (Signature signature : info.signatures) {
+            setContentView(R.layout.activity_initial);
 
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
+            try {
+                PackageInfo info = getPackageManager().
+                        getPackageInfo(this.getPackageName(), PackageManager.GET_SIGNATURES);
+
+                for (Signature signature : info.signatures) {
+
+                    MessageDigest md = MessageDigest.getInstance("SHA");
+                    md.update(signature.toByteArray());
 
 
-                Log.d("====Hash Key===", Base64.encodeToString(md.digest(),
-                        Base64.DEFAULT));
+                    Log.d("====Hash Key===", Base64.encodeToString(md.digest(),
+                            Base64.DEFAULT));
+
+                }
+
+            } catch (PackageManager.NameNotFoundException e) {
+
+            } catch (NoSuchAlgorithmException ex) {
 
             }
 
-        } catch (PackageManager.NameNotFoundException e) {
+            create = (Button) findViewById(R.id.create);
+            login = (Button) findViewById(R.id.login);
 
-        } catch (NoSuchAlgorithmException ex) {
+            create.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View arg0) {
+                    Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
 
+            login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View arg0) {
+                    Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                }
+            });
         }
-
-        create = (Button)findViewById(R.id.create);
-        login = (Button)findViewById(R.id.login);
-
-        create.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
-                startActivity(intent);
-                finish();
-
-            }
-        });
+        else {
+            Intent intent = new Intent(this, MatchListActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
     }
 

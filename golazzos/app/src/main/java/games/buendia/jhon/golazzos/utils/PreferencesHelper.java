@@ -49,6 +49,7 @@ public class PreferencesHelper {
     public static void storeUserObjectIntoPreferences(JSONObject response) throws JSONException {
         instanciateSharedPreferences();
         editor = sharedPreferences.edit();
+        editor.putBoolean(ApplicationConstants.userLoggedKey, true);
         editor.putInt(ApplicationConstants.idUserKey, response.getInt("id"));
         editor.putString(ApplicationConstants.nameUserKey, response.getString("name"));
         editor.putString(ApplicationConstants.emailUserKey, response.getString("email"));
@@ -95,5 +96,15 @@ public class PreferencesHelper {
         return sharedPreferences.getString(ApplicationConstants.urlImageKey, "");
     }
 
+    public static boolean isUserLogged(){
+        instanciateSharedPreferences();
+        return sharedPreferences.getBoolean(ApplicationConstants.userLoggedKey, false);
+    }
 
+    public static void unLogUser(){
+        instanciateSharedPreferences();
+        editor = sharedPreferences.edit();
+        editor.putBoolean(ApplicationConstants.userLoggedKey, false);
+        editor.commit();
+    }
 }
