@@ -90,6 +90,16 @@
                     android:background="@color/bgbtnamarillo"
                     android:width="300dp"
                     android:textColor="@color/txtbtnamarillo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/olvidaste_la_contrasena"
+                android:textColor="@android:color/white"
+                android:id="@+id/textViewOlvidoSuContrasena"
+                android:layout_margin="15dp"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal" />
         </LinearLayout>
     </ScrollView>
 
