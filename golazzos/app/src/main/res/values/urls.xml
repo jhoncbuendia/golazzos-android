@@ -8,7 +8,7 @@
     <string name="matches_live_endpoint">matches?status=playing</string>
     <string name="matches_end_endpoint">matches?status=played</string>
     <string name="me_endpoint">users/me</string>
-    <string name="teams_endpoint">teams?results=20</string>
+    <string name="teams_endpoint">teams?results=30</string>
     <string name="tournaments_endpoint">tournaments</string>
     <string name="format_url">%1$s%2$s</string>
     <string name="favorite_team_endpoint">favorite_teams</string>
