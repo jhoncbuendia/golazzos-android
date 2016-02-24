@@ -103,6 +103,7 @@
     <!-- Alertas -->
     <string name="aceptar_button">Aceptar</string>
     <string name="titulo_alerta">Selecciona tipo de jugada</string>
+    <string name="error_titulo">Se ha producido un error</string>
 
     <!-- Confirmacion jugada-->
 

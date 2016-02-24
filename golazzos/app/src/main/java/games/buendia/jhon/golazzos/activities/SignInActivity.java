@@ -1,8 +1,11 @@
 package games.buendia.jhon.golazzos.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +22,8 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.Arrays;
@@ -154,12 +159,29 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
     public void onErrorCallBack(JSONObject response) {
         DialogHelper.hideLoaderDialog();
         try {
-            //TODO - Cambiar toast de mensaje de error por alert dialogs.
-            Toast toast = Toast.makeText(GolazzosApplication.getInstance(), response.getString("messages"), Toast.LENGTH_LONG);
-            toast.show();
+            JSONObject jo = response.getJSONObject("messages");
+            showAlertDialog(jo.getString("base").replace("[", "").replace("]", "").replace("\"", ""));
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void showAlertDialog(String mensaje){
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle(getString(R.string.error_titulo));
+        alertDialogBuilder.setMessage(mensaje);
+
+        alertDialogBuilder.setPositiveButton(getString(R.string.aceptar_button), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int arg1) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
     @Override
