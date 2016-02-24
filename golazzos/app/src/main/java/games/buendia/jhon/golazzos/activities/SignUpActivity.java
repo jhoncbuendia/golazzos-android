@@ -87,7 +87,7 @@ public class SignUpActivity extends AppCompatActivity implements RequestInterfac
                     EmailValidator validator = new EmailValidator();
                     userEditText = (EditText) findViewById(R.id.userup);
                     passwordEditText = (EditText) findViewById(R.id.pwdup);
-                    if (validator.validate(userEditText.getText().toString()) && passwordEditText.getText().toString().length() >= 8) {
+                    if (validator.validate(userEditText.getText().toString()) && passwordEditText.getText().toString().length() >= 8 && userEditText.getText().toString().length() < 20) {
                         DialogHelper.showLoaderDialog(SignUpActivity.this);
                         loginrMailUser(userEditText.getText().toString(), passwordEditText.getText().toString());
                     } else {
@@ -164,9 +164,8 @@ public class SignUpActivity extends AppCompatActivity implements RequestInterfac
     public void onErrorCallBack(JSONObject response) {
         DialogHelper.hideLoaderDialog();
         try {
-            //TODO - Cambiar toast de mensaje de error por alert dialogs.
-            Toast toast = Toast.makeText(GolazzosApplication.getInstance(), response.getString("messages"), Toast.LENGTH_LONG);
-            toast.show();
+            JSONObject jo = response.getJSONObject("messages");
+            showAlertDialog("Este email "+ jo.getString("email").replace("[", "").replace("]", "").replace("\"", ""));
         } catch (JSONException e) {
             e.printStackTrace();
         }
