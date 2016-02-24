@@ -5,6 +5,9 @@
     <string name="sdk_key">b1431e56dcb20ec91a020287268d120bacf4db1c362752d08b3f654633322021</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string name="terminos_y_condiciones">AL COMENZAR ACEPTAS LOS <u>TÉRMINOS Y CONDICIONES</u></string>
+    <string name="debes_aceptar">Debes aceptar términos y condiciones para crear tu cuenta</string>
+
     <string name="action_settings">Mi Cuenta</string>
 
 <!-- TODO: Remove or change this placeholder text -->

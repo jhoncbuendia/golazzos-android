@@ -1,11 +1,14 @@
 package games.buendia.jhon.golazzos.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.android.volley.Request;
@@ -38,6 +41,7 @@ public class SignUpActivity extends AppCompatActivity implements RequestInterfac
     private LoginButton loginButton;
     private EditText userEditText;
     private EditText passwordEditText;
+    private CheckBox checkBoxTerminosYCondiciones;
     private CallbackManager callbackManager;
     private Button ingresar;
     private String url;
@@ -51,6 +55,7 @@ public class SignUpActivity extends AppCompatActivity implements RequestInterfac
         callbackManager = CallbackManager.Factory.create();
         ingresar = (Button) findViewById(R.id.crear_cuenta);
         LoginManager.getInstance().logOut();
+        checkBoxTerminosYCondiciones = (CheckBox) findViewById(R.id.checkBoxTerminosYCondiciones);
         loginButton = (LoginButton)findViewById(R.id.login_button);
         loginButton.setReadPermissions(Arrays.asList("public_profile, email, user_friends"));
 
@@ -78,19 +83,40 @@ public class SignUpActivity extends AppCompatActivity implements RequestInterfac
             @Override
             public void onClick(View arg0) {
 
-                EmailValidator validator = new EmailValidator();
-                userEditText = (EditText) findViewById(R.id.userup);
-                passwordEditText = (EditText) findViewById(R.id.pwdup);
-                if (validator.validate(userEditText.getText().toString()) && passwordEditText.getText().toString().length() >= 8) {
-                    DialogHelper.showLoaderDialog(SignUpActivity.this);
-                    loginrMailUser(userEditText.getText().toString(), passwordEditText.getText().toString());
+                if (checkBoxTerminosYCondiciones.isChecked()) {
+                    EmailValidator validator = new EmailValidator();
+                    userEditText = (EditText) findViewById(R.id.userup);
+                    passwordEditText = (EditText) findViewById(R.id.pwdup);
+                    if (validator.validate(userEditText.getText().toString()) && passwordEditText.getText().toString().length() >= 8) {
+                        DialogHelper.showLoaderDialog(SignUpActivity.this);
+                        loginrMailUser(userEditText.getText().toString(), passwordEditText.getText().toString());
+                    } else {
+                        Toast.makeText(SignUpActivity.this, getString(R.string.validador), Toast.LENGTH_LONG).show();
+                    }
                 }
-                else {
-                    Toast.makeText(SignUpActivity.this,getString(R.string.validador),Toast.LENGTH_LONG).show();
+                else{
+                    showAlertDialog(getString(R.string.debes_aceptar));
                 }
             }
         });
 
+    }
+
+    private void showAlertDialog(String mensaje){
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle(getString(R.string.error_titulo));
+        alertDialogBuilder.setMessage(mensaje);
+
+        alertDialogBuilder.setPositiveButton(getString(R.string.aceptar_button), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int arg1) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
     public void loginrMailUser(String email, String pwd){
