@@ -76,7 +76,7 @@
     <string name="por_jugar">POR JUGAR</string>
     <string name="en_vivo">EN VIVO</string>
     <string name="finalizado">FINALIZADO</string>
-    <string name="format_horas">%1$s|%2$s|%3$s</string>
+    <string name="format_horas">%1$s | %2$s | %3$s</string>
     <string name="format_horas_text"> DÍA | HORAS | MINS </string>
     <string name="cierra_en">Cierra en:</string>
     <string name="local">Local</string>

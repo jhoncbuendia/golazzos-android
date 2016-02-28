@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +19,11 @@ import android.widget.NumberPicker;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import java.util.Date;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import games.buendia.jhon.golazzos.R;
 import games.buendia.jhon.golazzos.activities.ConfirmacionJugadaActivity;
@@ -88,6 +91,8 @@ public class MatchListAdapter extends BaseAdapter {
             holder.linearLayoutResultados = (LinearLayout) v.findViewById(R.id.marcadorLayout);
             holder.buttonPlayPoints = (Button) v.findViewById(R.id.buttonCincuentaPuntos);
             holder.textViewCienPuntos = (TextView) v.findViewById(R.id.textViewCienPuntos);
+            holder.textViewHorasMinutosDias = (TextView) v.findViewById(R.id.textViewDiaHorasMinutos);
+            holder.horaPartido = (TextView) v.findViewById(R.id.textViewHoraPartido);
 
             v.setTag(holder);
 
@@ -280,6 +285,34 @@ public class MatchListAdapter extends BaseAdapter {
         final ProgressBar equipoLocalProgressBar = holder.progressBarEquipoLocal;
         final ProgressBar equipoVisitanteProgressBar = holder.progressBarEquipoVisitante;
 
+        String stringHour = match.getTimeLabelMatch().split("T")[1];
+        String stringDate = match.getTimeLabelMatch().split("T")[0];
+        SimpleDateFormat formateador = new SimpleDateFormat(ApplicationConstants.formatDate);
+        SimpleDateFormat dateFormat = new SimpleDateFormat(ApplicationConstants.formatDateMatch);
+        Date todayDate = new Date();
+
+        try {
+
+            Date dateMatch = formateador.parse(stringDate.replace("-","/")+" "+stringHour.substring(0, stringHour.length()-1));
+
+            long diff = Math.abs(todayDate.getTime() - dateMatch.getTime());
+            long daysDifference = Math.abs(Math.round(diff / (1000 * 3600 * 24)));
+
+            long minDifference = diff / (60 * 1000) % 60;
+            long hourDifference = diff / (60 * 60 * 1000) % 24;
+
+            holder.textViewHorasMinutosDias.setText(String.format(context.getString(R.string.format_horas), String.valueOf(daysDifference), String.valueOf(hourDifference), String.valueOf(minDifference)));
+
+            String dateMatchString = dateFormat.format(dateMatch.getTime());
+            dateMatchString = dateMatchString.substring(0,1).toUpperCase() + dateMatchString.substring(1).toLowerCase();
+
+            holder.horaPartido.setText(dateMatchString);
+
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         Picasso.with(context)
                 .load("http:" + match.getLocalTeam().getUrlTeam())
                 .into(holder.imageEquipoLocal, new Callback() {
@@ -323,9 +356,11 @@ public class MatchListAdapter extends BaseAdapter {
         ProgressBar progressBarEquipoVisitante;
         TextView nombreTorneoPartido;
         CardView jugarButton;
+        TextView textViewHorasMinutosDias;
         TextView resultadosSpinner;
         LinearLayout linearLayoutResultados;
         Button buttonPlayPoints;
         TextView textViewCienPuntos;
+        TextView horaPartido;
     }
 }
