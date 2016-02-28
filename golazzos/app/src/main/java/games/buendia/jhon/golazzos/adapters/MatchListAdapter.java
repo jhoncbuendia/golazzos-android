@@ -132,7 +132,7 @@ public class MatchListAdapter extends BaseAdapter {
         holder.marcadorEquipoLocal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NumberPicker myNumberPicker = new NumberPicker(context);
+                final NumberPicker myNumberPicker = new NumberPicker(context);
                 myNumberPicker.setMaxValue(100);
                 myNumberPicker.setMinValue(0);
 
@@ -145,7 +145,20 @@ public class MatchListAdapter extends BaseAdapter {
 
                 myNumberPicker.setOnValueChangedListener(myValChangedListener);
 
-                new AlertDialog.Builder(context).setView(myNumberPicker).show();
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+                alertDialogBuilder.setTitle(context.getString(R.string.informacion));
+                alertDialogBuilder.setMessage(context.getString(R.string.indica_marcador));
+
+                alertDialogBuilder.setPositiveButton(context.getString(R.string.aceptar_button), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int arg1) {
+                        holder.marcadorEquipoLocal.setText(String.valueOf(myNumberPicker.getValue()));
+                    }
+                });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.setView(myNumberPicker);
+                alertDialog.show();
             }
         });
 
@@ -154,7 +167,7 @@ public class MatchListAdapter extends BaseAdapter {
         holder.marcadorEquipoVisitante.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NumberPicker myNumberPicker = new NumberPicker(context);
+                final NumberPicker myNumberPicker = new NumberPicker(context);
                 myNumberPicker.setMaxValue(100);
                 myNumberPicker.setMinValue(0);
 
@@ -167,7 +180,20 @@ public class MatchListAdapter extends BaseAdapter {
 
                 myNumberPicker.setOnValueChangedListener(myValChangedListener);
 
-                new AlertDialog.Builder(context).setView(myNumberPicker).show();
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+                alertDialogBuilder.setTitle(context.getString(R.string.informacion));
+                alertDialogBuilder.setMessage(context.getString(R.string.indica_marcador));
+
+                alertDialogBuilder.setPositiveButton(context.getString(R.string.aceptar_button), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int arg1) {
+                        holder.marcadorEquipoVisitante.setText(String.valueOf(myNumberPicker.getValue()));
+                    }
+                });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.setView(myNumberPicker);
+                alertDialog.show();
             }
         });
 

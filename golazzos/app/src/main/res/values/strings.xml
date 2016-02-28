@@ -38,6 +38,8 @@
     <string name="crea_tu_cuenta">CREA TU CUENTA</string>
     <string name="acceso_rapido">¿Acceso rápido?</string>
     <string name="ingresa_con_facebook"><u>" Ingresa con facebook</u></string>
+    <string name="indica_marcador">Indica marcador</string>
+    <string name="informacion">Información</string>
     
     <!-- Primer wizard -->
     
