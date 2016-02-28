@@ -35,7 +35,7 @@ import games.buendia.jhon.golazzos.utils.ServicesCall;
 /**
  * Created by User on 28/02/2016.
  */
-public class UpdateFavoriteTeamActivity extends AppCompatActivity implements RequestInterface {
+public class UpdateSoulTeamActivity extends AppCompatActivity implements RequestInterface {
 
     private Spinner spinnerLigas;
     private Spinner spinnerEquipos;
@@ -71,12 +71,12 @@ public class UpdateFavoriteTeamActivity extends AppCompatActivity implements Req
         imagenEquipo = (ImageView) findViewById(R.id.imageViewTeam);
         changeShirtUrl(PreferencesHelper.getUrlSoulTeam());
 
-        DialogHelper.showLoaderDialog(UpdateFavoriteTeamActivity.this);
+        DialogHelper.showLoaderDialog(UpdateSoulTeamActivity.this);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.tournaments_endpoint));
-                HttpRequest h = new HttpRequest(UpdateFavoriteTeamActivity.this, ServicesCall.LEAGUES);
+                HttpRequest h = new HttpRequest(UpdateSoulTeamActivity.this, ServicesCall.LEAGUES);
                 h.sendAuthenticatedPostRequest(getApplicationContext(), url);
             }
         });
@@ -122,7 +122,7 @@ public class UpdateFavoriteTeamActivity extends AppCompatActivity implements Req
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (spinnerLigasPressed) {
-                    Intent intent = new Intent(UpdateFavoriteTeamActivity.this, UpdateFavoriteTeamActivity.class);
+                    Intent intent = new Intent(UpdateSoulTeamActivity.this, UpdateSoulTeamActivity.class);
                     intent.putExtra("tournament_id", tournamentArrayList.get(i).getIdTournament());
                     startActivity(intent);
                     finish();
@@ -158,14 +158,14 @@ public class UpdateFavoriteTeamActivity extends AppCompatActivity implements Req
                 if (soulTeam != null) {
                     spinnerEquiposPressed = false;
                     spinnerLigasPressed = false;
-                    DialogHelper.showLoaderDialog(UpdateFavoriteTeamActivity.this);
+                    DialogHelper.showLoaderDialog(UpdateSoulTeamActivity.this);
                     url = String.format(getString(R.string.delete_favorite_team_url), String.valueOf(PreferencesHelper.getIdSoulTeam()));
-                    HttpRequest h = new HttpRequest(UpdateFavoriteTeamActivity.this, ServicesCall.DELETE_FAVORITE_TEAM);
+                    HttpRequest h = new HttpRequest(UpdateSoulTeamActivity.this, ServicesCall.DELETE_FAVORITE_TEAM);
                     h.sendAuthenticatedDeleteRequest(GolazzosApplication.getInstance(), url);
                     PreferencesHelper.storeSoulTeamIntoPreferences(soulTeam);
                 }
                 else {
-                    Toast.makeText(UpdateFavoriteTeamActivity.this, getString(R.string.debes_seleccionar_equipo_del_alma), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UpdateSoulTeamActivity.this, getString(R.string.debes_seleccionar_equipo_del_alma), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -223,7 +223,7 @@ public class UpdateFavoriteTeamActivity extends AppCompatActivity implements Req
                             } else {
                                 url = String.format(getString(R.string.format_url_teams_tournament), String.valueOf(idTournament));
                             }
-                            HttpRequest h = new HttpRequest(UpdateFavoriteTeamActivity.this, ServicesCall.TEAMS);
+                            HttpRequest h = new HttpRequest(UpdateSoulTeamActivity.this, ServicesCall.TEAMS);
                             h.sendAuthenticatedPostRequest(getApplicationContext(), url);
                         }
                     });
@@ -239,7 +239,7 @@ public class UpdateFavoriteTeamActivity extends AppCompatActivity implements Req
                                         public void run() {
                                             url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.favorite_team_endpoint));
                                             JSONBuilder jsonBuilder = new JSONBuilder();
-                                            HttpRequest h = new HttpRequest(UpdateFavoriteTeamActivity.this, ServicesCall.FAVORITE_ADD);
+                                            HttpRequest h = new HttpRequest(UpdateSoulTeamActivity.this, ServicesCall.FAVORITE_ADD);
                                             h.startPostRequestAuthenticated(getApplicationContext(), url, jsonBuilder.getFavoriteTeamJSON(String.valueOf(soulTeam.getIdTeam()), true), soulTeam.getIdTeam());
                                         }
                                        });
@@ -247,7 +247,7 @@ public class UpdateFavoriteTeamActivity extends AppCompatActivity implements Req
 
 
             case FAVORITE_ADD:  DialogHelper.hideLoaderDialog();
-                                startActivity(new Intent(UpdateFavoriteTeamActivity.this, StadiumActivity.class));
+                                startActivity(new Intent(UpdateSoulTeamActivity.this, StadiumActivity.class));
                                 finish();
                                 break;
         }
@@ -266,7 +266,7 @@ public class UpdateFavoriteTeamActivity extends AppCompatActivity implements Req
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(UpdateFavoriteTeamActivity.this, StadiumActivity.class));
+        startActivity(new Intent(UpdateSoulTeamActivity.this, StadiumActivity.class));
         finish();
     }
 }

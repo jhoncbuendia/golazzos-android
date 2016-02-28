@@ -29,7 +29,7 @@ public class ApplicationConstants {
     public static final String soutTeamNameKey = "soutTeamNameKey";
     public static final String soulTeamImageUrlKey = "soulTeamImageUrlKey";
 
-    public static String[] opcionesAlerta = {"Gana/Pierde", "Marcador"};
+    public static String[] opcionesAlerta = {" - Cambiar equipo del alma", " - Cambiar equipos favoritos"};
     public static String[] pointsToBet = {"50", "100"};
 
     public static final String formatDate = "yyyy/MM/dd HH:mm:ss";

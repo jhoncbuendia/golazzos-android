@@ -1,5 +1,7 @@
 package games.buendia.jhon.golazzos.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,7 +19,8 @@ import games.buendia.jhon.golazzos.R;
 import games.buendia.jhon.golazzos.activities.MatchListActivity;
 import games.buendia.jhon.golazzos.activities.StadiumActivity;
 import games.buendia.jhon.golazzos.activities.StoryDetailActivity;
-import games.buendia.jhon.golazzos.activities.UpdateFavoriteTeamActivity;
+import games.buendia.jhon.golazzos.activities.UpdateFavoriteTeamsActivity;
+import games.buendia.jhon.golazzos.activities.UpdateSoulTeamActivity;
 import games.buendia.jhon.golazzos.activities.WriteSomethingActivity;
 import games.buendia.jhon.golazzos.adapters.TimeLineAdapter;
 import games.buendia.jhon.golazzos.model.Story;
@@ -77,9 +80,22 @@ public class StadiumFragment extends Fragment {
         layoutFavoritos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO - Make a popup with options.
-                startActivity(new Intent(getActivity(), UpdateFavoriteTeamActivity.class));
-                getActivity().finish();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle(getString(R.string.selecciona_opcion));
+                builder.setItems(ApplicationConstants.opcionesAlerta, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (which == 0) {
+                            startActivity(new Intent(getActivity(), UpdateSoulTeamActivity.class));
+                            getActivity().finish();
+                        } else {
+                            startActivity(new Intent(getActivity(), UpdateFavoriteTeamsActivity.class));
+                            getActivity().finish();
+                        }
+                    }
+                });
+                builder.show();
             }
         });
 
@@ -88,8 +104,8 @@ public class StadiumFragment extends Fragment {
         textViewQueTienesEnMente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            startActivity(new Intent(getActivity(), WriteSomethingActivity.class));
-            getActivity().finish();
+                startActivity(new Intent(getActivity(), WriteSomethingActivity.class));
+                getActivity().finish();
             }
         });
 

@@ -97,4 +97,23 @@ public class BuilderJsonList {
 
         return matchArrayList;
     }
+
+    public ArrayList<Team> getFavoriteTeams() throws JSONException {
+        JSONArray teams = jsonObject.getJSONArray("response");
+        ArrayList<Team> teamArrayList = new ArrayList<Team>();
+
+        for (int i = 0; i < teams.length(); i++){
+
+            JSONObject teamObject = teams.getJSONObject(i);
+            JSONObject teamJsonObject = teamObject.getJSONObject("team");
+
+            if (!teamObject.getBoolean("soul")) {
+                Log.i("is not soul", "here");
+                teamArrayList.add(new Team(teamJsonObject.getInt("id"),
+                        teamJsonObject.getString("name")));
+            }
+        }
+        return teamArrayList;
+
+    }
 }

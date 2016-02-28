@@ -89,6 +89,11 @@ public class PreferencesHelper {
         return sharedPreferences.getInt(ApplicationConstants.soutTeamIdKey, 0);
     }
 
+    public static int getIdUser(){
+        instanciateSharedPreferences();
+        return sharedPreferences.getInt(ApplicationConstants.idUserKey, 0);
+    }
+
     public static String getUrlSoulTeam(){
         instanciateSharedPreferences();
         return sharedPreferences.getString(ApplicationConstants.soulTeamImageUrlKey, "");
