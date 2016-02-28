@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import games.buendia.jhon.golazzos.R;
 import games.buendia.jhon.golazzos.activities.MatchListActivity;
 import games.buendia.jhon.golazzos.activities.StadiumActivity;
+import games.buendia.jhon.golazzos.activities.WriteSomethingActivity;
 import games.buendia.jhon.golazzos.adapters.TimeLineAdapter;
 import games.buendia.jhon.golazzos.model.Story;
 import games.buendia.jhon.golazzos.utils.ApplicationConstants;
@@ -75,7 +76,8 @@ public class StadiumFragment extends Fragment {
         textViewQueTienesEnMente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO - pass to write text activity.
+            startActivity(new Intent(getActivity(), WriteSomethingActivity.class));
+            getActivity().finish();
             }
         });
 

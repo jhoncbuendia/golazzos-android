@@ -163,4 +163,10 @@
     <string name="invitar_amigos">INVITAR AMIGOS</string>
     <string name="hace_dos_minutos">Hace 2 minutos</string>
 
+    <!-- Estadio escribe algo -->
+
+    <string name="cancelar">CANCELAR</string>
+    <string name="publicar">PUBLICAR</string>
+    <string name="que_tienes_en_mente_hint">¿Qué tienes en mente?</string>
+
 </resources>
