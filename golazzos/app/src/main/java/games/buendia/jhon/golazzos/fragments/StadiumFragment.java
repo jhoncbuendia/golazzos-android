@@ -77,6 +77,7 @@ public class StadiumFragment extends Fragment {
         layoutFavoritos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //TODO - Make a popup with options.
                 startActivity(new Intent(getActivity(), UpdateFavoriteTeamActivity.class));
                 getActivity().finish();
             }
