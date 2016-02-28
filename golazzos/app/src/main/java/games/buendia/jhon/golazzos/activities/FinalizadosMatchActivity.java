@@ -113,7 +113,7 @@ public class FinalizadosMatchActivity extends FragmentActivity implements Reques
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 if (position == 6) {
                     PreferencesHelper.unLogUser();
-                    startActivity(new Intent(FinalizadosMatchActivity.this, InitialActivity.class));
+                    startActivity(new Intent(FinalizadosMatchActivity.this, SignInActivity.class));
                     finish();
                 }
             }
