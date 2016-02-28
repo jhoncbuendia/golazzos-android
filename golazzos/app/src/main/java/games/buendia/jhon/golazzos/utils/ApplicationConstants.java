@@ -1,5 +1,10 @@
 package games.buendia.jhon.golazzos.utils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import games.buendia.jhon.golazzos.model.Story;
+
 /**
  * Created by User on 29/01/2016.
  */
@@ -26,5 +31,7 @@ public class ApplicationConstants {
 
     public static String[] opcionesAlerta = {"Gana/Pierde", "Marcador"};
     public static String[] pointsToBet = {"50", "100"};
+
+    public static ArrayList<Story> storiesArrayList = new ArrayList<Story>(Arrays.asList(new Story("Carlos Díaz perdio jugando al Millonarios.."),new Story("Marlon Mantilla esta jugando 50 puntos a que habran 6 corners en Manchester City"), new Story("¡Carlos Granados ha ganado 100 puntos!"), new Story("Dani Merchan esta jugando 50 puntos a que habran 6 corners en Manchester City"), new Story("Andres Saldarriaga ha subido al Nivel 7")));
 
 }

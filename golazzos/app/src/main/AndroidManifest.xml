@@ -102,6 +102,12 @@
             android:name=".npaysdkdemo.MainActivity" >
         </activity>
 
+        <activity
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:screenOrientation="portrait"
+            android:name=".activities.StadiumActivity" >
+        </activity>
+
     </application>
 
 </manifest>

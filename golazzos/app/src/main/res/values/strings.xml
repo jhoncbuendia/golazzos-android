@@ -151,4 +151,16 @@
     <string name="debes_seleccionar_equipo_del_alma">Debes seleccionar un equipo del alma</string>
     <string name="debes_seleccionar_equipo_favorito">Debes seleccionar al menos un equipo favorito</string>
 
+
+    <!-- Estadio -->
+    <string name="estadios_title">ESTADIO</string>
+    <string name="que_tienes_en_mente">¿QUÉ TIENES EN MENTE?</string>
+    <string name="fanaticada">FANATICADA</string>
+    <string name="equipos">EQUIPOS</string>
+    <string name="ranking">RANKING</string>
+    <string name="amigos">AMIGOS</string>
+    <string name="convoca_mas_jugadores">¡CONVOCA MÁS<![CDATA[<br/>]]>JUGADORES Y GANA<![CDATA[<br/>]]><![CDATA[<b><font color=#d2ff00>300 PUNTOS</b>]]>!</string>
+    <string name="invitar_amigos">INVITAR AMIGOS</string>
+    <string name="hace_dos_minutos">Hace 2 minutos</string>
+
 </resources>

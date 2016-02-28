@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@android:color/white"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="fitXY"
+                android:layout_margin="10dp"
+                android:id="@+id/imageViewIcono" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hace_dos_minutos"
+                android:textColor="#eaeaea"
+                android:textStyle="bold"
+                android:id="@+id/textViewTiempoStory"
+                android:layout_alignTop="@+id/imageViewIcono"
+                android:layout_toEndOf="@+id/imageViewIcono" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:textColor="@android:color/black"
+                android:id="@+id/textViewDescripcion"
+                android:layout_alignBottom="@+id/imageViewIcono"
+                android:layout_alignStart="@+id/textViewTiempoStory"
+                android:layout_below="@+id/textViewTiempoStory"
+                android:layout_toStartOf="@+id/imageViewFlecha"
+                android:layout_marginRight="10dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/flecha_derecha"
+                android:id="@+id/imageViewFlecha"
+                android:layout_marginEnd="13dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignBottom="@+id/textViewDescripcion" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>

@@ -23,6 +23,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import games.buendia.jhon.golazzos.GolazzosApplication;
 import games.buendia.jhon.golazzos.R;
 import games.buendia.jhon.golazzos.adapters.DrawerAdapterList;
 import games.buendia.jhon.golazzos.fragments.MatchListFragment;
@@ -113,10 +114,18 @@ public class MatchListActivity extends FragmentActivity implements RequestInterf
         listViewMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                if (position == 6){
-                    PreferencesHelper.unLogUser();
-                    startActivity(new Intent(MatchListActivity.this, SignInActivity.class));
-                    finish();
+
+                switch (position){
+
+                    case 1: startActivity(new Intent(GolazzosApplication.getInstance(), StadiumActivity.class));
+                            finish();
+                            break;
+
+                    case 6:
+                        PreferencesHelper.unLogUser();
+                        startActivity(new Intent(MatchListActivity.this, SignInActivity.class));
+                        finish();
+                        break;
                 }
             }
         });
