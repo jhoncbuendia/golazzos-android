@@ -113,7 +113,7 @@ public class EnVivoMatchActivity extends FragmentActivity implements RequestInte
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 if (position == 6) {
                     PreferencesHelper.unLogUser();
-                    startActivity(new Intent(EnVivoMatchActivity.this, InitialActivity.class));
+                    startActivity(new Intent(EnVivoMatchActivity.this, SignInActivity.class));
                     finish();
                 }
             }

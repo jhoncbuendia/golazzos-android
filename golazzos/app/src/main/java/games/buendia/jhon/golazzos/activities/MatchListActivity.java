@@ -115,7 +115,7 @@ public class MatchListActivity extends FragmentActivity implements RequestInterf
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 if (position == 6){
                     PreferencesHelper.unLogUser();
-                    startActivity(new Intent(MatchListActivity.this, InitialActivity.class));
+                    startActivity(new Intent(MatchListActivity.this, SignInActivity.class));
                     finish();
                 }
             }
