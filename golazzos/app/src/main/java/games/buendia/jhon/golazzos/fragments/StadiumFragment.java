@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import games.buendia.jhon.golazzos.R;
 import games.buendia.jhon.golazzos.activities.MatchListActivity;
 import games.buendia.jhon.golazzos.activities.StadiumActivity;
+import games.buendia.jhon.golazzos.activities.StoryDetailActivity;
 import games.buendia.jhon.golazzos.activities.WriteSomethingActivity;
 import games.buendia.jhon.golazzos.adapters.TimeLineAdapter;
 import games.buendia.jhon.golazzos.model.Story;
@@ -47,7 +48,7 @@ public class StadiumFragment extends Fragment {
         textConvocaMas.setText(Html.fromHtml(getActivity().getString(R.string.convoca_mas_jugadores)));
 
         //TODO - remove this, when the services is ready.
-        ArrayList<Story> storyArrayList = new ArrayList<Story>();
+        final ArrayList<Story> storyArrayList = new ArrayList<Story>();
         ArrayList<Story> storyArrayListTest = ApplicationConstants.storiesArrayList;
 
         for (Story story: storyArrayListTest){
@@ -87,7 +88,10 @@ public class StadiumFragment extends Fragment {
         listViewTimeLine.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                //TODO - pass to detail activity.
+                Intent intent = new Intent(getActivity(), StoryDetailActivity.class);
+                intent.putExtra("story", storyArrayList.get(position));
+                startActivity(intent);
+                getActivity().finish();
             }
         });
 

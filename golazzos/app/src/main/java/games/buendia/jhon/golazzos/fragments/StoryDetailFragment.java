@@ -9,37 +9,38 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.squareup.picasso.Picasso;
-
 import games.buendia.jhon.golazzos.R;
 import games.buendia.jhon.golazzos.activities.StadiumActivity;
-import games.buendia.jhon.golazzos.activities.WriteSomethingActivity;
-import games.buendia.jhon.golazzos.utils.PreferencesHelper;
+import games.buendia.jhon.golazzos.activities.StoryDetailActivity;
+import games.buendia.jhon.golazzos.model.Story;
 
 /**
  * Created by User on 28/02/2016.
  */
-public class WriteSomethingFragment extends Fragment {
+public class StoryDetailFragment extends Fragment{
 
-    public WriteSomethingFragment(){
+    public StoryDetailFragment(){
 
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_write_something, container, false);
+        final View view = inflater.inflate(R.layout.fragmen_detail_history, container, false);
+
+        Bundle arguments = getArguments();
+        Story story = (Story) arguments.getSerializable("story");
 
         view.findViewById(R.id.imageButtonHamburguerMenu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((WriteSomethingActivity) getActivity()).openDrawerMenu(view);
+                ((StoryDetailActivity) getActivity()).openDrawerMenu(view);
             }
         });
 
-       TextView textViewCancelar = (TextView) view.findViewById(R.id.textViewCancelar);
-       textViewCancelar.setOnClickListener(new View.OnClickListener() {
+        TextView textViewCancelar = (TextView) view.findViewById(R.id.textViewCancelar);
+        textViewCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), StadiumActivity.class));
@@ -47,13 +48,18 @@ public class WriteSomethingFragment extends Fragment {
             }
         });
 
-        String urlImage = PreferencesHelper.getUrlPhoto();
+        view.findViewById(R.id.imageViewFlecha).setVisibility(View.GONE);
+        TextView textViewDescription = (TextView) view.findViewById(R.id.textViewDescripcion);
+        textViewDescription.setEllipsize(null);
+        textViewDescription.setText(story.getDescription());
+
+        String urlImage = story.getUrlImage();
 
         if (!urlImage.contains("http")){
             urlImage = "http:"+urlImage;
         }
 
-        ImageView imageViewIcon = (ImageView) view.findViewById(R.id.imageViewUserIcon);
+        ImageView imageViewIcon = (ImageView) view.findViewById(R.id.imageViewIcono);
 
         Picasso.with(getActivity())
                 .load(urlImage)

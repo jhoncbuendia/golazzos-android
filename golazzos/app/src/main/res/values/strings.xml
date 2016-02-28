@@ -169,4 +169,10 @@
     <string name="publicar">PUBLICAR</string>
     <string name="que_tienes_en_mente_hint">¿Qué tienes en mente?</string>
 
+    <!-- Detalle noticia estadio -->
+
+    <string name="comentar">Comentar</string>
+    <string name="me_gusta">Me gusta</string>
+    <string name="compartir">Compartir</string>
+
 </resources>
