@@ -17,6 +17,7 @@ import games.buendia.jhon.golazzos.R;
 import games.buendia.jhon.golazzos.activities.MatchListActivity;
 import games.buendia.jhon.golazzos.activities.StadiumActivity;
 import games.buendia.jhon.golazzos.activities.StoryDetailActivity;
+import games.buendia.jhon.golazzos.activities.UpdateFavoriteTeamActivity;
 import games.buendia.jhon.golazzos.activities.WriteSomethingActivity;
 import games.buendia.jhon.golazzos.adapters.TimeLineAdapter;
 import games.buendia.jhon.golazzos.model.Story;
@@ -68,6 +69,15 @@ public class StadiumFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), MatchListActivity.class));
+                getActivity().finish();
+            }
+        });
+
+        layoutFavoritos.setClickable(true);
+        layoutFavoritos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), UpdateFavoriteTeamActivity.class));
                 getActivity().finish();
             }
         });

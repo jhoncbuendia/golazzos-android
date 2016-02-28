@@ -13,9 +13,13 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
+
+import games.buendia.jhon.golazzos.GolazzosApplication;
 import games.buendia.jhon.golazzos.R;
 import games.buendia.jhon.golazzos.adapters.CustomSpinnerAdapter;
 import games.buendia.jhon.golazzos.model.Team;
@@ -28,7 +32,10 @@ import games.buendia.jhon.golazzos.utils.JSONBuilder;
 import games.buendia.jhon.golazzos.utils.PreferencesHelper;
 import games.buendia.jhon.golazzos.utils.ServicesCall;
 
-public class WizardOnectivity extends AppCompatActivity implements RequestInterface{
+/**
+ * Created by User on 28/02/2016.
+ */
+public class UpdateFavoriteTeamActivity extends AppCompatActivity implements RequestInterface {
 
     private Spinner spinnerLigas;
     private Spinner spinnerEquipos;
@@ -50,7 +57,7 @@ public class WizardOnectivity extends AppCompatActivity implements RequestInterf
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wizard_one);
+        setContentView(R.layout.activity_update_favorite_team);
 
         try {
             idTournament = getIntent().getIntExtra("tournament_id", 0);
@@ -59,12 +66,17 @@ public class WizardOnectivity extends AppCompatActivity implements RequestInterf
             idTournament = 0;
         }
 
-        DialogHelper.showLoaderDialog(WizardOnectivity.this);
+        soulTeam = new Team(PreferencesHelper.getIdSoulTeam(),PreferencesHelper.getNameSoulTeam(),PreferencesHelper.getUrlSoulTeam());
+        loaderImagen = (ProgressBar) findViewById(R.id.progressBarLoaderImage);
+        imagenEquipo = (ImageView) findViewById(R.id.imageViewTeam);
+        changeShirtUrl(PreferencesHelper.getUrlSoulTeam());
+
+        DialogHelper.showLoaderDialog(UpdateFavoriteTeamActivity.this);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.tournaments_endpoint));
-                HttpRequest h = new HttpRequest(WizardOnectivity.this, ServicesCall.LEAGUES);
+                HttpRequest h = new HttpRequest(UpdateFavoriteTeamActivity.this, ServicesCall.LEAGUES);
                 h.sendAuthenticatedPostRequest(getApplicationContext(), url);
             }
         });
@@ -75,8 +87,6 @@ public class WizardOnectivity extends AppCompatActivity implements RequestInterf
         spinnerEquipos = (Spinner) findViewById(R.id.spinnerEquipos);
         spinnerLigas = (Spinner) findViewById(R.id.spinnerLigas);
         buttonSiguiente = (Button) findViewById(R.id.buttonSiguiente);
-        loaderImagen = (ProgressBar) findViewById(R.id.progressBarLoaderImage);
-        imagenEquipo = (ImageView) findViewById(R.id.imageViewTeam);
 
         boolean ifIsSelected = idTournament != 0, findIt = false;
         String[] tournamentsStringArray = new String[tournamentArrayList.size()];
@@ -112,7 +122,7 @@ public class WizardOnectivity extends AppCompatActivity implements RequestInterf
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (spinnerLigasPressed) {
-                    Intent intent = new Intent(WizardOnectivity.this, WizardOnectivity.class);
+                    Intent intent = new Intent(UpdateFavoriteTeamActivity.this, UpdateFavoriteTeamActivity.class);
                     intent.putExtra("tournament_id", tournamentArrayList.get(i).getIdTournament());
                     startActivity(intent);
                     finish();
@@ -148,15 +158,14 @@ public class WizardOnectivity extends AppCompatActivity implements RequestInterf
                 if (soulTeam != null) {
                     spinnerEquiposPressed = false;
                     spinnerLigasPressed = false;
+                    DialogHelper.showLoaderDialog(UpdateFavoriteTeamActivity.this);
+                    url = String.format(getString(R.string.delete_favorite_team_url), String.valueOf(PreferencesHelper.getIdSoulTeam()));
+                    HttpRequest h = new HttpRequest(UpdateFavoriteTeamActivity.this, ServicesCall.DELETE_FAVORITE_TEAM);
+                    h.sendAuthenticatedDeleteRequest(GolazzosApplication.getInstance(), url);
                     PreferencesHelper.storeSoulTeamIntoPreferences(soulTeam);
-                    DialogHelper.showLoaderDialog(WizardOnectivity.this);
-                    url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.favorite_team_endpoint));
-                    JSONBuilder jsonBuilder = new JSONBuilder();
-                    HttpRequest h = new HttpRequest(WizardOnectivity.this, ServicesCall.FAVORITE_ADD);
-                    h.startPostRequestAuthenticated(getApplicationContext(), url, jsonBuilder.getFavoriteTeamJSON(String.valueOf(soulTeam.getIdTeam()), true), soulTeam.getIdTeam());
                 }
                 else {
-                    Toast.makeText(WizardOnectivity.this, getString(R.string.debes_seleccionar_equipo_del_alma), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UpdateFavoriteTeamActivity.this, getString(R.string.debes_seleccionar_equipo_del_alma), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -189,45 +198,59 @@ public class WizardOnectivity extends AppCompatActivity implements RequestInterf
     public void onSuccessCallBack(JSONObject response, ServicesCall serviceCall) {
         builderJsonList = new BuilderJsonList(response);
         switch (serviceCall) {
-           case TEAMS:
-               teamsLoaded = true;
-               try {
-                   if (idTournament != 0)
-                       teamsArrayList = builderJsonList.getTeamsWithImages();
-                   else
-                       teamsArrayList = new ArrayList<Team>();
-               } catch (JSONException e) {
-                   e.printStackTrace();
-               }
+            case TEAMS:
+                teamsLoaded = true;
+                try {
+                    if (idTournament != 0)
+                        teamsArrayList = builderJsonList.getTeamsWithImages();
+                    else
+                        teamsArrayList = new ArrayList<Team>();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
-               break;
+                break;
 
-           case LEAGUES:
-               leaguesLoaded = true;
-               try {
-                   tournamentArrayList = builderJsonList.getTournaments();
-                   runOnUiThread(new Runnable() {
-                       @Override
-                       public void run() {
-                           if (idTournament == 0) {
-                               url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.teams_endpoint));
-                           } else {
-                               url = String.format(getString(R.string.format_url_teams_tournament), String.valueOf(idTournament));
-                           }
-                           HttpRequest h = new HttpRequest(WizardOnectivity.this, ServicesCall.TEAMS);
-                           h.sendAuthenticatedPostRequest(getApplicationContext(), url);
-                       }
-                   });
-               } catch (JSONException e) {
-                   e.printStackTrace();
-               }
-               break;
+            case LEAGUES:
+                leaguesLoaded = true;
+                try {
+                    tournamentArrayList = builderJsonList.getTournaments();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (idTournament == 0) {
+                                url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.teams_endpoint));
+                            } else {
+                                url = String.format(getString(R.string.format_url_teams_tournament), String.valueOf(idTournament));
+                            }
+                            HttpRequest h = new HttpRequest(UpdateFavoriteTeamActivity.this, ServicesCall.TEAMS);
+                            h.sendAuthenticatedPostRequest(getApplicationContext(), url);
+                        }
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                break;
+
+
+            case DELETE_FAVORITE_TEAM:  teamsLoaded = false;
+                                        runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.favorite_team_endpoint));
+                                            JSONBuilder jsonBuilder = new JSONBuilder();
+                                            HttpRequest h = new HttpRequest(UpdateFavoriteTeamActivity.this, ServicesCall.FAVORITE_ADD);
+                                            h.startPostRequestAuthenticated(getApplicationContext(), url, jsonBuilder.getFavoriteTeamJSON(String.valueOf(soulTeam.getIdTeam()), true), soulTeam.getIdTeam());
+                                        }
+                                       });
+                                       break;
+
 
             case FAVORITE_ADD:  DialogHelper.hideLoaderDialog();
-                                startActivity(new Intent(WizardOnectivity.this, WizardTwoActivity.class));
+                                startActivity(new Intent(UpdateFavoriteTeamActivity.this, StadiumActivity.class));
                                 finish();
                                 break;
-       }
+        }
 
         if (leaguesLoaded && teamsLoaded){
             initUI();
@@ -238,5 +261,12 @@ public class WizardOnectivity extends AppCompatActivity implements RequestInterf
     @Override
     public void onErrorCallBack(JSONObject response) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(UpdateFavoriteTeamActivity.this, StadiumActivity.class));
+        finish();
     }
 }

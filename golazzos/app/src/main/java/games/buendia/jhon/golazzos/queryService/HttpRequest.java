@@ -142,4 +142,42 @@ public class HttpRequest {
         volley.getRequestQueue().add(jsObjRequest);
     }
 
+    public void sendAuthenticatedDeleteRequest(Context context, String url ){
+
+        StringRequest postRequest = new StringRequest(Request.Method.DELETE, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response) {
+                        requestInterface.onSuccessCallBack(null, servicesCall);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        VolleyError error = new VolleyError(new String(volleyError.networkResponse.data));
+                        JSONObject jsonObj = null;
+
+                        try {
+                            jsonObj = new JSONObject(error.getLocalizedMessage());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        requestInterface.onErrorCallBack(jsonObj);
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("Authorization", "Token "+PreferencesHelper.getUserToken());
+                return params;
+            }
+        };
+
+        volley = VolleyService.getInstance(context);
+        volley.getRequestQueue().add(postRequest);
+    }
+
 }
