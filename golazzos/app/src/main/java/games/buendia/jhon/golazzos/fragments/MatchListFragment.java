@@ -211,7 +211,16 @@ public class MatchListFragment extends Fragment {
         view.findViewById(R.id.imageButtonHamburguerMenu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MatchListActivity) getActivity()).openDrawerMenu(view);
+                if (getActivity() instanceof MatchListActivity){
+                    ((MatchListActivity) getActivity()).openDrawerMenu(view);
+                }
+                else if (getActivity() instanceof EnVivoMatchActivity) {
+                    ((EnVivoMatchActivity) getActivity()).openDrawerMenu(view);
+                }
+                else if (getActivity() instanceof FinalizadosMatchActivity){
+                    ((FinalizadosMatchActivity) getActivity()).openDrawerMenu(view);
+                }
+
             }
         });
 

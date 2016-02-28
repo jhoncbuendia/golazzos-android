@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@android:color/white"
+    android:layout_height="match_parent">
+
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/header_golazzos"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/actualiza_tu_equipo_del_alma"
+        android:textColor="@color/letrasazules"
+        android:textStyle="bold"
+        android:id="@+id/textViewTituloInicial"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/si_ya_posees_uno_y_deseas_cambiar"
+        android:textColor="@color/letrasazules"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/textViewSubtituloInicial"
+        android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/fondo_wizard">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ponte_la_camiseta"
+            android:textColor="@color/yellow_letters_wizard"
+            android:drawablePadding="10dp"
+            android:textSize="15dp"
+            android:layout_margin="10dp"
+            android:id="@+id/textViewPonerCamiseta"
+            android:drawableRight="@drawable/right_arrow"
+            android:drawableLeft="@drawable/left_arrow"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/todos_tenemos_equipo_alma"
+            android:id="@+id/textViewTodosTenemosEquipoAlma"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="15dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="center_horizontal" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_margin="13dp"
+            android:layout_height="wrap_content">
+
+            <Spinner
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:spinnerMode="dialog"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerLigas" />
+
+            <Spinner
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:spinnerMode="dialog"
+                android:id="@+id/spinnerEquipos" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="139dp"
+                android:layout_height="139dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/elipse"
+                android:id="@+id/imageViewTeam"
+                android:layout_gravity="center_horizontal"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBarLoaderImage"
+                android:visibility="gone"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="@string/finalizar"
+            android:textSize="15dp"
+            android:layout_margin="10dp"
+            android:textColor="@color/yellow_letters_wizard"
+            android:background="@drawable/rounded_button"
+            android:id="@+id/buttonSiguiente"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import games.buendia.jhon.golazzos.GolazzosApplication;
 import games.buendia.jhon.golazzos.R;
+import games.buendia.jhon.golazzos.model.Team;
 
 /**
  * Created by User on 03/02/2016.
@@ -66,12 +67,41 @@ public class PreferencesHelper {
             editor = sharedPreferences.edit();
             editor.putInt(ApplicationConstants.soutTeamIdKey, jsonObject.getInt("id"));
             editor.putString(ApplicationConstants.soutTeamNameKey, jsonObject.getString("name"));
-            editor.putString(ApplicationConstants.soutTeamNameKey, jsonObject.getString("image_path"));
+            editor.putString(ApplicationConstants.soulTeamImageUrlKey, jsonObject.getString("image_path"));
             editor.commit();
         }
         catch (JSONException e){
             // Nothing to do here.
         }
+    }
+
+    public static void storeSoulTeamIntoPreferences(Team team){
+        instanciateSharedPreferences();
+        editor = sharedPreferences.edit();
+        editor.putInt(ApplicationConstants.soutTeamIdKey, team.getIdTeam());
+        editor.putString(ApplicationConstants.soutTeamNameKey, team.getTeamName());
+        editor.putString(ApplicationConstants.soulTeamImageUrlKey, team.getUrlTeam());
+        editor.commit();
+    }
+
+    public static int getIdSoulTeam(){
+        instanciateSharedPreferences();
+        return sharedPreferences.getInt(ApplicationConstants.soutTeamIdKey, 0);
+    }
+
+    public static int getIdUser(){
+        instanciateSharedPreferences();
+        return sharedPreferences.getInt(ApplicationConstants.idUserKey, 0);
+    }
+
+    public static String getUrlSoulTeam(){
+        instanciateSharedPreferences();
+        return sharedPreferences.getString(ApplicationConstants.soulTeamImageUrlKey, "");
+    }
+
+    public static String getNameSoulTeam(){
+        instanciateSharedPreferences();
+        return sharedPreferences.getString(ApplicationConstants.soutTeamNameKey, "");
     }
 
     public static String getUserName(){

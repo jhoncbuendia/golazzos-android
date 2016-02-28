@@ -12,6 +12,8 @@
     <string name="tournaments_endpoint">tournaments</string>
     <string name="format_url">%1$s%2$s</string>
     <string name="favorite_team_endpoint">favorite_teams</string>
+    <string name="delete_favorite_team_url">https://www.golazzos.com/api/v2/favorite_teams/%1$s</string>
+    <string name="favorites_teams_by_user_url">https://www.golazzos.com/api/v2/favorite_teams</string>
 
     <!-- Urls not played matches -->
 
