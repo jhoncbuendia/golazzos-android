@@ -1,5 +1,7 @@
 package games.buendia.jhon.golazzos.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -23,11 +25,15 @@ import games.buendia.jhon.golazzos.R;
 import games.buendia.jhon.golazzos.activities.EnVivoMatchActivity;
 import games.buendia.jhon.golazzos.activities.FinalizadosMatchActivity;
 import games.buendia.jhon.golazzos.activities.MatchListActivity;
+import games.buendia.jhon.golazzos.activities.StadiumActivity;
+import games.buendia.jhon.golazzos.activities.UpdateFavoriteTeamsActivity;
+import games.buendia.jhon.golazzos.activities.UpdateSoulTeamActivity;
 import games.buendia.jhon.golazzos.adapters.CustomSpinnerAdapter;
 import games.buendia.jhon.golazzos.adapters.MatchListAdapter;
 import games.buendia.jhon.golazzos.model.Match;
 import games.buendia.jhon.golazzos.model.Team;
 import games.buendia.jhon.golazzos.model.Tournament;
+import games.buendia.jhon.golazzos.utils.ApplicationConstants;
 
 /**
  * Created by User on 07/02/2016.
@@ -60,7 +66,6 @@ public class MatchListFragment extends Fragment {
         final ArrayList<Team> teams = (ArrayList<Team>) arguments.getSerializable("teams");
 
         filterBet = arguments.getBoolean("filter_beat");
-        Log.i("filter", ""+filterBet);
 
         viewPagerMatches = (ViewPager) view.findViewById(R.id.viewPagerMatches);
         viewPagerMatches.setAdapter(new MyPagerAdapter(matches));
@@ -258,6 +263,44 @@ public class MatchListFragment extends Fragment {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
+            }
+        });
+
+        LinearLayout layoutFanaticada = (LinearLayout) view.findViewById(R.id.layoutFanaticada);
+        LinearLayout layoutFavoritos = (LinearLayout) view.findViewById(R.id.layoutFavoritos);
+        LinearLayout layoutPartidos = (LinearLayout) view.findViewById(R.id.layoutPartidos);
+        LinearLayout layoutRanking = (LinearLayout) view.findViewById(R.id.layoutRanking);
+        LinearLayout layoutAmigos = (LinearLayout) view.findViewById(R.id.layoutAmigos);
+
+        layoutFavoritos.setClickable(true);
+        layoutFavoritos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle(getString(R.string.selecciona_opcion));
+                builder.setItems(ApplicationConstants.opcionesAlerta, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (which == 0) {
+                            startActivity(new Intent(getActivity(), UpdateSoulTeamActivity.class));
+                            getActivity().finish();
+                        } else {
+                            startActivity(new Intent(getActivity(), UpdateFavoriteTeamsActivity.class));
+                            getActivity().finish();
+                        }
+                    }
+                });
+                builder.show();
+            }
+        });
+
+        layoutFanaticada.setClickable(true);
+        layoutFanaticada.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), StadiumActivity.class));
+                getActivity().finish();
             }
         });
 

@@ -7,7 +7,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#005b7d">
+        android:background="#f6473f">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -28,6 +28,7 @@
                 android:text="@string/partidos"
                 android:textColor="@android:color/white"
                 android:textSize="20dp"
+                android:textStyle="bold|italic"
                 android:id="@+id/textViewPartidos"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true" />
@@ -179,9 +180,113 @@
         <android.support.v4.view.ViewPager
             android:id="@+id/viewPagerMatches"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="0dp"
+            android:layout_weight="4">
 
         </android.support.v4.view.ViewPager>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#444444"
+            android:layout_weight="0.7">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:id="@+id/layoutFanaticada"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@drawable/fanaticada_white_icon"
+                    android:text="@string/fanaticada"
+                    android:textSize="10dp"
+                    android:textColor="@android:color/white"
+                    android:id="@+id/textView3" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:id="@+id/layoutPartidos"
+                android:layout_height="match_parent"
+                android:gravity="center" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/camisa_amarilla_icon"
+                    android:drawablePadding="5dp"
+                    android:textSize="10dp"
+                    android:textColor="#d2ff00"
+                    android:text="@string/partidos"
+                    android:id="@+id/textView4" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:id="@+id/layoutFavoritos"
+                android:layout_height="match_parent"
+                android:gravity="center" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/equipos"
+                    android:drawablePadding="5dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="10dp"
+                    android:drawableTop="@drawable/star_icon"
+                    android:id="@+id/textView5" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:id="@+id/layoutRanking"
+                android:layout_height="match_parent"
+                android:gravity="center" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/trofeo_icon"
+                    android:drawablePadding="5dp"
+                    android:textColor="@android:color/white"
+                    android:text="@string/ranking"
+                    android:textSize="10dp"
+                    android:id="@+id/textView6" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:id="@+id/layoutAmigos"
+                android:layout_height="match_parent"
+                android:gravity="center" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:textColor="@android:color/white"
+                    android:drawableTop="@drawable/amigos_icon"
+                    android:text="@string/amigos"
+                    android:textSize="10dp"
+                    android:id="@+id/textView7" />
+            </LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -48,9 +48,6 @@ public class StadiumFragment extends Fragment {
             }
         });
 
-        TextView textConvocaMas = (TextView) view.findViewById(R.id.textViewConvocaMas);
-        textConvocaMas.setText(Html.fromHtml(getActivity().getString(R.string.convoca_mas_jugadores)));
-
         //TODO - remove this, when the services is ready.
         final ArrayList<Story> storyArrayList = new ArrayList<Story>();
         ArrayList<Story> storyArrayListTest = ApplicationConstants.storiesArrayList;

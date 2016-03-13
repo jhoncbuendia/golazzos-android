@@ -90,7 +90,7 @@ public class BuilderJsonList {
                                      tournament);
 
             Match match = new Match(matchObject.getInt("id"), matchObject.getString("start_time_utc"),
-                                    null, localTeam, awayTeam);
+                                    matchObject.getString("html_center_url"), localTeam, awayTeam);
 
             matchArrayList.add(match);
         }

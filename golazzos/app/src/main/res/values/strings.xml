@@ -182,4 +182,6 @@
     <string name="si_ya_posees_uno_y_deseas_cambiar">Si deseas cambiar tu equipo del alma\nes hora de hacerlo, es muy sencillo</string>
     <string name="selecciona_opcion">¿Qué deseas hacer?</string>
 
+    <string name="estadisticas_header">ESTADÍSTICAS</string>
+
 </resources>

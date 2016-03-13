@@ -25,6 +25,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import games.buendia.jhon.golazzos.R;
+import games.buendia.jhon.golazzos.activities.ActivityStatics;
 import games.buendia.jhon.golazzos.activities.ConfirmacionJugadaActivity;
 import games.buendia.jhon.golazzos.model.Match;
 import games.buendia.jhon.golazzos.utils.ApplicationConstants;
@@ -339,6 +340,17 @@ public class MatchListAdapter extends BaseAdapter {
                         equipoVisitanteProgressBar.setVisibility(View.GONE);
                     }
                 });
+
+        holder.estadisticasCardView.setClickable(true);
+        holder.estadisticasCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ActivityStatics.class);
+                intent.putExtra("html_center_url", match.getUrlMatch());
+                context.startActivity(intent);
+                ((Activity) context).finish();
+            }
+        });
 
         return v;
     }
