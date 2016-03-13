@@ -48,15 +48,7 @@ public class StadiumFragment extends Fragment {
             }
         });
 
-        //TODO - remove this, when the services is ready.
-        final ArrayList<Story> storyArrayList = new ArrayList<Story>();
-        ArrayList<Story> storyArrayListTest = ApplicationConstants.storiesArrayList;
-
-        for (Story story: storyArrayListTest){
-            story.setUrlImage(PreferencesHelper.getUrlPhoto());
-            story.setTimeAgo(getActivity().getString(R.string.hace_dos_minutos));
-            storyArrayList.add(story);
-        }
+        final ArrayList<Story> storyArrayList = (ArrayList<Story>) getArguments().getSerializable("posts");
 
         LinearLayout layoutFanaticada = (LinearLayout) view.findViewById(R.id.layoutFanaticada);
         LinearLayout layoutFavoritos = (LinearLayout) view.findViewById(R.id.layoutFavoritos);

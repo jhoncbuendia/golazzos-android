@@ -10,11 +10,19 @@ public class Story implements Serializable{
     private String urlImage;
     private String timeAgo;
     private String description;
+    private String ownerName;
 
     public Story(String urlImage, String timeAgo, String description) {
         this.urlImage = urlImage;
         this.timeAgo = timeAgo;
         this.description = description;
+    }
+
+    public Story(String urlImage, String ownerName, String description, String timeAgo) {
+        this.urlImage = urlImage;
+        this.ownerName = ownerName;
+        this.description = description;
+        this.timeAgo = timeAgo;
     }
 
     public Story(String description) {
@@ -43,5 +51,13 @@ public class Story implements Serializable{
 
     public void setUrlImage(String urlImage) {
         this.urlImage = urlImage;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
     }
 }

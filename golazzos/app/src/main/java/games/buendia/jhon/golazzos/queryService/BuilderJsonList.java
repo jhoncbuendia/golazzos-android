@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import games.buendia.jhon.golazzos.model.Match;
+import games.buendia.jhon.golazzos.model.Story;
 import games.buendia.jhon.golazzos.model.Team;
 import games.buendia.jhon.golazzos.model.Tournament;
 
@@ -115,5 +116,24 @@ public class BuilderJsonList {
         }
         return teamArrayList;
 
+    }
+
+    public ArrayList<Story> getPosts() throws JSONException {
+        JSONArray posts = jsonObject.getJSONArray("response");
+        ArrayList<Story> postsArrayList = new ArrayList<Story>();
+
+        for (int i = 0; i < posts.length(); i++){
+
+            JSONObject postObject = posts.getJSONObject(i);
+            JSONObject ownerJsonObject = postObject.getJSONObject("owner");
+
+            postsArrayList.add(new Story(ownerJsonObject.getString("profile_pic_url"),
+                                         ownerJsonObject.getString("name"),
+                                         postObject.getString("label"),
+                                         postObject.getString("time_ago")));
+
+        }
+
+        return postsArrayList;
     }
 }
