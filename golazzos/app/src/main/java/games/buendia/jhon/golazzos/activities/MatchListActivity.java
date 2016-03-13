@@ -53,6 +53,7 @@ public class MatchListActivity extends FragmentActivity implements RequestInterf
     private ArrayList<Team> teamsArrayList;
     private ArrayList<Tournament> tournamentArrayList;
     private int idTournament;
+    private String teamName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,7 @@ public class MatchListActivity extends FragmentActivity implements RequestInterf
         setContentView(R.layout.base_menu_layout);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         idTournament = 0;
+        teamName = "";
         url = validateUrlToRequestMatch(getIntent());
         DialogHelper.showLoaderDialog(MatchListActivity.this);
         buildMenu();
@@ -196,6 +198,7 @@ public class MatchListActivity extends FragmentActivity implements RequestInterf
             arguments.putSerializable("teams", teamsArrayList);
             arguments.putSerializable("tournament_id", idTournament);
             arguments.putSerializable("filter_beat", filterBets);
+            arguments.putSerializable("teamName", teamName);
             matchListFragment.setArguments(arguments);
             DialogHelper.hideLoaderDialog();
             makeTransaction(matchListFragment, getSupportFragmentManager(), R.id.content_frame);
@@ -245,6 +248,7 @@ public class MatchListActivity extends FragmentActivity implements RequestInterf
 
         if (isFilterTeam && isFilterTournament){
             idTournament = intent.getIntExtra("tournament_id", 0);
+            teamName = intent.getStringExtra("team_name");
             return String.format(getString(R.string.format_url_matches_team_name_and_tournament),intent.getStringExtra("team_name").replace(" ","%20"), String.valueOf(idTournament));
         }
         else if (isFilterTournament){

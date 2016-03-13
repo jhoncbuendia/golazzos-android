@@ -52,6 +52,7 @@ public class EnVivoMatchActivity extends FragmentActivity implements RequestInte
     private ArrayList<Team> teamsArrayList;
     private ArrayList<Tournament> tournamentArrayList;
     private int idTournament;
+    private String teamName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class EnVivoMatchActivity extends FragmentActivity implements RequestInte
         setContentView(R.layout.base_menu_layout);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         idTournament = 0;
+        teamName = "";
         url = validateUrlToRequestMatch(getIntent());
         DialogHelper.showLoaderDialog(EnVivoMatchActivity.this);
         buildMenu();
@@ -193,6 +195,7 @@ public class EnVivoMatchActivity extends FragmentActivity implements RequestInte
             arguments.putSerializable("teams", teamsArrayList);
             arguments.putSerializable("tournament_id", idTournament);
             arguments.putSerializable("filter_beat", filterBets);
+            arguments.putSerializable("teamName", teamName);
             matchListFragment.setArguments(arguments);
             DialogHelper.hideLoaderDialog();
             makeTransaction(matchListFragment, getSupportFragmentManager(), R.id.content_frame);
@@ -242,6 +245,7 @@ public class EnVivoMatchActivity extends FragmentActivity implements RequestInte
 
         if (isFilterTeam && isFilterTournament){
             idTournament = intent.getIntExtra("tournament_id", 0);
+            teamName = intent.getStringExtra("team_name");
             return String.format(getString(R.string.format_url_live_matches_team_name_and_tournament),intent.getStringExtra("team_name").replace(" ","%20"), String.valueOf(idTournament));
         }
         else if (isFilterTournament){

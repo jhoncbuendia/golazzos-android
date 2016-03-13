@@ -50,15 +50,23 @@ public class HttpRequest {
 
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                VolleyError error = new VolleyError(new String(volleyError.networkResponse.data));
                 JSONObject jsonObj = null;
 
                 try {
-                    jsonObj = new JSONObject(error.getLocalizedMessage());
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    VolleyError error = new VolleyError(new String(volleyError.networkResponse.data));
+                    try {
+                        jsonObj = new JSONObject(error.getLocalizedMessage());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
                 }
-                requestInterface.onErrorCallBack(jsonObj);
+                catch (NullPointerException e){
+                    jsonObj = new JSONObject();
+                }
+                finally {
+                    requestInterface.onErrorCallBack(jsonObj);
+                }
             }
         });
         volley = VolleyService.getInstance(context);
@@ -83,15 +91,25 @@ public class HttpRequest {
                 {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        VolleyError error = new VolleyError(new String(volleyError.networkResponse.data));
-                        JSONObject jsonObj = null;
+
+                    JSONObject jsonObj = null;
 
                         try {
-                            jsonObj = new JSONObject(error.getLocalizedMessage());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                            VolleyError error = new VolleyError(new String(volleyError.networkResponse.data));
+                            try {
+                                jsonObj = new JSONObject(error.getLocalizedMessage());
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
                         }
-                        requestInterface.onErrorCallBack(jsonObj);
+                        catch (NullPointerException e){
+                            jsonObj = new JSONObject();
+                        }
+                        finally {
+                            requestInterface.onErrorCallBack(jsonObj);
+                        }
+
                     }
                 }
         ) {

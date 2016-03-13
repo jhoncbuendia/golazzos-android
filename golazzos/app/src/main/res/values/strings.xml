@@ -184,4 +184,7 @@
 
     <string name="estadisticas_header">ESTADÍSTICAS</string>
 
+    <string name="drop_down_ligas">LIGAS</string>
+    <string name="drop_down_equipos">EQUIPOS</string>
+
 </resources>

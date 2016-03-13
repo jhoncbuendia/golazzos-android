@@ -82,12 +82,13 @@ public class MatchListFragment extends Fragment {
         textViewPorJugar.setClickable(true);
 
         int indexSelected = 0;
-        String[] tournamentsStringArray = new String[tournaments.size()];
+        String[] tournamentsStringArray = new String[tournaments.size()+1];
+        tournamentsStringArray[0] = getActivity().getString(R.string.drop_down_ligas);
         final int idTournament = arguments.getInt("tournament_id");
         boolean ifIsSelected = idTournament != 0, findIt = false;
 
         for (int i = 0; i < tournaments.size(); i++) {
-            tournamentsStringArray[i] = tournaments.get(i).getNameTornament();
+            tournamentsStringArray[i+1] = tournaments.get(i).getNameTornament();
             if (ifIsSelected){
                 if (!findIt) {
                     if (tournaments.get(i).getIdTournament() == idTournament){
@@ -99,13 +100,32 @@ public class MatchListFragment extends Fragment {
         }
 
         if (ifIsSelected){
-            tournamentsStringArray[indexSelected] = tournaments.get(0).getNameTornament();
+            tournamentsStringArray[indexSelected+1] = getActivity().getString(R.string.drop_down_ligas);
             tournamentsStringArray[0] = tournaments.get(indexSelected).getNameTornament();
         }
 
-        String[] teamsStringArray = new String[teams.size()];
-        for (int i = 0; i < teams.size(); i++)
-            teamsStringArray[i] = teams.get(i).getTeamName();
+        String teamName = getArguments().getString("teamName");
+        String[] teamsStringArray = new String[teams.size()+1];
+        teamsStringArray[0] = getActivity().getString(R.string.drop_down_equipos);
+        boolean ifIsSelectedTeam = !teamName.isEmpty(), findItTeam = false;
+        int indexTeamSelected = 0;
+
+        for (int i = 0; i < teams.size(); i++) {
+            teamsStringArray[i+1] = teams.get(i).getTeamName();
+            if (ifIsSelectedTeam){
+                if (!findItTeam) {
+                    if (teams.get(i).getTeamName().equals(teamName)){
+                        indexTeamSelected = i;
+                        findItTeam = true;
+                    }
+                }
+            }
+        }
+
+        if (ifIsSelectedTeam){
+            teamsStringArray[indexTeamSelected+1] = getActivity().getString(R.string.drop_down_equipos);
+            teamsStringArray[0] = teams.get(indexTeamSelected).getTeamName();
+        }
 
 
         final Spinner spinnerLigas = (Spinner) view.findViewById(R.id.spinnerLigas);
@@ -233,10 +253,12 @@ public class MatchListFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (spinnerLigasPressed) {
-                    Intent intent = new Intent(getActivity(), activityToRefresh);
-                    intent.putExtra("tournament_id", tournaments.get(i).getIdTournament());
-                    startActivity(intent);
-                    getActivity().finish();
+                    if (i != 0) {
+                        Intent intent = new Intent(getActivity(), activityToRefresh);
+                        intent.putExtra("tournament_id", tournaments.get(i-1).getIdTournament());
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
                 }
                 else spinnerLigasPressed = true;
             }
@@ -251,11 +273,13 @@ public class MatchListFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                if (spinnerEquiposPressed) {
-                   Intent intent = new Intent(getActivity(), activityToRefresh);
-                   intent.putExtra("team_name", teams.get(i).getTeamName());
-                   intent.putExtra("tournament_id", arguments.getInt("tournament_id"));
-                   startActivity(intent);
-                   getActivity().finish();
+                   if (i != 0) {
+                       Intent intent = new Intent(getActivity(), activityToRefresh);
+                       intent.putExtra("team_name", teams.get(i-1).getTeamName());
+                       intent.putExtra("tournament_id", arguments.getInt("tournament_id"));
+                       startActivity(intent);
+                       getActivity().finish();
+                   }
                }
                else spinnerEquiposPressed = true;
             }

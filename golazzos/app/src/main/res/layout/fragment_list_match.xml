@@ -156,8 +156,8 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:background="#fbfbfb"
             android:layout_margin="5dp"
+            android:background="@null"
             android:spinnerMode="dialog"
             android:id="@+id/spinnerLigas" />
 
@@ -166,7 +166,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="5dp"
-            android:background="#fbfbfb"
+            android:background="@null"
             android:spinnerMode="dialog"
             android:id="@+id/spinnerEquipos" />
 
