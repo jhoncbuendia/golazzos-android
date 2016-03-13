@@ -46,9 +46,17 @@ public class BuilderJsonList {
         ArrayList<Team> teamArrayList = new ArrayList<Team>();
 
         for (int i = 0; i < teams.length(); i++){
+
             JSONObject teamObject = teams.getJSONObject(i);
+            String imagePath;
+
+            if (teamObject.has("image_path")) {
+                imagePath = teamObject.getString("image_path");
+            }
+            else imagePath = "";
+
             teamArrayList.add(new Team(teamObject.getInt("id"),
-                    teamObject.getString("name"), teamObject.getString("image_path")));
+                    teamObject.getString("name"), imagePath));
         }
         return teamArrayList;
 
