@@ -35,6 +35,9 @@ public class ApplicationConstants {
     public static final String formatDate = "yyyy/MM/dd HH:mm:ss";
     public static final String formatDateMatch = "MMM dd, hh:mm a";
 
-    public static ArrayList<Story> storiesArrayList = new ArrayList<Story>(Arrays.asList(new Story("Carlos Díaz perdio jugando al Millonarios.."),new Story("Marlon Mantilla esta jugando 50 puntos a que habran 6 corners en Manchester City"), new Story("¡Carlos Granados ha ganado 100 puntos!"), new Story("Dani Merchan esta jugando 50 puntos a que habran 6 corners en Manchester City"), new Story("Andres Saldarriaga ha subido al Nivel 7"), new Story("Jose Rodriguez ha subido al Nivel 10")));
+    public static final String nameLevelKey = "nameLevelKey";
+    public static final String orderLevelKey = "orderLevelKey";
+    public static final String hitsCountKey = "hitsCountKey";
+    public static final String urlTrophyKey = "urlTrophyKey";
 
 }

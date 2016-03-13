@@ -75,6 +75,22 @@ public class PreferencesHelper {
         }
     }
 
+    public static void storeLevelUserIntoPreferences(JSONObject response){
+        try {
+            instanciateSharedPreferences();
+            JSONObject jsonObject = response.getJSONObject("level");
+            editor = sharedPreferences.edit();
+            editor.putInt(ApplicationConstants.orderLevelKey, jsonObject.getInt("order"));
+            editor.putInt(ApplicationConstants.hitsCountKey, jsonObject.getInt("hits_count"));
+            editor.putString(ApplicationConstants.nameLevelKey, jsonObject.getString("name"));
+            editor.putString(ApplicationConstants.urlTrophyKey, jsonObject.getString("logo_url"));
+            editor.commit();
+        }
+        catch (JSONException e){
+            // Nothing to do here.
+        }
+    }
+
     public static void storeSoulTeamIntoPreferences(Team team){
         instanciateSharedPreferences();
         editor = sharedPreferences.edit();
@@ -121,9 +137,19 @@ public class PreferencesHelper {
         else return R.string.suplente;
     }
 
+    public static int getUserLevelNumber(){
+        instanciateSharedPreferences();
+        return sharedPreferences.getInt(ApplicationConstants.orderLevelKey, 0);
+    }
+
     public static String getUrlPhoto(){
         instanciateSharedPreferences();
         return sharedPreferences.getString(ApplicationConstants.urlImageKey, "");
+    }
+
+    public static String getUserNameLevel(){
+        instanciateSharedPreferences();
+        return sharedPreferences.getString(ApplicationConstants.nameLevelKey, "");
     }
 
     public static boolean isUserLogged(){

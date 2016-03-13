@@ -98,6 +98,7 @@ public class MatchListActivity extends FragmentActivity implements RequestInterf
         });
         ((TextView) findViewById(R.id.textViewCondicion)).setText(getString(resourceLevel));
         ((TextView) findViewById(R.id.textViewUsuario)).setText(String.format(getString(R.string.format_hola), PreferencesHelper.getUserName()));
+        ((TextView) findViewById(R.id.textViewNivelUsuario)).setText(String.format(getString(R.string.format_nivel_menu), String.valueOf(PreferencesHelper.getUserLevelNumber())));
 
         ImageView imageViewUser = (ImageView) findViewById(R.id.imageViewPictureUser);
 

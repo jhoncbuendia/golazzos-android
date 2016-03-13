@@ -91,6 +91,7 @@
 
     <!-- Menu -->
     <string name="format_hola">Hola, %1$s</string>
+    <string name="format_nivel_menu">Nivel %1$s</string>
     <string name="puntos_label">PUNTOS</string>
     <string name="suplente">Suplente</string>
     <string name="titular">Titular</string>

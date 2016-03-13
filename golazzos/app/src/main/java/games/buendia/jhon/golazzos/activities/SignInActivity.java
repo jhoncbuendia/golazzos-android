@@ -248,6 +248,7 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
 
                                             PreferencesHelper.storeUserObjectIntoPreferences(response.getJSONObject(getString(R.string.response)));
                                             PreferencesHelper.storeSoulTeamIntoPreferences(response.getJSONObject(getString(R.string.response)));
+                                            PreferencesHelper.storeLevelUserIntoPreferences(response.getJSONObject(getString(R.string.response)));
 
                                             if (builderJsonList.isWizardCompleted()) {
                                                 startActivity(new Intent(GolazzosApplication.getInstance(), MatchListActivity.class));
