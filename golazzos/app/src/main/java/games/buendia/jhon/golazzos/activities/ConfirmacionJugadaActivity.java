@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
@@ -33,7 +34,7 @@ import games.buendia.jhon.golazzos.utils.ServicesCall;
 public class ConfirmacionJugadaActivity extends Activity implements RequestInterface {
 
     private Intent intent;
-    private TextView tipoJugada, tipoVictoria, equipoLocal, equipoVisitante;
+    private TextView tipoJugada, tipoVictoria, equipoLocal, equipoVisitante, marcadorLocal, marcadorVisitante;
     private Match match;
     private int resourceTextVictoryType;
     private ImageView imageWinTeam;
@@ -61,6 +62,8 @@ public class ConfirmacionJugadaActivity extends Activity implements RequestInter
         cardViewConfirmarJugada = (CardView) findViewById(R.id.cardViewConfirmarJugada);
         imageWinTeam = (ImageView) findViewById(R.id.imageViewEquipoGanador);
         progressBarImage = (ProgressBar) findViewById(R.id.progressBarLoaderImagen);
+        marcadorLocal = (TextView) findViewById(R.id.textViewMarcadorLocal);
+        marcadorVisitante = (TextView) findViewById(R.id.textViewMarcadorVisitante);
         cardViewConfirmarJugada.setClickable(true);
 
         equipoLocal.setText(match.getLocalTeam().getTeamName());
@@ -89,6 +92,10 @@ public class ConfirmacionJugadaActivity extends Activity implements RequestInter
         }
         else {
             tipoJugada.setText(R.string.marcador);
+            marcadorLocal.setText(String.valueOf(match.getMarcadorLocal()));
+            marcadorVisitante.setText(String.valueOf(match.getMarcadorVisitante()));
+            marcadorLocal.setVisibility(View.VISIBLE);
+            marcadorVisitante.setVisibility(View.VISIBLE);
         }
 
         if (isLocalWin){
@@ -133,6 +140,7 @@ public class ConfirmacionJugadaActivity extends Activity implements RequestInter
                     HttpRequest h = new HttpRequest(ConfirmacionJugadaActivity.this, null);
                     JSONBuilder builderJson = new JSONBuilder();
                     String url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.bet_endpoint));
+                    Log.i("json-send", builderJson.getBetJSON(match, isWithTypeBet, idBet, pointsToBet * 100).toString());
                     h.startPostRequestAuthenticated(ConfirmacionJugadaActivity.this, url, builderJson.getBetJSON(match, isWithTypeBet, idBet, pointsToBet * 100), 0);
                 }
             }
@@ -145,8 +153,7 @@ public class ConfirmacionJugadaActivity extends Activity implements RequestInter
     public void onSuccessCallBack(JSONObject response, ServicesCall serviceCall) {
         DialogHelper.hideLoaderDialog();
         PreferencesHelper.updateUserPoints(PreferencesHelper.getUserPoints() - pointsToBet);
-        startActivity(new Intent(this, MatchListActivity.class));
-        finish();
+        onBackPressed();
     }
 
     @Override
@@ -157,7 +164,9 @@ public class ConfirmacionJugadaActivity extends Activity implements RequestInter
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(this, MatchListActivity.class));
+        Intent intent = new Intent(this, MatchListActivity.class);
+        intent.putExtra("filter_bet", isWithTypeBet);
+        startActivity(intent);
         finish();
     }
 }
