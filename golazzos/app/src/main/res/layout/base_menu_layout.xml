@@ -13,6 +13,7 @@
 
     <LinearLayout
         android:layout_width="260dp"
+        android:layout_gravity="start"
         android:id="@+id/layoutBaseMenu"
         android:orientation="vertical"
         android:layout_height="match_parent">

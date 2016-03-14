@@ -5,6 +5,7 @@
     <string name="bet_endpoint">bets</string>
     <string name="users_endpoint">users</string>
     <string name="matches_endpoint">matches</string>
+    <string name="levels_endpoint">levels</string>
     <string name="matches_live_endpoint">matches?status=playing</string>
     <string name="matches_end_endpoint">matches?status=played</string>
     <string name="me_endpoint">users/me</string>

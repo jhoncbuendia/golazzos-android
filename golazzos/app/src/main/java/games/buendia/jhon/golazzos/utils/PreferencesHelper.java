@@ -82,6 +82,7 @@ public class PreferencesHelper {
             editor = sharedPreferences.edit();
             editor.putInt(ApplicationConstants.orderLevelKey, jsonObject.getInt("order"));
             editor.putInt(ApplicationConstants.hitsCountKey, jsonObject.getInt("hits_count"));
+            editor.putInt(ApplicationConstants.pointsLevelKey, jsonObject.getInt("points"));
             editor.putString(ApplicationConstants.nameLevelKey, jsonObject.getString("name"));
             editor.putString(ApplicationConstants.urlTrophyKey, jsonObject.getString("logo_url"));
             editor.commit();
@@ -89,6 +90,16 @@ public class PreferencesHelper {
         catch (JSONException e){
             // Nothing to do here.
         }
+    }
+
+    public static int getUserPointsTrophy(){
+        instanciateSharedPreferences();
+        return sharedPreferences.getInt(ApplicationConstants.pointsLevelKey, 0);
+    }
+
+    public static int getHitsCountLevelUser(){
+        instanciateSharedPreferences();
+        return sharedPreferences.getInt(ApplicationConstants.hitsCountKey, 0);
     }
 
     public static void storeSoulTeamIntoPreferences(Team team){
@@ -150,6 +161,11 @@ public class PreferencesHelper {
     public static String getUserNameLevel(){
         instanciateSharedPreferences();
         return sharedPreferences.getString(ApplicationConstants.nameLevelKey, "");
+    }
+
+    public static String getLevelImageUrl(){
+        instanciateSharedPreferences();
+        return sharedPreferences.getString(ApplicationConstants.urlTrophyKey, "");
     }
 
     public static boolean isUserLogged(){

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import games.buendia.jhon.golazzos.R;
 import games.buendia.jhon.golazzos.activities.MatchListActivity;
+import games.buendia.jhon.golazzos.activities.RankingActivity;
 import games.buendia.jhon.golazzos.activities.StadiumActivity;
 import games.buendia.jhon.golazzos.activities.StoryDetailActivity;
 import games.buendia.jhon.golazzos.activities.UpdateFavoriteTeamsActivity;
@@ -55,6 +56,15 @@ public class StadiumFragment extends Fragment {
         LinearLayout layoutPartidos = (LinearLayout) view.findViewById(R.id.layoutPartidos);
         LinearLayout layoutRanking = (LinearLayout) view.findViewById(R.id.layoutRanking);
         LinearLayout layoutAmigos = (LinearLayout) view.findViewById(R.id.layoutAmigos);
+
+        layoutRanking.setClickable(true);
+        layoutRanking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), RankingActivity.class));
+                getActivity().finish();
+            }
+        });
 
         layoutPartidos.setClickable(true);
         layoutPartidos.setOnClickListener(new View.OnClickListener() {

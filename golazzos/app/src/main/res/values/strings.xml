@@ -188,4 +188,14 @@
     <string name="drop_down_ligas">LIGAS</string>
     <string name="drop_down_equipos">EQUIPOS</string>
 
+    <!-- NIVEL -->
+
+    <string name="puntos_format">%1$s\nACIERTOS</string>
+    <string name="recompensa_format">Como recompensa obtuviste: <b>%1$s puntos</b></string>
+    <string name="nivel">NIVEL</string>
+    <string name="trofeos">TROFEOS</string>
+    <string name="aciertos">ACIERTOS</string>
+    <string name="ganadores">GANADORES</string>
+    <string name="nivel_number_name_format"><b>Nivel %1$s</b>  %2$s</string>
+
 </resources>

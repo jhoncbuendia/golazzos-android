@@ -39,5 +39,6 @@ public class ApplicationConstants {
     public static final String orderLevelKey = "orderLevelKey";
     public static final String hitsCountKey = "hitsCountKey";
     public static final String urlTrophyKey = "urlTrophyKey";
+    public static final String pointsLevelKey = "pointsLevelKey";
 
 }

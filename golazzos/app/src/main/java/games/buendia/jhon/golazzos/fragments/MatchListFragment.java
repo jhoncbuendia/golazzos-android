@@ -25,6 +25,7 @@ import games.buendia.jhon.golazzos.R;
 import games.buendia.jhon.golazzos.activities.EnVivoMatchActivity;
 import games.buendia.jhon.golazzos.activities.FinalizadosMatchActivity;
 import games.buendia.jhon.golazzos.activities.MatchListActivity;
+import games.buendia.jhon.golazzos.activities.RankingActivity;
 import games.buendia.jhon.golazzos.activities.StadiumActivity;
 import games.buendia.jhon.golazzos.activities.UpdateFavoriteTeamsActivity;
 import games.buendia.jhon.golazzos.activities.UpdateSoulTeamActivity;
@@ -324,6 +325,15 @@ public class MatchListFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), StadiumActivity.class));
+                getActivity().finish();
+            }
+        });
+
+        layoutRanking.setClickable(true);
+        layoutRanking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), RankingActivity.class));
                 getActivity().finish();
             }
         });

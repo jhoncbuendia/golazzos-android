@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import games.buendia.jhon.golazzos.model.Level;
 import games.buendia.jhon.golazzos.model.Match;
 import games.buendia.jhon.golazzos.model.Story;
 import games.buendia.jhon.golazzos.model.Team;
@@ -143,5 +144,23 @@ public class BuilderJsonList {
         }
 
         return postsArrayList;
+    }
+
+    public ArrayList<Level> getLevels() throws JSONException {
+        JSONArray levels = jsonObject.getJSONArray("response");
+        ArrayList<Level> levelsArrayList = new ArrayList<Level>();
+
+        for (int i = 0; i < levels.length(); i++){
+
+            JSONObject levelObject = levels.getJSONObject(i);
+
+            levelsArrayList.add(new Level(levelObject.getString("name"),
+                                          levelObject.getInt("order"),
+                                          levelObject.getInt("points"),
+                                          levelObject.getInt("hits_count"),
+                                          levelObject.getString("logo_url")));
+
+        }
+        return levelsArrayList;
     }
 }
