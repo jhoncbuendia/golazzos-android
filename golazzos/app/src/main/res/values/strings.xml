@@ -197,5 +197,7 @@
     <string name="aciertos">ACIERTOS</string>
     <string name="ganadores">GANADORES</string>
     <string name="nivel_number_name_format"><b>Nivel %1$s</b>  %2$s</string>
+    <string name="mensaje_exitoso">Tu mensaje fue posteado con éxito</string>
+    <string name="error_mensaje_vacio">Debes escribir algo para poder publicar.</string>
 
 </resources>

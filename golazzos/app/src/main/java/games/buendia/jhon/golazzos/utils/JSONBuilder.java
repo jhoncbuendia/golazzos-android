@@ -92,4 +92,16 @@ public class JSONBuilder {
         return jsonObject;
     }
 
+    public JSONObject getPostJson(String text){
+        try {
+            userData.put("text", text);
+            jsonObject = new JSONObject();
+            jsonObject.put("post", userData);
+
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+
 }
