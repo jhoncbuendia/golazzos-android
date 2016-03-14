@@ -46,12 +46,12 @@
     <string name="te_damos_la_bienvenida">¡Te damos la bienvenida!</string>
     <string name="antes_de_jugar">Antes de comenzar a jugar es necesario realizar\nunos pasos de calentamiento...</string>
     <string name="ponte_la_camiseta">PONTE LA CAMISETA DE TU EQUIPO</string>
-    <string name="todos_tenemos_equipo_alma">Todos tenemos un equipo del alma,\nselecciona uno</string>
+    <string name="todos_tenemos_equipo_alma">Todos tenemos un equipo del alma,\nselecciona el tuyo</string>
     <string name="siguiente_button">SIGUIENTE</string>
     
     <!-- Segundo wizard -->
 
-    <string name="clubes_ponen_celebrar">CLUBES QUE TAMBIÉN\nTE PONEN A CELEBRAR</string>
+    <string name="clubes_ponen_celebrar">TAMBIÉN TE GUSTA...</string>
     <string name="selecciona_tus_equipos">Selecciona tus equipos favoritos (Máx. 8)</string>
     <string name="agregar_button">AGREGAR</string>
     <string name="debes_seleccionar_una_liga">Debes seleccionar una liga</string>
@@ -128,7 +128,7 @@
 
     <!-- Cuarto wizard -->
 
-    <string name="no_te_quedes_en_banca">NO TE QUEDES EN LA BANCA,\nCOMIENZA COMO TITULAR</string>
+    <string name="no_te_quedes_en_banca">COMIENZA COMO TITULAR</string>
     <string name="estas_listo"><b>¡Estás listo!</b>\nSuscríbete y comienza a jugar como <b>Titular</b></string>
     <string name="comenzar_a_jugar">COMENZAR A JUGAR</string>
 

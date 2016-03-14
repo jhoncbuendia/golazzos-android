@@ -57,7 +57,9 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:background="@drawable/background_tabla"
-            android:layout_height="290dp">
+            android:layout_height="290dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp">
 
         </LinearLayout>
 
