@@ -79,22 +79,8 @@ public class StadiumFragment extends Fragment {
         layoutFavoritos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle(getString(R.string.selecciona_opcion));
-                builder.setItems(ApplicationConstants.opcionesAlerta, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (which == 0) {
-                            startActivity(new Intent(getActivity(), UpdateSoulTeamActivity.class));
-                            getActivity().finish();
-                        } else {
-                            startActivity(new Intent(getActivity(), UpdateFavoriteTeamsActivity.class));
-                            getActivity().finish();
-                        }
-                    }
-                });
-                builder.show();
+                startActivity(new Intent(getActivity(), UpdateSoulTeamActivity.class));
+                getActivity().finish();
             }
         });
 

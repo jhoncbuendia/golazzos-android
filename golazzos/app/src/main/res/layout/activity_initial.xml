@@ -32,6 +32,7 @@
             android:id="@+id/create"
             android:gravity="center"
             android:width="300dp"
+            android:textColor="#0e5a80"
             android:background="@color/bgbtnamarillo"
             android:layout_gravity="center_horizontal"
             android:layout_above="@+id/login"

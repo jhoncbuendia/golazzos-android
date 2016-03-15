@@ -209,43 +209,55 @@ public class MatchListAdapter extends BaseAdapter {
 
                 int pointsToBet = 0;
 
-                if (holder.buttonPlayPoints.getText().toString().contains("50")){
-                    pointsToBet = 50;
-                }
-                else pointsToBet = 100;
+                    if (holder.buttonPlayPoints.getText().toString().contains("50")) {
+                        pointsToBet = 50;
+                    } else pointsToBet = 100;
 
-                if (!filterBet){
-                    match.setMarcadorLocal(Integer.parseInt(holder.marcadorEquipoLocal.getText().toString()));
-                    match.setMarcadorVisitante(Integer.parseInt(holder.marcadorEquipoVisitante.getText().toString()));
-                    intent.putExtra("match", match);
-                    intent.putExtra("opcion", context.getString(R.string.marcador));
-                }
-                else {
-                    if (holder.resultadosSpinner.getText().toString().equals(context.getString(R.string.gana_visitante))) {
-                        match.setMarcadorLocal(0);
-                        match.setMarcadorVisitante(1);
-                    }
-                    else if (holder.resultadosSpinner.getText().toString().equals(context.getString(R.string.gana_local))) {
-                        match.setMarcadorLocal(1);
-                        match.setMarcadorVisitante(0);
-                    }
-                    else {
-                        match.setMarcadorLocal(0);
-                        match.setMarcadorVisitante(0);
-                    }
-                    intent = new Intent(context, ConfirmacionJugadaActivity.class);
-                    intent.putExtra("match", match);
-                    intent.putExtra("opcion", context.getString(R.string.gana_pierde));
-                }
+                    if (!filterBet) {
+                        if (!holder.marcadorEquipoLocal.getText().toString().isEmpty() && !holder.marcadorEquipoVisitante.getText().toString().isEmpty()) {
+                            match.setMarcadorLocal(Integer.parseInt(holder.marcadorEquipoLocal.getText().toString()));
+                            match.setMarcadorVisitante(Integer.parseInt(holder.marcadorEquipoVisitante.getText().toString()));
+                            intent.putExtra("match", match);
+                            intent.putExtra("opcion", context.getString(R.string.marcador));
 
-                if (PreferencesHelper.getUserPoints() - pointsToBet >= 0) {
-                    intent.putExtra("pointsToBet", pointsToBet);
-                    context.startActivity(intent);
-                    ((Activity) context).finish();
-                }
-                else {
-                    Toast.makeText(context, context.getString(R.string.no_tienes_suficientes_puntos), Toast.LENGTH_SHORT).show();
-                }
+                            if (PreferencesHelper.getUserPoints() - pointsToBet >= 0) {
+                                intent.putExtra("pointsToBet", pointsToBet);
+                                context.startActivity(intent);
+                                ((Activity) context).finish();
+                            } else {
+                                Toast.makeText(context, context.getString(R.string.no_tienes_suficientes_puntos), Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+                        else {
+                            Toast.makeText(context, context.getString(R.string.debes_seleccionar_marcador), Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        if (holder.resultadosSpinner.getText().toString().equals(context.getString(R.string.gana_visitante))) {
+                            match.setMarcadorLocal(0);
+                            match.setMarcadorVisitante(1);
+                        } else if (holder.resultadosSpinner.getText().toString().equals(context.getString(R.string.gana_local))) {
+                            match.setMarcadorLocal(1);
+                            match.setMarcadorVisitante(0);
+                        } else {
+                            match.setMarcadorLocal(0);
+                            match.setMarcadorVisitante(0);
+                        }
+                        intent = new Intent(context, ConfirmacionJugadaActivity.class);
+                        intent.putExtra("match", match);
+                        intent.putExtra("opcion", context.getString(R.string.gana_pierde));
+
+
+
+                        if (PreferencesHelper.getUserPoints() - pointsToBet >= 0) {
+                            intent.putExtra("pointsToBet", pointsToBet);
+                            context.startActivity(intent);
+                            ((Activity) context).finish();
+                        } else {
+                            Toast.makeText(context, context.getString(R.string.no_tienes_suficientes_puntos), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
             }
         });
 

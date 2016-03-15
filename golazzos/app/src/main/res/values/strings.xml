@@ -151,6 +151,7 @@
 
     <string name="debes_seleccionar_equipo_del_alma">Debes seleccionar un equipo del alma</string>
     <string name="debes_seleccionar_equipo_favorito">Debes seleccionar al menos un equipo favorito</string>
+    <string name="debes_seleccionar_marcador">Debes colocar un marcador para equipo local y equipo visitante</string>
 
 
     <!-- Estadio -->
@@ -199,5 +200,12 @@
     <string name="nivel_number_name_format"><b>Nivel %1$s</b>  %2$s</string>
     <string name="mensaje_exitoso">Tu mensaje fue posteado con éxito</string>
     <string name="error_mensaje_vacio">Debes escribir algo para poder publicar.</string>
+
+    <string name="equipos_favoritos">EQUIPOS FAVORITOS</string>
+    <string name="actualizar">ACTUALIZAR</string>
+    <string name="la_camiseta_de_tu_equipo">LA CAMISETA DE TU EQUIPO</string>
+    <string name="equipo_del_alma">EQUIPO DEL ALMA</string>
+    <string name="favoritos">FAVORITOS</string>
+    <string name="clubes_que_tambien_te_ponen_a_celebrar">CLUBES QUE TAMBIÉN TE PONEN A CELEBRAR</string>
 
 </resources>

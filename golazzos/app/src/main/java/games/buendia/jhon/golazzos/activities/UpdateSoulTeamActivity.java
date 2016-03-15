@@ -7,8 +7,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Callback;
@@ -169,6 +171,50 @@ public class UpdateSoulTeamActivity extends AppCompatActivity implements Request
                 }
             }
         });
+
+        LinearLayout layoutFanaticada = (LinearLayout) findViewById(R.id.layoutFanaticada);
+        LinearLayout layoutFavoritos = (LinearLayout) findViewById(R.id.layoutFavoritos);
+        LinearLayout layoutPartidos = (LinearLayout) findViewById(R.id.layoutPartidos);
+        LinearLayout layoutRanking = (LinearLayout) findViewById(R.id.layoutRanking);
+        LinearLayout layoutAmigos = (LinearLayout) findViewById(R.id.layoutAmigos);
+
+        layoutRanking.setClickable(true);
+        layoutRanking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GolazzosApplication.getInstance(), RankingActivity.class));
+                finish();
+            }
+        });
+
+        layoutPartidos.setClickable(true);
+        layoutPartidos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GolazzosApplication.getInstance(), MatchListActivity.class));
+                finish();
+            }
+        });
+
+        layoutFanaticada.setClickable(true);
+        layoutFanaticada.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GolazzosApplication.getInstance(), StadiumActivity.class));
+                finish();
+            }
+        });
+
+        TextView textViewEquiposFavoritos = (TextView) findViewById(R.id.textViewEquiposFavoritos);
+        textViewEquiposFavoritos.setClickable(true);
+        textViewEquiposFavoritos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GolazzosApplication.getInstance(), UpdateFavoriteTeamsActivity.class));
+                finish();
+            }
+        });
+
 
     }
 

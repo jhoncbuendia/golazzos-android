@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -157,6 +158,49 @@ public class UpdateFavoriteTeamsActivity extends Activity implements RequestInte
                 } else {
                     Toast.makeText(UpdateFavoriteTeamsActivity.this, getString(R.string.equipo_agregado), Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        LinearLayout layoutFanaticada = (LinearLayout) findViewById(R.id.layoutFanaticada);
+        LinearLayout layoutFavoritos = (LinearLayout) findViewById(R.id.layoutFavoritos);
+        LinearLayout layoutPartidos = (LinearLayout) findViewById(R.id.layoutPartidos);
+        LinearLayout layoutRanking = (LinearLayout) findViewById(R.id.layoutRanking);
+        LinearLayout layoutAmigos = (LinearLayout) findViewById(R.id.layoutAmigos);
+
+        layoutRanking.setClickable(true);
+        layoutRanking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GolazzosApplication.getInstance(), RankingActivity.class));
+                finish();
+            }
+        });
+
+        layoutPartidos.setClickable(true);
+        layoutPartidos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GolazzosApplication.getInstance(), MatchListActivity.class));
+                finish();
+            }
+        });
+
+        layoutFanaticada.setClickable(true);
+        layoutFanaticada.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GolazzosApplication.getInstance(), StadiumActivity.class));
+                finish();
+            }
+        });
+
+        TextView textViewEquipoDelAlma = (TextView) findViewById(R.id.textViewEquipoDelAlma);
+        textViewEquipoDelAlma.setClickable(true);
+        textViewEquipoDelAlma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GolazzosApplication.getInstance(), UpdateSoulTeamActivity.class));
+                finish();
             }
         });
 
