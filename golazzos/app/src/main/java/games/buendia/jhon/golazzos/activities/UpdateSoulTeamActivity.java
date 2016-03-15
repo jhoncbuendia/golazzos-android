@@ -215,6 +215,8 @@ public class UpdateSoulTeamActivity extends AppCompatActivity implements Request
             }
         });
 
+        TextView nameSoulTeam = (TextView) findViewById(R.id.textViewNameSoulTeam);
+        nameSoulTeam.setText(PreferencesHelper.getNameSoulTeam());
 
     }
 
