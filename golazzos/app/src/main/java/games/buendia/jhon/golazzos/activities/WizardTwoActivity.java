@@ -28,6 +28,7 @@ import games.buendia.jhon.golazzos.queryService.RequestInterface;
 import games.buendia.jhon.golazzos.utils.DialogHelper;
 import games.buendia.jhon.golazzos.utils.JSONBuilder;
 import games.buendia.jhon.golazzos.utils.ServicesCall;
+import games.buendia.jhon.golazzos.utils.TypeScreen;
 
 public class WizardTwoActivity extends Activity implements RequestInterface, AdapterView.OnItemSelectedListener {
 
@@ -295,7 +296,9 @@ public class WizardTwoActivity extends Activity implements RequestInterface, Ada
         }
         else if (teamsToUp >= favoriteTeams.size()){
             DialogHelper.hideLoaderDialog();
-            startActivity(new Intent(this, WizardThreeActivity.class));
+            Intent intent = new Intent(this, SignInActivity.class);
+            intent.putExtra("typeScreen", TypeScreen.WIZARD_THREE);
+            startActivity(intent);
             finish();
         }
     }

@@ -62,11 +62,6 @@
         <activity
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:screenOrientation="portrait"
-            android:name=".activities.WizardThreeActivity" >
-        </activity>
-        <activity
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:screenOrientation="portrait"
             android:name=".activities.WizardFourActivity" >
         </activity>
         <activity

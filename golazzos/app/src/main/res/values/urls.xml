@@ -37,4 +37,8 @@
 
     <string name="format_url_teams_tournament">https://www.golazzos.com/api/v2/teams?tournament_id=%1$s&amp;results=20</string>
 
+    <!-- Facebook invites -->
+    <string name="url_app">https://fb.me/989441564468184</string>
+    <string name="image_canvas_url">https://d2rdr03y0akbm.cloudfront.net/assets/v3/golazzos-logo-big-130e348f5b97ced784cbcddc3588efab.png</string>
+
 </resources>

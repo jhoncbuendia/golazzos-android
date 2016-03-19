@@ -3,12 +3,17 @@ package games.buendia.jhon.golazzos.activities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.facebook.AccessToken;
@@ -19,6 +24,9 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.facebook.share.model.AppInviteContent;
+import com.facebook.share.widget.AppInviteDialog;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.Arrays;
@@ -41,7 +49,7 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
     private EditText passwordEditText;
     private CallbackManager callbackManager;
     private CheckBox checkBoxTerminosYCondiciones;
-    private Button ingresar;
+    private Button ingresar, wizardFour;
     private String url;
     private JSONBuilder jsonBuilder;
     private Intent intent;
@@ -49,6 +57,8 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
     private Button create;
     private Button login;
     private TextView textViewFacebook;
+    private LinearLayout linearLayoutFacebook, linearLayoutMail, linearLayoutTwitter;
+    private ImageView imageViewFacebook, imageViewMail, imageViewTwitter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,15 +90,22 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
                     case REGISTER_SCREEN:
                         setContentView(R.layout.activity_sign_up);
                         break;
+
                 }
                 initFacebookButton();
                 initUI(typeScreen);
             }
         }
         else {
-            Intent intent = new Intent(this, MatchListActivity.class);
-            startActivity(intent);
-            finish();
+            if (typeScreen == null) {
+                Intent intent = new Intent(this, MatchListActivity.class);
+                startActivity(intent);
+                finish();
+            }
+            else {
+                setContentView(R.layout.activity_wizard_three);
+                initUI(typeScreen);
+            }
         }
     }
 
@@ -194,6 +211,36 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
                                             else{
                                                 showAlertDialog(getString(R.string.debes_aceptar));
                                             }
+                                        }
+                                    });
+                                    break;
+
+            case WIZARD_THREE:      linearLayoutFacebook = (LinearLayout) findViewById(R.id.linearLayoutFacebook);
+                                    linearLayoutMail = (LinearLayout) findViewById(R.id.linearLayoutMail);
+                                    linearLayoutTwitter = (LinearLayout) findViewById(R.id.linearLayoutTwitter);
+
+                                    linearLayoutFacebook.setClickable(true);
+                                    linearLayoutFacebook.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            openFacebookInvitesDialog();
+                                        }
+                                    });
+
+                                    linearLayoutMail.setClickable(true);
+                                    linearLayoutTwitter.setClickable(true);
+
+                                    imageViewFacebook = (ImageView) findViewById(R.id.imageViewFacebook);
+                                    imageViewTwitter = (ImageView) findViewById(R.id.imageViewTwitter);
+                                    imageViewMail = (ImageView) findViewById(R.id.imageViewMail);
+
+                                    wizardFour = (Button)findViewById(R.id.buttonSiguiente);
+                                    wizardFour.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View arg0) {
+                                            Intent intent = new Intent(SignInActivity.this, WizardFourActivity.class);
+                                            startActivity(intent);
+                                            finish();
                                         }
                                     });
                                     break;
@@ -323,6 +370,42 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
             case REGISTER_SCREEN: startActivity(new Intent(this, SignInActivity.class));
                                   finish();
                                   break;
+        }
+    }
+
+    public void openFacebookInvitesDialog(){
+
+        if (AppInviteDialog.canShow()) {
+
+            AppInviteContent content = new AppInviteContent.Builder()
+                    .setApplinkUrl(getString(R.string.url_app))
+                    .setPreviewImageUrl(getString(R.string.image_canvas_url))
+                    .build();
+
+            AppInviteDialog appInviteDialog = new AppInviteDialog(this);
+
+            appInviteDialog.registerCallback(callbackManager,
+                    new FacebookCallback<AppInviteDialog.Result>() {
+                        @Override
+                        public void onSuccess(AppInviteDialog.Result result) {
+                            linearLayoutFacebook.setClickable(false);
+                            linearLayoutFacebook.setBackgroundColor(Color.parseColor("#d2ff00"));
+                            imageViewFacebook.setImageResource(R.drawable.facebook_logo_blue);
+                            Log.d("Invitation", "Invitation Sent Successfully");
+                        }
+
+                        @Override
+                        public void onCancel() {
+                            Log.d("Invitation", "Invitation Cancel Successfully");
+                        }
+
+                        @Override
+                        public void onError(FacebookException e) {
+                            Log.d("Invitation", "Error Occured");
+                        }
+                    });
+
+            appInviteDialog.show(content);
         }
     }
 
