@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">golazzos</string>
     <string name="facebook_app_id">972710989474575</string>
+    <string name="consumer_twiiter_key">1JOPJviQiTezqIPgjwy2aDdNN</string>
+    <string name="secret_twitter_key">VLN0QBy3gjjeaqJVKo8mgUBEhB2Bgic1Y06E0EQsvxIBnzAA2i</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="sdk_key">b1431e56dcb20ec91a020287268d120bacf4db1c362752d08b3f654633322021</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
