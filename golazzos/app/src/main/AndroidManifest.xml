@@ -3,32 +3,34 @@
     package="games.buendia.jhon.golazzos" >
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
-    <uses-feature android:name="android.hardware.telephony" android:required="false" />
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
 
     <application
+        android:name=".GolazzosApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name=".GolazzosApplication"
         android:theme="@style/AppTheme" >
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-
         <meta-data
-            android:value="@string/sdk_key"
-            android:name="sdk_key">
+            android:name="sdk_key"
+            android:value="@string/sdk_key" >
         </meta-data>
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
-        <receiver android:name="io.npay.custom_view.NPayDialogUserData$NPayPinSMSReceiver">
+        <receiver android:name="io.npay.custom_view.NPayDialogUserData$NPayPinSMSReceiver" >
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
@@ -40,9 +42,9 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".activities.SignInActivity"
-            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" >
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="stateHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -50,97 +52,100 @@
             </intent-filter>
         </activity>
         <activity
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:name=".activities.WizardOnectivity"
             android:screenOrientation="portrait"
-            android:name=".activities.WizardOnectivity">
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
         </activity>
         <activity
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:name=".activities.WizardTwoActivity"
             android:screenOrientation="portrait"
-            android:name=".activities.WizardTwoActivity" >
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
         </activity>
         <activity
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:name=".activities.WizardFourActivity"
             android:screenOrientation="portrait"
-            android:name=".activities.WizardFourActivity" >
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
         </activity>
         <activity
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:name=".activities.MatchListActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            android:name=".activities.MatchListActivity" >
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
-
         <activity
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:name=".activities.EnVivoMatchActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            android:name=".activities.EnVivoMatchActivity" >
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
-
         <activity
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:name=".activities.FinalizadosMatchActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            android:name=".activities.FinalizadosMatchActivity" >
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
-
         <activity
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:name=".activities.ConfirmacionJugadaActivity"
             android:screenOrientation="portrait"
-            android:name=".activities.ConfirmacionJugadaActivity" >
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
         </activity>
-
         <activity
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:name=".npaysdkdemo.MainActivity"
             android:screenOrientation="portrait"
-            android:name=".npaysdkdemo.MainActivity" >
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
         </activity>
-
         <activity
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:name=".activities.StadiumActivity"
             android:screenOrientation="portrait"
-            android:name=".activities.StadiumActivity" >
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
         </activity>
-
         <activity
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:name=".activities.WriteSomethingActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            android:name=".activities.WriteSomethingActivity" >
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
-
         <activity
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:name=".activities.StoryDetailActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            android:name=".activities.StoryDetailActivity" >
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
-
         <activity
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:name=".activities.UpdateSoulTeamActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            android:name=".activities.UpdateSoulTeamActivity" >
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
-
         <activity
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:name=".activities.UpdateFavoriteTeamsActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            android:name=".activities.UpdateFavoriteTeamsActivity" >
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
-
-        <activity android:name=".activities.ActivityStatics"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+        <activity
+            android:name=".activities.ActivityStatics"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
-
-        <activity android:name=".activities.RankingActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+        <activity
+            android:name=".activities.RankingActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden">
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
     </application>
 
 </manifest>

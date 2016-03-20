@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -26,6 +27,12 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.facebook.share.model.AppInviteContent;
 import com.facebook.share.widget.AppInviteDialog;
+import com.google.android.gms.appinvite.AppInvite;
+import com.google.android.gms.appinvite.AppInviteInvitation;
+import com.google.android.gms.appinvite.AppInviteInvitationResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,7 +49,7 @@ import games.buendia.jhon.golazzos.utils.PreferencesHelper;
 import games.buendia.jhon.golazzos.utils.ServicesCall;
 import games.buendia.jhon.golazzos.utils.TypeScreen;
 
-public class SignInActivity extends AppCompatActivity implements RequestInterface {
+public class SignInActivity extends AppCompatActivity implements RequestInterface, GoogleApiClient.OnConnectionFailedListener {
 
     private LoginButton loginButton;
     private EditText userEditText;
@@ -59,6 +66,10 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
     private TextView textViewFacebook;
     private LinearLayout linearLayoutFacebook, linearLayoutMail, linearLayoutTwitter;
     private ImageView imageViewFacebook, imageViewMail, imageViewTwitter;
+    private final int REQUEST_CODE_FACEBOOK = 64206;
+    private final int REQUEST_CODE_FACEBOOK_INVITE = 64213;
+    private GoogleApiClient mGoogleApiClient;
+    private static final int REQUEST_INVITE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -215,7 +226,22 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
                                     });
                                     break;
 
-            case WIZARD_THREE:      linearLayoutFacebook = (LinearLayout) findViewById(R.id.linearLayoutFacebook);
+            case WIZARD_THREE:       mGoogleApiClient = new GoogleApiClient.Builder(this)
+                                     .addApi(AppInvite.API)
+                                     .enableAutoManage(this, this)
+                                     .build();
+
+                                    boolean autoLaunchDeepLink = true;
+                                    AppInvite.AppInviteApi.getInvitation(mGoogleApiClient, this, autoLaunchDeepLink)
+                                            .setResultCallback(
+                                                    new ResultCallback<AppInviteInvitationResult>() {
+                                                        @Override
+                                                        public void onResult(AppInviteInvitationResult result) {
+                                                            Log.d("TAG", "getInvitation:onResult:" + result.getStatus());
+                                                        }
+                                                    });
+
+                                    linearLayoutFacebook = (LinearLayout) findViewById(R.id.linearLayoutFacebook);
                                     linearLayoutMail = (LinearLayout) findViewById(R.id.linearLayoutMail);
                                     linearLayoutTwitter = (LinearLayout) findViewById(R.id.linearLayoutTwitter);
 
@@ -228,6 +254,12 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
                                     });
 
                                     linearLayoutMail.setClickable(true);
+                                    linearLayoutMail.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            onInviteClicked();
+                                        }
+                                    });
                                     linearLayoutTwitter.setClickable(true);
 
                                     imageViewFacebook = (ImageView) findViewById(R.id.imageViewFacebook);
@@ -245,6 +277,16 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
                                     });
                                     break;
         }
+    }
+
+    private void onInviteClicked() {
+        Intent intent = new AppInviteInvitation.IntentBuilder("Invitacion")
+                .setMessage("Descarga la app de golazzos")
+                .setDeepLink(Uri.parse("http://example.com/offer/five_dollar_offer"))
+                .setCustomImage(Uri.parse("https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"))
+                .setCallToActionText("Install!")
+                .build();
+        startActivityForResult(intent, REQUEST_INVITE);
     }
 
     public void registerMailUser(String email, String pwd){
@@ -356,7 +398,20 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_FACEBOOK || requestCode == REQUEST_CODE_FACEBOOK_INVITE) {
+            callbackManager.onActivityResult(requestCode, resultCode, data);
+        }
+
+        if (requestCode == REQUEST_INVITE) {
+            if (resultCode == RESULT_OK) {
+                linearLayoutMail.setClickable(false);
+                linearLayoutMail.setBackgroundColor(Color.parseColor("#d2ff00"));
+                imageViewMail.setImageResource(R.drawable.mail_logo_blue);
+            } else {
+                Toast.makeText(SignInActivity.this, getString(R.string.error_invitacion_mail), Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
@@ -391,12 +446,11 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
                             linearLayoutFacebook.setClickable(false);
                             linearLayoutFacebook.setBackgroundColor(Color.parseColor("#d2ff00"));
                             imageViewFacebook.setImageResource(R.drawable.facebook_logo_blue);
-                            Log.d("Invitation", "Invitation Sent Successfully");
                         }
 
                         @Override
                         public void onCancel() {
-                            Log.d("Invitation", "Invitation Cancel Successfully");
+
                         }
 
                         @Override
@@ -409,4 +463,8 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
         }
     }
 
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+    }
 }
