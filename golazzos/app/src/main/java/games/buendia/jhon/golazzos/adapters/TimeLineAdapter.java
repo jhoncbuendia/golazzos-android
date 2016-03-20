@@ -7,7 +7,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import games.buendia.jhon.golazzos.R;
@@ -58,6 +61,7 @@ public class TimeLineAdapter extends BaseAdapter {
             holder.descriptionTextView = (TextView) v.findViewById(R.id.textViewDescripcion);
             holder.timeAgoTextView = (TextView) v.findViewById(R.id.textViewTiempoStory);
             holder.imageViewIconRow = (ImageView) v.findViewById(R.id.imageViewIcono);
+            holder.progressBarLoaderImage = (ProgressBar) v.findViewById(R.id.progressBarImagenLoader);
 
             v.setTag(holder);
 
@@ -72,13 +76,19 @@ public class TimeLineAdapter extends BaseAdapter {
 
         String urlImage = match.getUrlImage();
 
-        if (!urlImage.contains("http")){
-            urlImage = "http:"+urlImage;
-        }
-
         Picasso.with(context)
                 .load(urlImage)
-                .into(holder.imageViewIconRow);
+                .into(holder.imageViewIconRow, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        holder.progressBarLoaderImage.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError() {
+                        holder.progressBarLoaderImage.setVisibility(View.GONE);
+                    }
+                });
 
         return v;
     }
@@ -87,5 +97,6 @@ public class TimeLineAdapter extends BaseAdapter {
         TextView timeAgoTextView;
         TextView descriptionTextView;
         ImageView imageViewIconRow;
+        ProgressBar progressBarLoaderImage;
     }
 }

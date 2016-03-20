@@ -92,12 +92,12 @@ public class JSONBuilder {
         return jsonObject;
     }
 
-    public JSONObject getPostJson(String text){
+    public JSONObject getPostJson(String text, String image){
         try {
+            if (!image.isEmpty()) userData.accumulate("image_base_64",image);
             userData.put("text", text);
             jsonObject = new JSONObject();
             jsonObject.put("post", userData);
-
         }catch (JSONException e) {
             e.printStackTrace();
         }

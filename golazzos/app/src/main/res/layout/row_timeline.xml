@@ -55,6 +55,14 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignBottom="@+id/textViewDescripcion" />
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/progressBarImagenLoader"
+                android:layout_alignTop="@+id/imageViewIcono"
+                android:layout_alignStart="@+id/imageViewIcono" />
         </RelativeLayout>
 
     </LinearLayout>

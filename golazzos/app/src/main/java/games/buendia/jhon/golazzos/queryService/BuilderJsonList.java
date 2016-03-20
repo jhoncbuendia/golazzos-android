@@ -136,10 +136,25 @@ public class BuilderJsonList {
             JSONObject postObject = posts.getJSONObject(i);
             JSONObject ownerJsonObject = postObject.getJSONObject("owner");
 
-            postsArrayList.add(new Story(ownerJsonObject.getString("profile_pic_url"),
-                                         ownerJsonObject.getString("name"),
-                                         postObject.getString("label"),
-                                         postObject.getString("time_ago")));
+            if (!postObject.has("image_url")) {
+
+                String urlImage = ownerJsonObject.getString("profile_pic_url");
+
+                if (!urlImage.contains("http"))
+                    urlImage = "http:"+urlImage;
+
+                    postsArrayList.add(new Story(urlImage,
+                        ownerJsonObject.getString("name"),
+                        postObject.getString("label"),
+                        postObject.getString("time_ago")));
+
+            }
+            else {
+                postsArrayList.add(new Story(postObject.getString("image_url"),
+                        ownerJsonObject.getString("name"),
+                        postObject.getString("label"),
+                        postObject.getString("time_ago")));
+            }
 
         }
 

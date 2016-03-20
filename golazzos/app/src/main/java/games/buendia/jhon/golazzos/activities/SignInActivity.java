@@ -401,7 +401,7 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
 
                         @Override
                         public void onError(FacebookException e) {
-                            Log.d("Invitation", "Error Occured");
+                            Toast.makeText(SignInActivity.this, getString(R.string.error_invitacion_facebook), Toast.LENGTH_SHORT).show();
                         }
                     });
 

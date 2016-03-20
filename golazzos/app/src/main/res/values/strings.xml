@@ -208,4 +208,6 @@
     <string name="favoritos">FAVORITOS</string>
     <string name="clubes_que_tambien_te_ponen_a_celebrar">CLUBES QUE TAMBIÉN TE PONEN A CELEBRAR</string>
 
+    <string name="error_invitacion_facebook">Ocurrió un error al momento de realizar la invitación vía facebook, por favor intenta nuevamente</string>
+
 </resources>
