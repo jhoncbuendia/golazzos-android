@@ -40,5 +40,6 @@
     <!-- Facebook invites -->
     <string name="url_app">https://fb.me/989441564468184</string>
     <string name="image_canvas_url">https://d2rdr03y0akbm.cloudfront.net/assets/v3/golazzos-logo-big-130e348f5b97ced784cbcddc3588efab.png</string>
+    <string name="sharing_url_twitter">https://twitter.com/intent/tweet?text=Instala la aplicacion de golazzos&amp;url=http://www.golazzos.com</string>
 
 </resources>

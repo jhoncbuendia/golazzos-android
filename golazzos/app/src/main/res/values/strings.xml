@@ -213,5 +213,4 @@
     <string name="error_invitacion_facebook">Ocurrió un error al momento de realizar la invitación vía facebook, por favor intenta nuevamente</string>
     <string name="error_invitacion_mail">Ocurrió un error al momento de realizar la invitación vía correo, por favor intenta nuevamente</string>
     <string name="title_activity_maps">Map</string>
-
 </resources>

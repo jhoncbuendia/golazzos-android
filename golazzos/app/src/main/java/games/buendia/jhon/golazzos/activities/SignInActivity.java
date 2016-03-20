@@ -1,11 +1,13 @@
 package games.buendia.jhon.golazzos.activities;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -32,15 +34,8 @@ import com.google.android.gms.appinvite.AppInviteInvitationResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
-import com.twitter.sdk.android.core.TwitterAuthConfig;
-import com.twitter.sdk.android.core.TwitterCore;
-import com.twitter.sdk.android.tweetcomposer.TweetComposer;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Arrays;
 import games.buendia.jhon.golazzos.GolazzosApplication;
 import games.buendia.jhon.golazzos.R;
@@ -53,9 +48,9 @@ import games.buendia.jhon.golazzos.utils.JSONBuilder;
 import games.buendia.jhon.golazzos.utils.PreferencesHelper;
 import games.buendia.jhon.golazzos.utils.ServicesCall;
 import games.buendia.jhon.golazzos.utils.TypeScreen;
-import io.fabric.sdk.android.Fabric;
 
-public class SignInActivity extends AppCompatActivity implements RequestInterface, GoogleApiClient.OnConnectionFailedListener {
+
+public class SignInActivity extends FragmentActivity implements RequestInterface, GoogleApiClient.OnConnectionFailedListener {
 
     private LoginButton loginButton;
     private EditText userEditText;
@@ -89,12 +84,8 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
 
         typeScreen = (TypeScreen) intent.getSerializableExtra("typeScreen");
         url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.tokens_endpoint));
-        typeScreen = TypeScreen.WIZARD_THREE;
-        setContentView(R.layout.activity_wizard_three);
-        initUI(typeScreen);
 
-        /*if (!PreferencesHelper.isUserLogged()) {
-
+        if (!PreferencesHelper.isUserLogged()) {
             if (typeScreen == null) {
                 setContentView(R.layout.activity_initial);
                 typeScreen = TypeScreen.MAIN_SCREEN;
@@ -127,7 +118,7 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
                 setContentView(R.layout.activity_wizard_three);
                 initUI(typeScreen);
             }
-        }*/
+        }
     }
 
     private void initFacebookButton(){
@@ -241,9 +232,6 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
                                      .enableAutoManage(this, this)
                                      .build();
 
-                                    TwitterAuthConfig authConfig =  new TwitterAuthConfig(getString(R.string.consumer_twiiter_key), getString(R.string.secret_twitter_key));
-                                    Fabric.with(this, new TwitterCore(authConfig), new TweetComposer());
-
                                     boolean autoLaunchDeepLink = true;
                                     AppInvite.AppInviteApi.getInvitation(mGoogleApiClient, this, autoLaunchDeepLink)
                                             .setResultCallback(
@@ -277,11 +265,7 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
                                     linearLayoutTwitter.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
-                                            try {
-                                                openTwitterDialog();
-                                            } catch (MalformedURLException e) {
-                                                e.printStackTrace();
-                                            }
+                                            startActivityForResult((new Intent(SignInActivity.this, WebViewActivity.class)), TWEET_COMPOSER_REQUEST_CODE);
                                         }
                                     });
 
@@ -436,8 +420,13 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
             }
         }
 
-        if (requestCode == TWEET_COMPOSER_REQUEST_CODE){
-            updateTwitterButton();
+        try {
+            boolean isTwitterLogin = data.getBooleanExtra("twitter", false);
+            if (isTwitterLogin) {
+                updateTwitterButton();
+            }
+        } catch (NullPointerException e){
+
         }
     }
 
@@ -494,14 +483,6 @@ public class SignInActivity extends AppCompatActivity implements RequestInterfac
 
             appInviteDialog.show(content);
         }
-    }
-
-    private void openTwitterDialog() throws MalformedURLException {
-        Intent intent = new TweetComposer.Builder(this)
-                .text("Tweet from Fabric!")
-                .url(new URL("http://www.twitter.com"))
-                .createIntent();
-        startActivityForResult(intent, TWEET_COMPOSER_REQUEST_CODE);
     }
 
     @Override
