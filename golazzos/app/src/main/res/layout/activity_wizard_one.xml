@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/barra"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:id="@+id/barra"
         android:layout_gravity="center_horizontal" />
 
@@ -37,8 +37,8 @@
         android:text="@string/antes_de_jugar"
         android:textColor="@color/letrasazules"
         android:gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:id="@+id/textViewSubtituloInicial"
         android:layout_gravity="center_horizontal" />
 
@@ -55,11 +55,11 @@
                 android:textColor="@color/yellow_letters_wizard"
                 android:drawablePadding="10dp"
                 android:textSize="15dp"
-                android:layout_margin="10dp"
                 android:id="@+id/textViewPonerCamiseta"
                 android:drawableRight="@drawable/right_arrow"
                 android:drawableLeft="@drawable/left_arrow"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -69,7 +69,7 @@
             android:gravity="center"
             android:textColor="@android:color/white"
             android:textSize="15dp"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             android:layout_gravity="center_horizontal" />
 
         <LinearLayout
@@ -100,8 +100,8 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_width="139dp"
-                android:layout_height="139dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/elipse"
                 android:id="@+id/imageViewTeam"
