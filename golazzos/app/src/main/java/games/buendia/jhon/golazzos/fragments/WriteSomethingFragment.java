@@ -101,7 +101,13 @@ public class WriteSomethingFragment extends Fragment implements RequestInterface
                         @Override
                         public void run() {
                             JSONBuilder builderJson = new JSONBuilder();
-                            JSONObject jsonToPost = builderJson.getPostJson(editTextPost.getText().toString(), encodeImageToBase64(previewCapturedImage(getOutputMediaFile(getUrlImage()))).replace("\n", "").replace("\r", ""));
+                            JSONObject jsonToPost;
+
+                            if (!getUrlImage().isEmpty())
+                                jsonToPost = builderJson.getPostJson(editTextPost.getText().toString(), encodeImageToBase64(previewCapturedImage(getOutputMediaFile(getUrlImage()))).replace("\n", "").replace("\r", ""));
+                            else
+                                jsonToPost = builderJson.getPostJson(editTextPost.getText().toString(), "");
+
                             HttpRequest h = new HttpRequest(WriteSomethingFragment.this);
                             String url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.posts_endpoint));
                             h.startPostRequestAuthenticated(getActivity(), url, jsonToPost, 0);

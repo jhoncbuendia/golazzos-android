@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import java.util.ArrayList;
 import games.buendia.jhon.golazzos.R;
@@ -56,6 +57,16 @@ public class StadiumFragment extends Fragment {
         LinearLayout layoutPartidos = (LinearLayout) view.findViewById(R.id.layoutPartidos);
         LinearLayout layoutRanking = (LinearLayout) view.findViewById(R.id.layoutRanking);
         LinearLayout layoutAmigos = (LinearLayout) view.findViewById(R.id.layoutAmigos);
+        RelativeLayout layoutCamara = (RelativeLayout) view.findViewById(R.id.camaraLayout);
+
+        layoutCamara.setClickable(true);
+        layoutCamara.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), WriteSomethingActivity.class));
+                getActivity().finish();
+            }
+        });
 
         layoutRanking.setClickable(true);
         layoutRanking.setOnClickListener(new View.OnClickListener() {

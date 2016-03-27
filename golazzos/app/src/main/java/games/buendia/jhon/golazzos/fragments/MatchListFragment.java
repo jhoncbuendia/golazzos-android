@@ -19,6 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.daimajia.swipe.SwipeLayout;
 import java.util.ArrayList;
 import games.buendia.jhon.golazzos.R;
@@ -324,6 +326,8 @@ public class MatchListFragment extends Fragment {
             }
         });
 
+        if (matches.isEmpty())
+            Toast.makeText(getActivity(),getString(R.string.no_existen_resultados), Toast.LENGTH_SHORT).show();
 
         return view;
     }
