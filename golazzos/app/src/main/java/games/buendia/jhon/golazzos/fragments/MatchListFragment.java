@@ -107,7 +107,7 @@ public class MatchListFragment extends Fragment {
             tournamentsStringArray[0] = tournaments.get(indexSelected).getNameTornament();
         }
 
-        String teamName = getArguments().getString("teamName");
+        final String teamName = getArguments().getString("teamName");
         String[] teamsStringArray = new String[teams.size()+1];
         teamsStringArray[0] = getActivity().getString(R.string.drop_down_equipos);
         boolean ifIsSelectedTeam = !teamName.isEmpty(), findItTeam = false;
@@ -205,6 +205,8 @@ public class MatchListFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), activityToRefresh);
                 intent.putExtra("tournament_id", idTournament);
                 intent.putExtra("filter_bet", !filterBet);
+                if (!teamName.isEmpty())
+                    intent.putExtra("team_name", teamName);
                 startActivity(intent);
                 getActivity().finish();
             }
