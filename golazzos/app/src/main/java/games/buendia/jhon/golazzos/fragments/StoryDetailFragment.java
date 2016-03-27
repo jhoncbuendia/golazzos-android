@@ -4,13 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import games.buendia.jhon.golazzos.R;
+import games.buendia.jhon.golazzos.activities.MatchListActivity;
 import games.buendia.jhon.golazzos.activities.StadiumActivity;
 import games.buendia.jhon.golazzos.activities.StoryDetailActivity;
 import games.buendia.jhon.golazzos.model.Story;
@@ -60,12 +64,32 @@ public class StoryDetailFragment extends Fragment{
         }
 
         ImageView imageViewIcon = (ImageView) view.findViewById(R.id.imageViewIcono);
+        final ProgressBar imagenLoader = (ProgressBar) view.findViewById(R.id.progressBarImagenLoader);
 
         Picasso.with(getActivity())
                 .load(urlImage)
-                .into(imageViewIcon);
+                .into(imageViewIcon, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        imagenLoader.setVisibility(View.GONE);
+                    }
 
+                    @Override
+                    public void onError() {
+                        imagenLoader.setVisibility(View.GONE);
+                    }
+                });
 
+        CardView cardViewPlay = (CardView) view.findViewById(R.id.cardViewJugar);
+        cardViewPlay.setClickable(true);
+        cardViewPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MatchListActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
         return view;
     }
 }
