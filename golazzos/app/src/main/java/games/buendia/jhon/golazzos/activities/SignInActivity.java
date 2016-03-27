@@ -142,7 +142,7 @@ public class SignInActivity extends FragmentActivity implements RequestInterface
             public void onError(FacebookException e) {
                 Toast.makeText(GolazzosApplication.getInstance(), getString(R.string.error_facebook), Toast.LENGTH_LONG).show();
             }
-        });
+         });
     }
 
     private void initUI(TypeScreen typeScreen){
@@ -305,6 +305,7 @@ public class SignInActivity extends FragmentActivity implements RequestInterface
 
     public void loginrMailUser(String email, String pwd){
         jsonBuilder = new JSONBuilder();
+        url = String.format(getString(R.string.format_url), getString(R.string.url_base), getString(R.string.tokens_endpoint));
         HttpRequest h = new HttpRequest(this, ServicesCall.LOGIN);
         h.starPostRequest(getApplicationContext(), url, jsonBuilder.getSingleRegisterJSON(email, pwd));
     }
@@ -362,12 +363,11 @@ public class SignInActivity extends FragmentActivity implements RequestInterface
                                 }
                                 break;
 
-            case REGISTER_SCREEN: DialogHelper.hideLoaderDialog();
-                                  Intent intentScreen = new Intent(GolazzosApplication.getInstance(), SignInActivity.class);
-                                  intentScreen.putExtra("typeScreen", TypeScreen.LOGIN_SCREEN);
-                                  startActivity(intentScreen);
-                                  finish();
-                                  break;
+            case REGISTER_SCREEN:   userEditText = (EditText) findViewById(R.id.userup);
+                                    passwordEditText = (EditText) findViewById(R.id.pwdup);
+                                    typeScreen = TypeScreen.LOGIN_SCREEN;
+                                    loginrMailUser(userEditText.getText().toString(), passwordEditText.getText().toString());
+                                    break;
         }
     }
 
