@@ -71,7 +71,7 @@ public class UpdateSoulTeamActivity extends AppCompatActivity implements Request
         soulTeam = new Team(PreferencesHelper.getIdSoulTeam(),PreferencesHelper.getNameSoulTeam(),PreferencesHelper.getUrlSoulTeam());
         loaderImagen = (ProgressBar) findViewById(R.id.progressBarLoaderImage);
         imagenEquipo = (ImageView) findViewById(R.id.imageViewTeam);
-        changeShirtUrl(PreferencesHelper.getUrlSoulTeam());
+        changeShirtUrl(PreferencesHelper.getUrlSoulTeam(), PreferencesHelper.getNameSoulTeam());
 
         DialogHelper.showLoaderDialog(UpdateSoulTeamActivity.this);
         runOnUiThread(new Runnable() {
@@ -144,7 +144,7 @@ public class UpdateSoulTeamActivity extends AppCompatActivity implements Request
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (spinnerEquiposPressed) {
                     soulTeam = teamsArrayList.get(i);
-                    changeShirtUrl(teamsArrayList.get(i).getUrlTeam());
+                    changeShirtUrl(teamsArrayList.get(i).getUrlTeam(), teamsArrayList.get(i).getTeamName());
                 } else spinnerEquiposPressed = true;
             }
 
@@ -220,7 +220,7 @@ public class UpdateSoulTeamActivity extends AppCompatActivity implements Request
 
     }
 
-    private void changeShirtUrl(String urlImage){
+    private void changeShirtUrl(String urlImage, String teamName){
 
         loaderImagen.setVisibility(View.VISIBLE);
 
@@ -239,6 +239,9 @@ public class UpdateSoulTeamActivity extends AppCompatActivity implements Request
                         loaderImagen.setVisibility(View.GONE);
                     }
                 });
+
+        TextView nameSoulTeam = (TextView) findViewById(R.id.textViewNameSoulTeam);
+        nameSoulTeam.setText(teamName);
 
     }
 
