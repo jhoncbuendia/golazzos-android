@@ -41,6 +41,8 @@ public class ConfirmacionJugadaActivity extends Activity implements RequestInter
     private ProgressBar progressBarImage;
     private CardView cardViewConfirmarJugada;
     private boolean isLocalWin = false, isAwayWin = false, isWithTypeBet = false;
+    private String intentFilterStringTeam = "";
+    private int idTournament = 0;
     private int idBet = 0, pointsToBet;
 
     @Override
@@ -53,6 +55,10 @@ public class ConfirmacionJugadaActivity extends Activity implements RequestInter
     private void initUI(){
 
         intent = getIntent();
+
+        intentFilterStringTeam = intent.getStringExtra("team_name");
+        idTournament = intent.getIntExtra("tournament_id", 0);
+
         match = (Match) intent.getSerializableExtra("match");
         pointsToBet = intent.getIntExtra("pointsToBet",0);
         tipoJugada = (TextView) findViewById(R.id.textViewTipoJugada);
@@ -177,9 +183,12 @@ public class ConfirmacionJugadaActivity extends Activity implements RequestInter
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, MatchListActivity.class);
-        intent.putExtra("filter_bet", isWithTypeBet);
-        startActivity(intent);
+        Intent intentBack = new Intent(this, MatchListActivity.class);
+        intentBack.putExtra("filter_bet", isWithTypeBet);
+        intentBack.putExtra("team_name", intentFilterStringTeam);
+        intentBack.putExtra("tournament_id", idTournament);
+        intentBack.putExtra("filter_bet", isWithTypeBet);
+        startActivity(intentBack);
         finish();
     }
 }

@@ -41,13 +41,17 @@ public class MatchListAdapter extends BaseAdapter {
     private ListView listViewMatches;
     private LayoutInflater layoutInflater;
     private boolean filterBet;
+    private String teamName;
+    private int idTournament;
 
-    public MatchListAdapter(ArrayList<Match> matchArrayList, Context context, ListView listViewMatches, boolean filterBet) {
+    public MatchListAdapter(ArrayList<Match> matchArrayList, Context context, ListView listViewMatches, boolean filterBet, int idTournament, String teamName) {
         this.matchArrayList = matchArrayList;
         this.context = context;
         this.listViewMatches = listViewMatches;
         layoutInflater = LayoutInflater.from(context);
         this.filterBet = filterBet;
+        this.teamName = teamName;
+        this.idTournament = idTournament;
     }
 
     @Override
@@ -206,7 +210,6 @@ public class MatchListAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, ConfirmacionJugadaActivity.class);
-
                 int pointsToBet = 0;
 
                     if (holder.buttonPlayPoints.getText().toString().contains("50")) {
@@ -217,6 +220,8 @@ public class MatchListAdapter extends BaseAdapter {
                         if (!holder.marcadorEquipoLocal.getText().toString().isEmpty() && !holder.marcadorEquipoVisitante.getText().toString().isEmpty()) {
                             match.setMarcadorLocal(Integer.parseInt(holder.marcadorEquipoLocal.getText().toString()));
                             match.setMarcadorVisitante(Integer.parseInt(holder.marcadorEquipoVisitante.getText().toString()));
+                            intent.putExtra("team_name", teamName);
+                            intent.putExtra("tournament_id", idTournament);
                             intent.putExtra("match", match);
                             intent.putExtra("opcion", context.getString(R.string.marcador));
 
@@ -245,9 +250,9 @@ public class MatchListAdapter extends BaseAdapter {
                         }
                         intent = new Intent(context, ConfirmacionJugadaActivity.class);
                         intent.putExtra("match", match);
+                        intent.putExtra("team_name", teamName);
+                        intent.putExtra("tournament_id", idTournament);
                         intent.putExtra("opcion", context.getString(R.string.gana_pierde));
-
-
 
                         if (PreferencesHelper.getUserPoints() - pointsToBet >= 0) {
                             intent.putExtra("pointsToBet", pointsToBet);

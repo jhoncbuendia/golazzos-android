@@ -1,7 +1,5 @@
 package games.buendia.jhon.golazzos.fragments;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -10,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +17,6 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.daimajia.swipe.SwipeLayout;
 import java.util.ArrayList;
 import games.buendia.jhon.golazzos.R;
@@ -29,14 +25,12 @@ import games.buendia.jhon.golazzos.activities.FinalizadosMatchActivity;
 import games.buendia.jhon.golazzos.activities.MatchListActivity;
 import games.buendia.jhon.golazzos.activities.RankingActivity;
 import games.buendia.jhon.golazzos.activities.StadiumActivity;
-import games.buendia.jhon.golazzos.activities.UpdateFavoriteTeamsActivity;
 import games.buendia.jhon.golazzos.activities.UpdateSoulTeamActivity;
 import games.buendia.jhon.golazzos.adapters.CustomSpinnerAdapter;
 import games.buendia.jhon.golazzos.adapters.MatchListAdapter;
 import games.buendia.jhon.golazzos.model.Match;
 import games.buendia.jhon.golazzos.model.Team;
 import games.buendia.jhon.golazzos.model.Tournament;
-import games.buendia.jhon.golazzos.utils.ApplicationConstants;
 
 /**
  * Created by User on 07/02/2016.
@@ -71,7 +65,7 @@ public class MatchListFragment extends Fragment {
         filterBet = arguments.getBoolean("filter_beat");
 
         viewPagerMatches = (ViewPager) view.findViewById(R.id.viewPagerMatches);
-        viewPagerMatches.setAdapter(new MyPagerAdapter(matches));
+        viewPagerMatches.setAdapter(new MyPagerAdapter(matches, arguments));
         viewPagerMatches.setCurrentItem(0);
 
         textViewPorJugar = (TextView) view.findViewById(R.id.textViewPorJugar);
@@ -139,7 +133,6 @@ public class MatchListFragment extends Fragment {
 
         spinnerEquipos.setFocusable(false);
         spinnerLigas.setFocusable(false);
-
 
         textViewPorJugar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -221,6 +214,8 @@ public class MatchListFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), activityToRefresh);
                 intent.putExtra("tournament_id", idTournament);
                 intent.putExtra("filter_bet", !filterBet);
+                if (!teamName.isEmpty())
+                    intent.putExtra("team_name", teamName);
                 startActivity(intent);
                 getActivity().finish();
             }
@@ -261,6 +256,7 @@ public class MatchListFragment extends Fragment {
                     if (i != 0) {
                         Intent intent = new Intent(getActivity(), activityToRefresh);
                         intent.putExtra("tournament_id", tournaments.get(i-1).getIdTournament());
+                        intent.putExtra("filter_bet", filterBet);
                         startActivity(intent);
                         getActivity().finish();
                     }
@@ -282,6 +278,7 @@ public class MatchListFragment extends Fragment {
                        Intent intent = new Intent(getActivity(), activityToRefresh);
                        intent.putExtra("team_name", teams.get(i-1).getTeamName());
                        intent.putExtra("tournament_id", arguments.getInt("tournament_id"));
+                       intent.putExtra("filter_bet", filterBet);
                        startActivity(intent);
                        getActivity().finish();
                    }
@@ -369,9 +366,11 @@ public class MatchListFragment extends Fragment {
     private class MyPagerAdapter extends PagerAdapter {
 
         private ArrayList<Match> arrayListMatches;
+        private Bundle arguments;
 
-        public MyPagerAdapter(ArrayList<Match> arrayListMatches){
+        public MyPagerAdapter(ArrayList<Match> arrayListMatches, Bundle arguments){
             this.arrayListMatches = arrayListMatches;
+            this.arguments = arguments;
         }
 
         @Override
@@ -397,7 +396,10 @@ public class MatchListFragment extends Fragment {
 
             ListView lv = new ListView(getActivity());
 
-            lv.setAdapter(new MatchListAdapter(arrayListMatches, getActivity(), lv, filterBet));
+            final int idTournament = arguments.getInt("tournament_id");
+            final String teamName = arguments.getString("teamName");
+
+            lv.setAdapter(new MatchListAdapter(arrayListMatches, getActivity(), lv, filterBet, idTournament, teamName));
 
             lv.setDivider(new ColorDrawable(Color.TRANSPARENT));
 
