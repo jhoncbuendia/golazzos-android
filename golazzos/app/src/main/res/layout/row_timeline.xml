@@ -8,7 +8,7 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -34,10 +34,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Text"
                 android:ellipsize="end"
-                android:singleLine="true"
-                android:maxLines="1"
+                android:maxLines="4"
                 android:textColor="@android:color/black"
                 android:id="@+id/textViewDescripcion"
                 android:layout_alignBottom="@+id/imageViewIcono"
