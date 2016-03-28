@@ -214,4 +214,7 @@
     <string name="error_invitacion_mail">Ocurrió un error al momento de realizar la invitación vía correo, por favor intenta nuevamente</string>
     <string name="title_activity_maps">Map</string>
     <string name="no_existen_resultados">No existen resultados para mostrar, por favor intenta más tarde</string>
+    <string name="apuesta_exitosa">Su apuesta fue realizada exitosamente.</string>
+    <string name="operacion_exitosa">Operación exitosa</string>
+
 </resources>

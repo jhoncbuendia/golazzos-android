@@ -152,8 +152,21 @@ public class ConfirmacionJugadaActivity extends Activity implements RequestInter
     @Override
     public void onSuccessCallBack(JSONObject response, ServicesCall serviceCall) {
         DialogHelper.hideLoaderDialog();
-        PreferencesHelper.updateUserPoints(PreferencesHelper.getUserPoints() - pointsToBet);
-        onBackPressed();
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle(getString(R.string.operacion_exitosa));
+        alertDialogBuilder.setMessage(getString(R.string.apuesta_exitosa));
+
+        alertDialogBuilder.setPositiveButton(getString(R.string.aceptar_button), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int arg1) {
+                PreferencesHelper.updateUserPoints(PreferencesHelper.getUserPoints() - pointsToBet);
+                onBackPressed();
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
     @Override
