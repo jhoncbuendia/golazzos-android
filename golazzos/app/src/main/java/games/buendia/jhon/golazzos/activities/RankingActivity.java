@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.squareup.picasso.Callback;
@@ -26,6 +27,7 @@ public class RankingActivity extends Activity {
     private TextView textViewNivelNumeroTexto, textViewNivelNombre, textViewAciertos, textViewRecompensa;
     private ProgressBar progressBarLoaderImagen;
     private ImageButton imageButtonBack;
+    private LinearLayout layoutGanadores;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,16 @@ public class RankingActivity extends Activity {
         textViewRecompensa = (TextView) findViewById(R.id.textViewRecompensa);
         progressBarLoaderImagen = (ProgressBar) findViewById(R.id.progressBarLoaderImagen);
         imageButtonBack = (ImageButton) findViewById(R.id.imageButtonBackArrow);
+        layoutGanadores = (LinearLayout) findViewById(R.id.linearLayoutGanadores);
+
+        layoutGanadores.setClickable(true);
+        layoutGanadores.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(RankingActivity.this, WeeklyAwardsActivity.class));
+                finish();
+            }
+        });
 
         progressBarLoaderImagen.setVisibility(View.VISIBLE);
 

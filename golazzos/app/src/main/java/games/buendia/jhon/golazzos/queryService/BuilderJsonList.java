@@ -13,6 +13,8 @@ import games.buendia.jhon.golazzos.model.Match;
 import games.buendia.jhon.golazzos.model.Story;
 import games.buendia.jhon.golazzos.model.Team;
 import games.buendia.jhon.golazzos.model.Tournament;
+import games.buendia.jhon.golazzos.model.WeeklyWinner;
+import games.buendia.jhon.golazzos.model.Winner;
 
 /**
  * Created by User on 07/02/2016.
@@ -177,5 +179,47 @@ public class BuilderJsonList {
 
         }
         return levelsArrayList;
+    }
+
+    public ArrayList<WeeklyWinner> getWeeklyWinners() throws JSONException {
+        JSONArray winners = jsonObject.getJSONArray("response");
+        ArrayList<WeeklyWinner> weeklyWinnersArrayList = new ArrayList<WeeklyWinner>();
+
+        for (int i = 0; i < winners.length(); i++){
+
+            JSONObject winnerObject = winners.getJSONObject(i);
+            JSONArray winnersArray = winnerObject.getJSONArray("ranking_entries");
+            WeeklyWinner weeklyWinner = new WeeklyWinner();
+            weeklyWinner.setLabelDate(winnerObject.getString("week_label"));
+            ArrayList<Winner> winnersArrayList = new ArrayList<Winner>();
+
+            for (int j = 0; j < winnersArray.length(); j++){
+               JSONObject rankingEntryObject = winnersArray.getJSONObject(j);
+               JSONObject winnerUserObject = rankingEntryObject.getJSONObject("winner");
+                if (winnerUserObject.has("soul_team")) {
+
+                    JSONObject soulTeamWinnerObject = winnerUserObject.getJSONObject("soul_team");
+
+                    winnersArrayList.add(new Winner(rankingEntryObject.getInt("rank"),
+                            rankingEntryObject.getInt("prize"),
+                            winnerUserObject.getString("name"),
+                            soulTeamWinnerObject.getString("name"),
+                            winnerUserObject.getString("profile_pic_url"),
+                            soulTeamWinnerObject.getString("image_path")));
+                }
+                else {
+                    winnersArrayList.add(new Winner(rankingEntryObject.getInt("rank"),
+                            rankingEntryObject.getInt("prize"),
+                            winnerUserObject.getString("name"),
+                            "",
+                            winnerUserObject.getString("profile_pic_url"),
+                            ""));
+                }
+            }
+
+            weeklyWinner.setWinnersArrayList(winnersArrayList);
+            weeklyWinnersArrayList.add(weeklyWinner);
+        }
+        return weeklyWinnersArrayList;
     }
 }

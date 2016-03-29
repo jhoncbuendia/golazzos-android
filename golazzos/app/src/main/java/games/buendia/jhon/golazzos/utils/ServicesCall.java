@@ -5,5 +5,5 @@ package games.buendia.jhon.golazzos.utils;
  */
 public enum ServicesCall {
     LOGIN,REGISTER,TEAMS,LEAGUES,MATCHES,FAVORITE_ADD,ME,BET,DELETE_FAVORITE_TEAM,
-    USER_FAVORITES, POSTS, LEVELS;
+    USER_FAVORITES, POSTS, LEVELS, WEEKLY_AWARDS;
 }

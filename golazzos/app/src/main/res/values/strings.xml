@@ -217,4 +217,9 @@
     <string name="apuesta_exitosa">Su apuesta fue realizada exitosamente.</string>
     <string name="operacion_exitosa">Operación exitosa</string>
 
+    <string name="nombre_label">NOMBRE</string>
+    <string name="posicion_label">POSICIÓN</string>
+    <string name="premios_label">PREMIOS</string>
+    <string name="ganadores_header">GANADORES</string>
+
 </resources>

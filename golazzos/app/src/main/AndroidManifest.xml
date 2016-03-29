@@ -60,6 +60,11 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" >
         </activity>
         <activity
+            android:name=".activities.WeeklyAwardsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
+        </activity>
+        <activity
             android:name=".activities.WizardOnectivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" >

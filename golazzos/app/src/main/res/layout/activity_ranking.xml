@@ -509,7 +509,7 @@
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:id="@+id/linearLayout5"
+                android:id="@+id/linearLayoutGanadores"
                 android:layout_height="match_parent"
                 android:gravity="center" >
 

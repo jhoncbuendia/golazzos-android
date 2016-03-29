@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:id="@+id/layoutBackground"
+        android:layout_height="80dp">
+
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="0.2"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="1"
+                android:textSize="15dp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:gravity="center_vertical"
+                android:id="@+id/textViewNumeroRanking"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/default_icon_level"
+                android:id="@+id/imageViewIconoUserProfile"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="fitXY"
+                android:layout_marginLeft="3dp"
+                android:src="@drawable/default_icon_level"
+                android:id="@+id/imageViewIconoEquipoAlmaUser"
+                android:layout_alignTop="@+id/imageViewIconoUserProfile"
+                android:layout_toEndOf="@+id/imageViewIconoUserProfile" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textColor="#0e5a80"
+                android:text="New Text"
+                android:id="@+id/textViewUserName"
+                android:layout_alignTop="@+id/imageViewIconoEquipoAlmaUser"
+                android:layout_toEndOf="@+id/imageViewIconoEquipoAlmaUser"
+                android:layout_alignBottom="@+id/imageViewIconoEquipoAlmaUser" />
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBarLoaderUserImageIcon"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true" />
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBarLoaderSoulTeamUser"
+                android:layout_alignTop="@+id/progressBarLoaderUserImageIcon"
+                android:layout_toStartOf="@+id/textViewUserName" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="5000 puntos"
+                android:textSize="11dp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:gravity="center_vertical"
+                android:id="@+id/textViewPuntaje"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
